@@ -1,6 +1,5 @@
 {
 	"headershell": {
-		"scope": "shellscript",
 		"prefix": "headershell",
 		"body": [
 			"#!/bin/bash",
