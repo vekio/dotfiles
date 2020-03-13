@@ -12,3 +12,6 @@ cp -r ~/.config/Code/User/snippets/ ./vscode/
 
 # vscode/settings.json
 cp ~/.config/Code/User/settings.json ./vscode/
+
+# .vimrc
+cp ~/.vimrc ./
