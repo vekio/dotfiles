@@ -1,12 +1,22 @@
-" Syntax highlight
-syntax enable
+" -------------------------------------------------------------------
+"  Color settings
+" -------------------------------------------------------------------
 
-" Tabs are spaces
+syntax on
+
+" -------------------------------------------------------------------
+"  Basic settings
+" -------------------------------------------------------------------
+
 set expandtab
-" Number of spaces per tab
 set tabstop=4
-
-" Search as soon as characters are entered
+set softtabstop=4
 set incsearch
-" Highlight search results
 set hlsearch
+
+" -------------------------------------------------------------------
+"  Basic autocommands
+" -------------------------------------------------------------------
+
+" Ensure tabs don't get converted to spaces in Makefiles
+autocmd FileType make setlocal noexpandtab
