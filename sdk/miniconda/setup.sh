@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 wget -P /tmp/ https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
