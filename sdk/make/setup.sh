@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-sudo apt install -y build-essential
+sudo apt -y install build-essential
