@@ -1,9 +1,7 @@
 # dotfiles
 
-## Requirements
-Install make
-
-`sudo apt install -y build-essential`
+## Install
+`git clone https://github.com/vekio/dotfiles.git ~/.dotfiles`
 
 ## References
 - [wfxr/dotfiles](https://github.com/wfxr/dotfiles)
