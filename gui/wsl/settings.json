@@ -1,0 +1,13 @@
+// profile
+{
+    "acrylicOpacity": 0.7,
+    "bellStyle": "visual",
+    "colorScheme": "Campbell",
+    "cursorShape": "filledBox",
+    "fontFace": "Cascadia Mono PL",
+    "fontSize": 12,
+    "hidden": false,
+    "scrollbarState": "hidden",
+    "suppressApplicationTitle": true,
+    "useAcrylic": true
+}

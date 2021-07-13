@@ -17,5 +17,7 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "editor.fontFamily": "'Cascadia Code', Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": "font-feature-settings"
 }
