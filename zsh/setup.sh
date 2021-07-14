@@ -7,6 +7,7 @@ logwarn() { printf "%b[warn]%b %s\n"  '\e[0;33m\033[1m' '\e[0m' "$@" >&2; }
 SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) || exit 1
 
 # rc files
+mkdir -p ~/.config/zsh
 ln -sf "$SDIR/zshenv" ~/.zshenv
 ln -sf "$SDIR/zshrc" ~/.config/zsh/.zshrc
 
