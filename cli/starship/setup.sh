@@ -12,4 +12,4 @@ ln -sf "$SDIR/starship.toml" ~/.config/
 
 # install starship
 starship --version &>/dev/null && loginfo "starship already installed." && exit 0
-mkdir -p ~/bin && curl -fsSL https://starship.rs/install.sh | bash -s -- -y -b ~/bin &>/dev/null
+mkdir -p ~/.local/bin && curl -fsSL https://starship.rs/install.sh | bash -s -- -y -b ~/.local/bin &>/dev/null
