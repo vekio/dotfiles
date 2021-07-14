@@ -1,6 +1,7 @@
-// profile
+// Theme
 {
-    "acrylicOpacity": 0.7,
+    //"useAcrylic": true,
+    //"acrylicOpacity": 0.7,
     "bellStyle": "visual",
     "colorScheme": "Campbell",
     "cursorShape": "filledBox",
@@ -8,6 +9,5 @@
     "fontSize": 12,
     "hidden": false,
     "scrollbarState": "hidden",
-    "suppressApplicationTitle": true,
-    "useAcrylic": true
+    "suppressApplicationTitle": true
 }
