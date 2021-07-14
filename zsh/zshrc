@@ -5,3 +5,6 @@ logerror() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$@" >&2; }
 
 # starship
 source <(starship init zsh) || logwarn "failed loading starship."
+
+# Other rc files
+source "$ZDOTDIR/.zsh_aliases"

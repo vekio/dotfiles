@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+alias ls='ls --color=auto'
+alias up='sudo apt update && sudo apt -y upgrade'

@@ -10,6 +10,7 @@ SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) || exit 1
 mkdir -p ~/.config/zsh
 ln -sf "$SDIR/zshenv" ~/.zshenv
 ln -sf "$SDIR/zshrc" ~/.config/zsh/.zshrc
+ln -sf "$SDIR/zsh_aliases" ~/.config/zsh/.zsh_aliases
 
 # starship setup
 bash "$SDIR/../cli/starship/setup.sh" || logwarn "starship not installed correctly."
