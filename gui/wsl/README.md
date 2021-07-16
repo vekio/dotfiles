@@ -35,21 +35,4 @@ Shutdown the WSL VM.
 
 Download last realease and install the `ttf variable` version of 'Cascadia Code PL' and 'Cascadia Mono PL' for windows.
 
-Using 'Cascadia Mono PL' in windows terminal and 'Cascadia Code' in VSCode.
-
-## Profile
-```json
-// profile
-{
-    "acrylicOpacity": 0.7,
-    "bellStyle": "visual",
-    "colorScheme": "Campbell",
-    "cursorShape": "filledBox",
-    "fontFace": "Cascadia Mono PL",
-    "fontSize": 12,
-    "hidden": false,
-    "scrollbarState": "hidden",
-    "suppressApplicationTitle": true,
-    "useAcrylic": true
-}
-```
+Using 'Cascadia Code PL' in windows terminal and 'Cascadia Code' in VSCode.

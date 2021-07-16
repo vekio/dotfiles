@@ -12,7 +12,7 @@ ln -sf "$SDIR/zshenv" ~/.zshenv
 ln -sf "$SDIR/zshrc" ~/.config/zsh/.zshrc
 ln -sf "$SDIR/zsh_aliases" ~/.config/zsh/.zsh_aliases
 
-# starship setup
+# install starship
 bash "$SDIR/../cli/starship/setup.sh" || logwarn "starship not installed correctly."
 
 # install zsh

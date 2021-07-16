@@ -2,3 +2,4 @@
 
 alias ls='ls --color=auto'
 alias up='sudo apt update && sudo apt -y upgrade'
+alias src='source ~/.config/zsh/.zshrc'

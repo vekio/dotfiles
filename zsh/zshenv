@@ -1,5 +1,7 @@
-# Adds `.local/bin` to $PATH
-export PATH="$HOME/.local/bin:$PATH"
+#!/usr/bin/env bash
 
-# ~/ Clean
+# $PATH
+export PATH="$HOME/.local/bin:$HOME/.local/miniconda3/bin:$PATH"
+
+# Clean ~/
 export ZDOTDIR="$HOME/.config/zsh"

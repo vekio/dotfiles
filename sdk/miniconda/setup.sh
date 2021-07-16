@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
-wget -P /tmp/ https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+# logger
+loginfo() { printf "%b[info]%b %s\n"  '\e[0;32m\033[1m' '\e[0m' "$@" >&2; }
 
-bash /tmp/Miniconda3-latest-Linux-x86_64.sh
+conda --version &>/dev/null && loginfo "conda already installed." && exit 0
 
-source ~/.bashrc
-conda config --set auto_activate_base false
-source ~/.bashrc
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /tmp/miniconda.sh
+
+bash /tmp/miniconda.sh -b -u -p ~/.local/miniconda3
+rm /tmp/miniconda.sh
+
+~/.local/miniconda3/bin/conda update conda && ~/.local/miniconda3/bin/conda init zsh && source ~/.config/zsh/.zshrc
+rm ~/.zshrc
