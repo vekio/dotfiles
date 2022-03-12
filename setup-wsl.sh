@@ -68,3 +68,9 @@ bash "${SDIR}/fzf/setup.sh"
 
 # miniconda3
 bash "${SDIR}/miniconda3/setup.sh"
+
+# ssh
+bash "${SDIR}/ssh/setup.sh"
+
+# nvm
+bash "${SDIR}/nvm/setup.sh"
