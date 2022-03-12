@@ -52,19 +52,19 @@ error "create symlinks"
 # setup
 # -----------------------------------------------------------------------------
 # zsh
-bash "${SDIR}/zsh/setup"
+bash "${SDIR}/zsh/setup.sh"
 
 # starship
-bash "${SDIR}/starship/setup"
+bash "${SDIR}/starship/setup.sh"
 
 # terraform
-bash "${SDIR}/terraform/setup"
+bash "${SDIR}/terraform/setup.sh"
 
 # vim
-bash "${SDIR}/vim/setup"
+bash "${SDIR}/vim/setup.sh"
 
 # fzf
-bash "${SDIR}/fzf/setup"
+bash "${SDIR}/fzf/setup.sh"
 
 # miniconda3
-bash "${SDIR}/miniconda3/setup"
+bash "${SDIR}/miniconda3/setup.sh"
