@@ -1,0 +1,6 @@
+# starship docs - https://starship.rs/config/
+# -----------------------------------------------------------------------------
+add_newline = false
+
+[time]
+disabled = false

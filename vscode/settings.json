@@ -1,0 +1,37 @@
+{
+    "workbench.iconTheme": "vscode-icons",
+    "[makefile]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": false
+    },
+    "[vue]": {
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[typescript]": {
+        "editor.tabSize": 2
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "editor.scrollBeyondLastLine": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "editor.fontFamily": "'Cascadia Code PL', Consolas",
+    "editor.fontLigatures": "font-feature-settings",
+    "editor.fontSize": 14,
+    "editor.cursorStyle": "line",
+    "files.insertFinalNewline": true,
+    "editor.renderFinalNewline": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+}

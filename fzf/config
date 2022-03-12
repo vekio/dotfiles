@@ -1,0 +1,57 @@
+# export FZF_FILE_HIGHLIGHTER='bat --color=always'
+# export FZF_DIR_HIGHLIGHTER='tree -CtrL 2'
+# export FZF_DEFAULT_COMMAND='fd --type f --type d --hidden --follow --exclude .git 2>/dev/null'
+
+# FZF_DEFAULT_OPTS="
+# --prompt '❯ '
+# --pointer '➤'
+# --marker '┃'
+# --border
+# --color=fg:-1,bg:-1,hl:#ffaf5f,fg+:-1,bg+:-1,hl+:#ffaf5f
+# --color=prompt:#5fff87,marker:#ff87d7,spinner:#ff87d7
+# --info inline
+# --height 80%
+# --extended
+# --ansi
+# --reverse
+# --cycle
+# --bind alt-k:preview-up,alt-j:preview-down
+# --bind ctrl-u:half-page-up,ctrl-d:half-page-down
+# --bind alt-a:select-all,ctrl-r:toggle-all
+# --bind ctrl-s:toggle-sort
+# --bind ctrl-p:toggle-preview
+# --bind 'alt-e:execute(${EDITOR} {} >/dev/tty </dev/tty)'
+# --preview \"(${FZF_FILE_HIGHLIGHTER} {} || ${FZF_DIR_HIGHLIGHTER} {}) 2>/dev/null | head -200\"
+# --preview-window right:60%:hidden
+# "
+# export FZF_DEFAULT_OPTS
+
+# # FZF: Ctrl - T
+# FZF_CTRL_T_COMMAND="${FZF_DEFAULT_COMMAND}"
+# export FZF_CTRL_T_COMMAND
+
+# FZF_CTRL_T_OPTS="
+# --preview \"(${FZF_FILE_HIGHLIGHTER} {} || ${FZF_DIR_HIGHLIGHTER} {}) 2>/dev/null | head -200\"
+# --bind 'alt-e:execute(${EDITOR} {} >/dev/tty </dev/tty)'
+# --preview-window default:right:60%
+# "
+# export FZF_CTRL_T_OPTS
+
+# # FZF: Ctrl - R
+# FZF_CTRL_R_OPTS="
+# --preview 'echo {}'
+# --preview-window 'down:2:wrap'
+# --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+# --header 'Press CTRL-Y to copy command into clipboard'
+# --exact
+# --expect=ctrl-x
+# "
+# export FZF_CTRL_R_OPTS
+
+# # FZF: Alt - C
+# export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git 2>/dev/null'
+# export FZF_ALT_C_OPTS="
+# --exit-0
+# --preview '(${FZF_DIR_HIGHLIGHTER} {}) | head -200 2>/dev/null'
+# --preview-window=right:50%
+# "

@@ -1,0 +1,13 @@
+{
+  "colorScheme": "Gruvbox Dark",
+  "commandline": "wsl.exe -d FAZE",
+  "cursorShape": "filledBox",
+  "font":
+  {
+      "face": "Cascadia Code PL",
+      "size": 11
+  },
+  "hidden": false,
+  "name": "FAZE",
+  "startingDirectory": "\\\\wsl.localhost\\FAZE\\home\\alberto"
+}
