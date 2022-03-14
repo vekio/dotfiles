@@ -38,7 +38,8 @@ mkdir -p "${HOME}/.config" \
     "${HOME}/.cache" \
     "${HOME}/.local/bin" \
     "${HOME}/.local/share" \
-    "${HOME}/.local/state" &> /dev/null || \
+    "${HOME}/.local/state" \
+    "${HOME}/projects" &> /dev/null || \
 error "create directories"
 
 # setup

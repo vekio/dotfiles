@@ -4,6 +4,13 @@ weather () {
     curl "https://wttr.in/${1}"
 }
 
+project () {
+    conda create --force -y -q -n "${1}" python=3.9 poetry
+    conda activate "${1}"
+    mkdir -p "${PROJECTS}/${1}" && cd "${PROJECTS}/${1}"
+    git flow init -d
+}
+
 
 # aliases
 # -----------------------------------------------------------------------------
