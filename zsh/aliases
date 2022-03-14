@@ -9,6 +9,7 @@ project () {
     conda activate "${1}"
     mkdir -p "${PROJECTS}/${1}" && cd "${PROJECTS}/${1}"
     git flow init -d
+    code .
 }
 
 
