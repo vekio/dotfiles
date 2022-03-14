@@ -15,10 +15,20 @@ SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd) || error "source directory no
 
 # check nvm install
 # -----------------------------------------------------------------------------
-nvm --version &>/dev/null || \
-warn "nvm already setup" && info "setup nvm"
+nvm --version &>/dev/null && \
+warn "nvm already setup" || info "setup nvm"
 
 
 # install nvm
 # -----------------------------------------------------------------------------
 curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash &>/dev/null
+
+
+# install latest lts nodejs
+# -----------------------------------------------------------------------------
+nvm install --lts &>/dev/null
+
+
+# install vue
+# -----------------------------------------------------------------------------
+npm install --global @vue/cli &>/dev/null
