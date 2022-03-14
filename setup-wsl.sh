@@ -41,16 +41,11 @@ mkdir -p "${HOME}/.config" \
     "${HOME}/.local/state" &> /dev/null || \
 error "create directories"
 
-
-# create symlinks
-# -----------------------------------------------------------------------------
-ln -fs "${SDIR}/gitconfig" "${HOME}/.gitconfig" && \
-ln -fs "${SDIR}/gitconfig.user" "${HOME}/.gitconfig.user" || \
-error "create symlinks"
-
-
 # setup
 # -----------------------------------------------------------------------------
+# git
+bash "${SDIR}/git/setup.sh"
+
 # zsh
 bash "${SDIR}/zsh/setup.sh"
 
