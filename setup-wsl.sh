@@ -28,6 +28,7 @@ error "update & upgrade"
 sudo apt update &> /dev/null && \
 sudo apt -y install \
     build-essential \
+    zip \
     tree &> /dev/null || \
 error "install packages"
 
