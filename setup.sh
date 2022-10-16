@@ -71,7 +71,7 @@ function home_setup () {
     git clone https://gitea.casta.me/alberto/dotfiles.git $dotfiles
 
     # setups
-    # bash ${DOTFILES}/zsh/setup.sh
+    bash ${dotfiles}/zsh/setup.sh
 }
 
 # main
