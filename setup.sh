@@ -1,69 +1,112 @@
 #!/usr/bin/env bash
 #
-#
+# =============================================================================
+#%SYNOPSIS
+#+  ${SCRIPT_NAME} [OPTIONS] SETUP
+#%
+#%DESCRIPTION
+#%  Installs and config different setups
+#%
+#%SETUPS
+#%  home                install home setup
+#%
+#%OPTIONS
+#%  -v, --version       display version information and exit
+#%  -h, --help          display this help text and exit
+#-
+#-IMPLEMENTATION
+#-  version             ${SCRIPT_NAME} alpha
+#-  author              Alberto Castañeiras
+# =============================================================================
 set -euo pipefail
 IFS=$'\n\t'
 
-AWDAWD=${1:-nada}
-echo ${AWDAWD}
+# global variables
+# -----------------------------------------------------------------------------
+unset SCRIPT_NAME
+SCRIPT_NAME="$(basename ${0})"
 
 # loggers
 # -----------------------------------------------------------------------------
-info() { printf "$(date +%FT%T) %b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
-warn() { printf "$(date +%FT%T) %b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-erro() { printf "$(date +%FT%T) %b[erro]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
+# info() { printf "$(date +%FT%T) %b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
+# warn() { printf "$(date +%FT%T) %b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
+# error() { printf "$(date +%FT%T) %b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
+info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
+warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
+error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
 
 # usage
 # -----------------------------------------------------------------------------
-# function usage () {
-# }
+function usage () {
+    printf "Usage: "; head -30 ${0} | grep "^#+" | sed -e "s/^#+[ ]*//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
+    printf "Try '%s --help' for more information\n" "$SCRIPT_NAME";
+}
+function usagefull () {
+    printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
+}
 
 # home setup
 # -----------------------------------------------------------------------------
 function home_setup () {
     info "home setup"
 
-    packages="curl git zsh build-essential tree zip unzip"
-    info "install packages: ${packages}"
+    # packages="curl git zsh build-essential tree zip unzip"
+    # info "install packages: ${packages}"
 
-    if ${IS_SUDO}; then
-        apt update && \
-        apt install -y \
-            ${packages}
-    else
-        sudo apt update && \
-        sudo apt install -y \
-            ${packages}
-    fi
+    # if ${IS_SUDO}; then
+    #     apt update && \
+    #     apt install -y \
+    #         ${packages}
+    # else
+    #     sudo apt update && \
+    #     sudo apt install -y \
+    #         ${packages}
+    # fi
 
-    # clone dotfiles
-    DOTFILES="${HOME}/.dotfiles"
-    git clone https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES}
+    # # clone dotfiles
+    # DOTFILES="${HOME}/.dotfiles"
+    # git clone https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES}
 
-    # setups
-    bash ${DOTFILES}/zsh/setup.sh
+    # # setups
+    # bash ${DOTFILES}/zsh/setup.sh
 }
+
+# main
+# -----------------------------------------------------------------------------
+# transform long options to short ones
+for ARG in "$@"; do
+  shift
+  case "$ARG" in
+    --help) set -- "$@" '-h' ;;
+    --version) set -- "$@" '-v' ;;
+    *) set -- "$@" "$ARG" ;;
+  esac
+done
+
+# parse short options
+# adding : before the flags, I am telling getopts that I want to take control of flags that aren't in the list I set.
+while getopts ":vh" FLAG; do
+    case "$FLAG" in
+        h) usagefull; exit ;;
+        v) echo "version"; exit ;;
+        *) usage; exit 1 ;;
+    esac
+done
+shift $(($OPTIND -1))
+
+if [[ "$#" -eq 0 ]]; then
+    error "expected at least one setup"
+elif [[ "$#" -gt 1 ]]; then
+    error "too many arguments"
+fi
+
+SETUP="$*"
+case "$SETUP" in
+    home) home_setup; exit ;;
+    *) error "$SETUP is not a valid setup\n" "$SETUP" ;;
+esac
 
 IS_SUDO=false
 if [[ "${EUID}" -eq 0 ]]; then
   IS_SUDO=true
 fi
-
-# setup menu
-# -----------------------------------------------------------------------------
-PS3='Choose your setup to install: '
-SETUPS=("home" "quit")
-
-select setup in "${SETUPS[@]}"; do
-    case ${setup} in
-        "home")
-            home_setup
-            break
-            ;;
-        "quit")
-            info "Bye!"
-            exit
-            ;;
-        *) echo warn "invalid option ${REPLY}";;
-    esac
-done
