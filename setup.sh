@@ -71,11 +71,11 @@ function home_setup () {
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
-    # installs
-    bash ${dotfiles}/installs/install-nodejs.sh
-
     # setups
     bash ${dotfiles}/zsh/setup.sh && warn "zsh setup failed"
+
+    # installs
+    bash ${dotfiles}/installs/install-nodejs.sh
 }
 
 # main
