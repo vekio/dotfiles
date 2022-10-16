@@ -68,7 +68,7 @@ function home_setup () {
     # clone dotfiles
     dotfiles="${HOME}/.dotfiles"
     [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
-    git clone -b new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles
+    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles
 
     # setups
     bash ${dotfiles}/zsh/setup.sh || (error "zsh setup"; exit 1) && info "zsh setup"
