@@ -17,6 +17,7 @@ SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # check zsh
 # -----------------------------------------------------------------------------
 if ! command -v zsh &>/dev/null; then
+    error "zsh not installed"
     exit 1
 fi
 
@@ -33,4 +34,4 @@ ln -fs "${SDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 # change to zsh
 # -----------------------------------------------------------------------------
 chsh -s "$(command -v zsh)" && info "shell changed to zsh, to open a new terminal run: exec bash"
-# exec bash
+exec bash
