@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Config zsh files.
+# Config zsh.
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -12,7 +12,7 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 # source directory
 # -----------------------------------------------------------------------------
-SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SRCDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 # check zsh
 # -----------------------------------------------------------------------------
@@ -26,9 +26,9 @@ mkdir -p "${HOME}/.config/zsh" "${HOME}/.cache/zsh"
 
 # create zsh symlinks
 # -----------------------------------------------------------------------------
-ln -fs "${SDIR}/zshenv" "${HOME}/.zshenv"
-ln -fs "${SDIR}/zshrc" "${HOME}/.config/zsh/.zshrc"
-ln -fs "${SDIR}/aliases" "${HOME}/.config/zsh/.aliases"
+ln -fs "${SRCDIR}/zshenv" "${HOME}/.zshenv"
+ln -fs "${SRCDIR}/zshrc" "${HOME}/.config/zsh/.zshrc"
+ln -fs "${SRCDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 
 # change to zsh
 # -----------------------------------------------------------------------------

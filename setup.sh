@@ -46,7 +46,11 @@ function usagefull () {
     printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
 }
 function error_usage () {
-    error "${1-}"; usage; exit 1;
+    if [[ -z "${1-}" ]]; then
+        usage; exit 1;
+    else
+        error "${1-}"; usage; exit 1;
+    fi
 }
 
 # home setup
@@ -73,7 +77,8 @@ function home_setup () {
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
     # setups
-    bash ${dotfiles}/zsh/setup.sh
+    bash ${dotfiles}/zsh/setup.sh || warn "zsh setup failed"
+    bash ${dotfiles}/git/setup.sh || warn "git setup failed"
 
     # installs
     bash ${dotfiles}/installs/install-nodejs.sh
