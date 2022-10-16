@@ -54,15 +54,13 @@ function error_usage () {
 function home_setup () {
     info "home setup"
 
-    PACKAGES="curl git zsh build-essential tree zip unzip"
+    PACKAGES=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
     info "install packages: $PACKAGES"
 
     if $IS_SUDO; then
-        apt update && \
-        apt install -y $PACKAGES
+        apt update && apt install -y $PACKAGES
     else
-        sudo apt update && \
-        sudo apt install -y $PACKAGES
+        sudo apt update && sudo apt install -y $PACKAGES
     fi
 
     # clone dotfiles
