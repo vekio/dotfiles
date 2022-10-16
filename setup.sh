@@ -54,7 +54,8 @@ function error_usage () {
 function home_setup () {
     info "home setup"
 
-    packages=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
+    # packages=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
+    packages=("curl" "git" "zsh")
     info "install packages: $(echo "${packages[@]}") ..."
 
     if ${IS_SUDO}; then
