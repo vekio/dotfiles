@@ -57,7 +57,8 @@ function home_setup () {
     packages="curl git zsh build-essential tree zip unzip"
     info "install packages: ${packages}"
 
-    if ${IS_SUDO}; then
+    echo $IS_SUDO
+    if $IS_SUDO; then
         apt update && \
         apt install -y \
             ${packages}
