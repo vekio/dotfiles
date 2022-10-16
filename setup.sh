@@ -25,6 +25,7 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
+IS_SUDO=false; if [[ "${EUID}" -eq 0 ]]; then IS_SUDO=true; fi
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -33,7 +34,7 @@ SCRIPT_NAME="$(basename ${0})"
 # error() { printf "$(date +%FT%T) %b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
 info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
 warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
+error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 # usage
 # -----------------------------------------------------------------------------
@@ -44,30 +45,33 @@ function usage () {
 function usagefull () {
     printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
 }
+function error_usage () {
+    error "${1:-""}"; usage; exit 1;
+}
 
 # home setup
 # -----------------------------------------------------------------------------
 function home_setup () {
     info "home setup"
 
-    # packages="curl git zsh build-essential tree zip unzip"
-    # info "install packages: ${packages}"
+    packages="curl git zsh build-essential tree zip unzip"
+    info "install packages: ${packages}"
 
-    # if ${IS_SUDO}; then
-    #     apt update && \
-    #     apt install -y \
-    #         ${packages}
-    # else
-    #     sudo apt update && \
-    #     sudo apt install -y \
-    #         ${packages}
-    # fi
+    if ${IS_SUDO}; then
+        apt update && \
+        apt install -y \
+            ${packages}
+    else
+        sudo apt update && \
+        sudo apt install -y \
+            ${packages}
+    fi
 
-    # # clone dotfiles
-    # DOTFILES="${HOME}/.dotfiles"
-    # git clone https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES}
+    # clone dotfiles
+    DOTFILES="${HOME}/.dotfiles"
+    git clone https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES}
 
-    # # setups
+    # setups
     # bash ${DOTFILES}/zsh/setup.sh
 }
 
@@ -89,24 +93,19 @@ while getopts ":vh" FLAG; do
     case "$FLAG" in
         h) usagefull; exit ;;
         v) echo "version"; exit ;;
-        *) usage; exit 1 ;;
+        *) error_usage "invalid option";;
     esac
 done
 shift $(($OPTIND -1))
 
 if [[ "$#" -eq 0 ]]; then
-    error "expected at least one setup"
+    error_usage "expected at least one setup"
 elif [[ "$#" -gt 1 ]]; then
-    error "too many arguments"
+    error_usage "too many arguments"
 fi
 
 SETUP="$*"
 case "$SETUP" in
     home) home_setup; exit ;;
-    *) error "$SETUP is not a valid setup\n" "$SETUP" ;;
+    *) error_usage "$SETUP is not a valid setup" "$SETUP" ;;
 esac
-
-IS_SUDO=false
-if [[ "${EUID}" -eq 0 ]]; then
-  IS_SUDO=true
-fi
