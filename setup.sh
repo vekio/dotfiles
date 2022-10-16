@@ -74,11 +74,9 @@ function home_setup () {
 
     # setups
     bash ${dotfiles}/zsh/setup.sh
-    echo $?
-    # && warn "zsh setup failed"
 
     # installs
-    # bash ${dotfiles}/installs/install-nodejs.sh
+    bash ${dotfiles}/installs/install-nodejs.sh
 }
 
 # main

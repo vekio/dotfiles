@@ -18,6 +18,10 @@ if ! command -v nvm &>/dev/null; then
     curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash &>/dev/null
 fi
 
+# load nvm
+NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[[ -s "${NVM_DIR}/nvm.sh" ]] && \. "${NVM_DIR}/nvm.sh"
+
 # install nodejs
 # -----------------------------------------------------------------------------
 if ! command -v node &>/dev/null; then
