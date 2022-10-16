@@ -17,7 +17,6 @@ SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # check zsh
 # -----------------------------------------------------------------------------
 if ! command -v zsh &>/dev/null; then
-    error "zsh not installed"
     exit 1
 fi
 
