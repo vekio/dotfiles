@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 #
-#
+# Config zsh files.
 set -euo pipefail
 IFS=$'\n\t'
 
 # loggers
 # -----------------------------------------------------------------------------
-info() { printf "\t%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
-warn() { printf "\t%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-error() { printf "\t%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
+info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
+warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
+error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 # source directory
 # -----------------------------------------------------------------------------
 SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+info "zsh setup"
 
 # check zsh
 # -----------------------------------------------------------------------------
 if ! command -v zsh &>/dev/null; then
     error "zsh is not installed"
     exit 1
-else
-    info "zsh setup"
 fi
 
 # create zsh directories
@@ -35,5 +35,5 @@ ln -fs "${SDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 
 # change to zsh
 # -----------------------------------------------------------------------------
-chsh -s "$(command -v zsh)"
-exec bash
+chsh -s "$(command -v zsh)" && info "shell changed to zsh, open a new terminal"
+# exec bash
