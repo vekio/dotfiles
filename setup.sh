@@ -46,7 +46,7 @@ function usagefull () {
     printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
 }
 function error_usage () {
-    error "${1:-""}"; usage; exit 1;
+    error "${1-}"; usage; exit 1;
 }
 
 # home setup
@@ -71,6 +71,9 @@ function home_setup () {
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
+    # installs
+    bash ${dotfiles}/installs/install-nodejs.sh
+
     # setups
     bash ${dotfiles}/zsh/setup.sh && warn "zsh setup failed"
 }
@@ -93,7 +96,7 @@ while getopts ":vh" FLAG; do
     case "${FLAG}" in
         h) usagefull; exit ;;
         v) echo "version"; exit ;;
-        *) error_usage "invalid option";;
+        *) error_usage "invalid option" ;;
     esac
 done
 shift $((${OPTIND} -1))
@@ -106,5 +109,5 @@ fi
 
 case "$*" in
     home) home_setup; exit ;;
-    *) error_usage "$* is not a valid setup";;
+    *) error_usage "$* is not a valid setup" ;;
 esac
