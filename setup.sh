@@ -23,9 +23,15 @@ function home_setup () {
     packages="curl git zsh build-essential tree zip unzip"
     info "install packages: ${packages}"
 
-    sudo apt update && \
-    sudo apt install -y \
-        ${packages}
+    if ${IS_SUDO}; then
+        apt update && \
+        apt install -y \
+            ${packages}
+    else
+        sudo apt update && \
+        sudo apt install -y \
+            ${packages}
+    fi
 
     # clone dotfiles
     DOTFILES="${HOME}/.dotfiles"
@@ -35,12 +41,17 @@ function home_setup () {
     bash ${DOTFILES}/zsh/setup.sh
 }
 
+IS_SUDO=false
+if [[ "${EUID}" -eq 0 ]]; then
+  IS_SUDO=true
+fi
+
 # setup menu
 # -----------------------------------------------------------------------------
 PS3='Choose your setup to install: '
-setups=("home" "quit")
+SETUPS=("home" "quit")
 
-select setup in "${setups[@]}"; do
+select setup in "${SETUPS[@]}"; do
     case ${setup} in
         "home")
             home_setup
