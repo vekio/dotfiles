@@ -26,5 +26,5 @@ NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf 
 # -----------------------------------------------------------------------------
 if ! command -v node &>/dev/null; then
     info "install nodejs"
-    nvm install --lts
+    nvm install --lts &>/dev/null
 fi
