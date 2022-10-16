@@ -72,7 +72,7 @@ function home_setup () {
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
     # setups
-    bash ${dotfiles}/zsh/setup.sh && warn "fail zsh setup"
+    bash ${dotfiles}/zsh/setup.sh && warn "zsh setup failed"
 }
 
 # main
