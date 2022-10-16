@@ -4,8 +4,8 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-SETUP=${1:-nada}
-echo ${SETUP}
+AWDAWD=${1:-nada}
+echo ${AWDAWD}
 
 # loggers
 # -----------------------------------------------------------------------------
