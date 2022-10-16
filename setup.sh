@@ -4,7 +4,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-SETUP=${1:"nada"}
+SETUP=${1:-nada}
 echo ${SETUP}
 
 # loggers
