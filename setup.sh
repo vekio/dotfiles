@@ -54,23 +54,20 @@ function error_usage () {
 function home_setup () {
     info "home setup"
 
-    packages="curl git zsh build-essential tree zip unzip"
-    info "install packages: ${packages}"
+    PACKAGES="curl git zsh build-essential tree zip unzip"
+    info "install packages: $PACKAGES"
 
-    echo $IS_SUDO
     if $IS_SUDO; then
         apt update && \
-        apt install -y \
-            ${packages}
+        apt install -y $PACKAGES
     else
         sudo apt update && \
-        sudo apt install -y \
-            ${packages}
+        sudo apt install -y $PACKAGES
     fi
 
     # clone dotfiles
     DOTFILES="${HOME}/.dotfiles"
-    git clone https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES}
+    git clone https://gitea.casta.me/alberto/dotfiles.git $DOTFILES
 
     # setups
     # bash ${DOTFILES}/zsh/setup.sh
