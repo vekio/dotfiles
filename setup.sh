@@ -49,23 +49,36 @@ function error_usage () {
     error "${1:-""}"; usage; exit 1;
 }
 
+function install_packages () {
+    sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
+    echo $@
+    echo $#
+    for package in "$@"; do
+        echo $package
+        if $IS_SUDO; then
+            apt install -y "$package" &> /dev/null || warn "unenable to install $package" && info "install $package"
+        else
+            sudo apt install -y "$package" &> /dev/null || warn "unenable to install $package" && info "install $package"
+        fi
+    done
+}
+
 # home setup
 # -----------------------------------------------------------------------------
 function home_setup () {
     info "home setup"
 
-    PACKAGES=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
-    info "install packages: $PACKAGES"
-
-    if $IS_SUDO; then
-        apt update && apt install -y $PACKAGES
-    else
-        sudo apt update && sudo apt install -y $PACKAGES
-    fi
+    packages=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
+    # packages="curl git zsh build-essential tree zip unzip"
+    # info "install packages: $packages"
+    apt install -y ${packages[@]}
+    # install_packages ${packages[@]}
 
     # clone dotfiles
-    DOTFILES="${HOME}/.dotfiles"
-    git clone https://gitea.casta.me/alberto/dotfiles.git $DOTFILES
+    dotfiles="${HOME}/.dotfiles"
+    [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
+    # || (error "$dotfiles folder exists, remove it"; exit 1)
+    # git clone https://gitea.casta.me/alberto/dotfiles.git $dotfiles
 
     # setups
     # bash ${DOTFILES}/zsh/setup.sh
@@ -103,5 +116,5 @@ fi
 SETUP="$*"
 case "$SETUP" in
     home) home_setup; exit ;;
-    *) error_usage "$SETUP is not a valid setup" "$SETUP" ;;
+    *) error_usage "$SETUP is not a valid setup";;
 esac
