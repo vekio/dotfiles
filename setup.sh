@@ -49,36 +49,26 @@ function error_usage () {
     error "${1:-""}"; usage; exit 1;
 }
 
-function install_packages () {
-    sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
-    echo $@
-    echo $#
-    for package in "$@"; do
-        echo $package
-        if $IS_SUDO; then
-            apt install -y "$package" &> /dev/null || warn "unenable to install $package" && info "install $package"
-        else
-            sudo apt install -y "$package" &> /dev/null || warn "unenable to install $package" && info "install $package"
-        fi
-    done
-}
-
 # home setup
 # -----------------------------------------------------------------------------
 function home_setup () {
     info "home setup"
 
     packages=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
-    # packages="curl git zsh build-essential tree zip unzip"
-    # info "install packages: $packages"
-    apt install -y ${packages[@]}
-    # install_packages ${packages[@]}
+    info "install packages: $(echo "${packages[@]}") ..."
+
+    if ${IS_SUDO}; then
+        apt update &> /dev/null || (error "update the package lists"; exit 1)
+        apt install -y ${packages[@]} &> /dev/null
+    else
+        sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
+        sudo apt install -y ${packages[@]}  &> /dev/null
+    fi
 
     # clone dotfiles
     dotfiles="${HOME}/.dotfiles"
     [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
-    # || (error "$dotfiles folder exists, remove it"; exit 1)
-    # git clone https://gitea.casta.me/alberto/dotfiles.git $dotfiles
+    git clone https://gitea.casta.me/alberto/dotfiles.git $dotfiles
 
     # setups
     # bash ${DOTFILES}/zsh/setup.sh
@@ -89,7 +79,7 @@ function home_setup () {
 # transform long options to short ones
 for ARG in "$@"; do
   shift
-  case "$ARG" in
+  case "${ARG}" in
     --help) set -- "$@" '-h' ;;
     --version) set -- "$@" '-v' ;;
     *) set -- "$@" "$ARG" ;;
@@ -99,13 +89,13 @@ done
 # parse short options
 # adding : before the flags, I am telling getopts that I want to take control of flags that aren't in the list I set.
 while getopts ":vh" FLAG; do
-    case "$FLAG" in
+    case "${FLAG}" in
         h) usagefull; exit ;;
         v) echo "version"; exit ;;
         *) error_usage "invalid option";;
     esac
 done
-shift $(($OPTIND -1))
+shift $((${OPTIND} -1))
 
 if [[ "$#" -eq 0 ]]; then
     error_usage "expected at least one setup"
@@ -113,8 +103,7 @@ elif [[ "$#" -gt 1 ]]; then
     error_usage "too many arguments"
 fi
 
-SETUP="$*"
-case "$SETUP" in
+case "$*" in
     home) home_setup; exit ;;
-    *) error_usage "$SETUP is not a valid setup";;
+    *) error_usage "$* is not a valid setup";;
 esac
