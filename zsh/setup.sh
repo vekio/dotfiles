@@ -36,4 +36,4 @@ ln -fs "${SDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 # change to zsh
 # -----------------------------------------------------------------------------
 chsh -s "$(command -v zsh)"
-exec bash -l
+exec bash
