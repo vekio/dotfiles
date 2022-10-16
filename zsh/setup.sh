@@ -27,8 +27,7 @@ ln -fs "${SDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 # change to zsh
 # -----------------------------------------------------------------------------
 if ! command -v zsh &>/dev/null; then
-    error "zsh is not installed"; exit 1;
+    exit 1
 else
     chsh -s "$(command -v zsh)"
-    info "change to zsh, open a new terminal"
 fi
