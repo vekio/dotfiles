@@ -14,6 +14,8 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 # -----------------------------------------------------------------------------
 SDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
+info "zsh setup"
+
 # create zsh directories
 # -----------------------------------------------------------------------------
 mkdir -p "${HOME}/.config/zsh" "${HOME}/.cache/zsh"
@@ -31,3 +33,5 @@ if ! command -v zsh &>/dev/null; then
 else
     chsh -s "$(command -v zsh)"
 fi
+
+exec bash -l
