@@ -32,5 +32,5 @@ ln -fs "${SRCDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 
 # change to zsh
 # -----------------------------------------------------------------------------
-chsh -s "$(command -v zsh)" && info "shell changed to zsh, open a new terminal"
+chsh -s "$(command -v zsh)" && info "open a new terminal to change the shell to zsh"
 # exec bash -l

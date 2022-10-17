@@ -8,7 +8,8 @@
 #%  Installs and config different setups
 #%
 #%SETUPS
-#%  home                install home setup
+#%  wsl                install wsl setup
+#%  sdk                 install sdk setup
 #%
 #%OPTIONS
 #%  -v, --version       display version information and exit
@@ -53,22 +54,49 @@ function error_usage () {
     fi
 }
 
-# home setup
+# install packages
 # -----------------------------------------------------------------------------
-function home_setup () {
-    info "home setup"
-
-    # packages=("curl" "git" "zsh" "build-essential" "tree" "zip" "unzip")
-    packages=("curl" "git" "zsh")
-    info "install packages: $(echo "${packages[@]}") ..."
-
+function install_packages () {
     if ${IS_SUDO}; then
         apt update &> /dev/null || (error "update the package lists"; exit 1)
-        apt install -y ${packages[@]} &> /dev/null
+        apt install -y ${1} &> /dev/null
     else
         sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
-        sudo apt install -y ${packages[@]}  &> /dev/null
+        sudo apt install -y ${1}  &> /dev/null
     fi
+}
+
+# wsl setup
+# -----------------------------------------------------------------------------
+function wsl_setup () {
+    sdk_setup
+
+    packages=("curl" "tree" "zip" "unzip")
+    install_packages ${packages[@]}
+
+
+}
+
+# sdk setup
+# -----------------------------------------------------------------------------
+function sdk_setup () {
+    default_setup
+
+    packages=("build-essential")
+    install_packages ${packages[@]}
+
+    # setups
+    bash ${dotfiles}/git/setup.sh && info "git setup" || warn "git setup failed"
+
+    # installs
+    bash ${dotfiles}/installs/install-nodejs.sh
+}
+
+# default setup
+# -----------------------------------------------------------------------------
+function default_setup () {
+    packages=("git" "zsh")
+    install_packages ${packages[@]}
 
     # clone dotfiles
     dotfiles="${HOME}/.dotfiles"
@@ -77,11 +105,7 @@ function home_setup () {
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
     # setups
-    bash ${dotfiles}/zsh/setup.sh || warn "zsh setup failed"
-    bash ${dotfiles}/git/setup.sh || warn "git setup failed"
-
-    # installs
-    bash ${dotfiles}/installs/install-nodejs.sh
+    bash ${dotfiles}/zsh/setup.sh && info "zsh setup" || warn "zsh setup failed"
 }
 
 # main
@@ -114,6 +138,7 @@ elif [[ "$#" -gt 1 ]]; then
 fi
 
 case "$*" in
-    home) home_setup; exit ;;
+    wsl) info "wsl setup"; wsl_setup; exit ;;
+    sdk) info "sdk setup"; sdk_setup; exit ;;
     *) error_usage "$* is not a valid setup" ;;
 esac
