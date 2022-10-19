@@ -17,7 +17,7 @@ SRCDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # check starship
 # -----------------------------------------------------------------------------
 if ! command -v starship &>/dev/null; then
-    error "starship is not installed"; exit 1
+    error "starship is not installed"; return 1
 fi
 info "setting up starship"
 
