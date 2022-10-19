@@ -59,9 +59,9 @@ function error_usage () {
 # install packages
 # -----------------------------------------------------------------------------
 DEFAULT_PACKAGES=("git" "zsh")
-SDK_PACKAGES=("build-essential"); SDK_PACKAGES+=(${DEFAULT_PACKAGES[@]})
-DEVOPS_PACKAGES=(); DEVOPS_PACKAGES+=("${SDK_PACKAGES[@]}")
-WSL_PACKAGES=("curl" "tree" "zip" "unzip"); WSL_PACKAGES+=(${DEVOPS_PACKAGES[@]})
+SDK_PACKAGES=(${DEFAULT_PACKAGES[@]} "build-essential")
+DEVOPS_PACKAGES=(${SDK_PACKAGES[@]})
+WSL_PACKAGES=(${DEVOPS_PACKAGES[@]} "curl" "tree" "zip" "unzip")
 function install_packages () {
     info "installing packages ${1}"
     if ${IS_SUDO}; then
