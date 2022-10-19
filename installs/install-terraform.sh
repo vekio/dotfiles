@@ -18,10 +18,10 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 # check terraform
 # -----------------------------------------------------------------------------
-# if command -v terraform &>/dev/null; then
-#     warn "terraform already installed"; exit;
-# fi
-# info "installing terraform"
+if command -v terraform &>/dev/null; then
+    warn "terraform already installed"; exit;
+fi
+info "installing terraform"
 
 # dependencies
 # -----------------------------------------------------------------------------
@@ -32,11 +32,11 @@ ${SUDO} apt install -y ${packages[@]} &> /dev/null
 # gpg key
 wget -O- https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
-    ${SUDO} tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    ${SUDO} tee /usr/share/keyrings/hashicorp-archive-keyring.gpg &> /dev/null
 
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-    ${SUDO} tee /etc/apt/sources.list.d/hashicorp.list
+    ${SUDO} tee /etc/apt/sources.list.d/hashicorp.list &> /dev/null
 
 # # update & install terraform
 ${SUDO} apt update &> /dev/null || (error "update the package lists"; exit 1)
