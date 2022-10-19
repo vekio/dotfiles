@@ -28,6 +28,7 @@ IFS=$'\n\t'
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
 IS_SUDO=false; if [[ ${EUID} -eq 0 ]]; then IS_SUDO=true; fi
+DOTFILES="${HOME}/.dotfiles"
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -83,7 +84,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${dotfiles}/installs/install-terraform.sh
+    bash ${DOTFILES}/installs/install-terraform.sh
 }
 
 # sdk setup
@@ -92,21 +93,20 @@ function sdk_setup () {
     default_setup
 
     # installs
-    bash ${dotfiles}/installs/install-nodejs.sh
+    bash ${DOTFILES}/installs/install-nodejs.sh
 }
 
 # default setup
 # -----------------------------------------------------------------------------
 function default_setup () {
     # clone dotfiles
-    dotfiles="${HOME}/.dotfiles"
     [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
     info "cloning dotfiles"
-    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
+    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
     # setups
-    bash ${dotfiles}/zsh/setup.sh
-    bash ${dotfiles}/git/setup.sh
+    bash ${DOTFILES}/zsh/setup.sh
+    bash ${DOTFILES}/git/setup.sh
 }
 
 # main
