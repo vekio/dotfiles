@@ -16,10 +16,10 @@ info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
 warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
 error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
-# check terraform
+# install terraform
 # -----------------------------------------------------------------------------
 if command -v terraform &>/dev/null; then
-    warn "terraform already installed"; exit;
+    warn "terraform already installed"; exit
 fi
 info "installing terraform"
 
