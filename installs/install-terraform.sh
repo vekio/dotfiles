@@ -4,6 +4,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# global variables
+# -----------------------------------------------------------------------------
+unset SCRIPT_NAME
+SCRIPT_NAME="$(basename ${0})"
+
 # loggers
 # -----------------------------------------------------------------------------
 info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
@@ -44,3 +49,5 @@ else
     sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
     sudo apt install -y terraform  &> /dev/null
 fi
+
+info "install terraform"

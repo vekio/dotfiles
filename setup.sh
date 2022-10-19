@@ -8,8 +8,9 @@
 #%  Installs and config different setups
 #%
 #%SETUPS
-#%  wsl                install wsl setup
+#%  wsl                 install wsl setup
 #%  sdk                 install sdk setup
+#%  devops              install devops setup
 #%
 #%OPTIONS
 #%  -v, --version       display version information and exit
@@ -26,7 +27,7 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
-IS_SUDO=false; if [[ "${EUID}" -eq 0 ]]; then IS_SUDO=true; fi
+IS_SUDO=false; if [[ ${EUID} -eq 0 ]]; then IS_SUDO=true; fi
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -41,7 +42,7 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 # -----------------------------------------------------------------------------
 function usage () {
     printf "Usage: "; head -30 ${0} | grep "^#+" | sed -e "s/^#+[ ]*//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
-    printf "Try '%s --help' for more information\n" "$SCRIPT_NAME";
+    printf "Try '%s --help' for more information\n" "${SCRIPT_NAME}";
 }
 function usagefull () {
     printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
@@ -69,12 +70,19 @@ function install_packages () {
 # wsl setup
 # -----------------------------------------------------------------------------
 function wsl_setup () {
-    sdk_setup
+    devops_setup
 
     packages=("curl" "tree" "zip" "unzip")
     install_packages ${packages[@]}
+}
 
+# devops setup
+# -----------------------------------------------------------------------------
+function devops_setup () {
+    sdk_setup
 
+    # installs
+    bash ${dotfiles}/installs/install-terraform.sh
 }
 
 # sdk setup
@@ -85,11 +93,8 @@ function sdk_setup () {
     packages=("build-essential")
     install_packages ${packages[@]}
 
-    # setups
-    bash ${dotfiles}/git/setup.sh && info "git setup" || warn "git setup failed"
-
     # installs
-    bash ${dotfiles}/installs/install-nodejs.sh
+    bash ${dotfiles}/installs/install-nodejs.sh && info "terraform install" || warn "terraform install failed"
 }
 
 # default setup
@@ -106,6 +111,7 @@ function default_setup () {
 
     # setups
     bash ${dotfiles}/zsh/setup.sh && info "zsh setup" || warn "zsh setup failed"
+    bash ${dotfiles}/git/setup.sh && info "git setup" || warn "git setup failed"
 }
 
 # main
@@ -140,5 +146,6 @@ fi
 case "$*" in
     wsl) info "wsl setup"; wsl_setup; exit ;;
     sdk) info "sdk setup"; sdk_setup; exit ;;
+    devops) info "sdk setup"; devops_setup; exit ;;
     *) error_usage "$* is not a valid setup" ;;
 esac
