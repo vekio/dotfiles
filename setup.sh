@@ -112,11 +112,13 @@ function default_setup () {
 
     # installs
     bash ${DOTFILES}/installs/install-starship.sh
+    bash ${DOTFILES}/installs/install-fzf.sh
 
     # default setups
     bash ${DOTFILES}/zsh/setup.sh
     bash ${DOTFILES}/git/setup.sh
     bash ${DOTFILES}/starship/setup.sh
+    bash ${DOTFILES}/fzf/setup.sh
 }
 
 # main

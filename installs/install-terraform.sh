@@ -19,7 +19,7 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 # install terraform
 # -----------------------------------------------------------------------------
 if command -v terraform &>/dev/null; then
-    warn "terraform already installed"; exit
+    warn "terraform is already installed"; exit
 fi
 info "installing terraform"
 
