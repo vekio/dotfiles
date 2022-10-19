@@ -57,6 +57,10 @@ function error_usage () {
 
 # install packages
 # -----------------------------------------------------------------------------
+DEFAULT_PACKAGES=("git" "zsh")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" ("build-essential"))
+DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
+WSL_PACKAGES=("${SDK_PACKAGES[@]}" ("curl" "tree" "zip" "unzip"))
 function install_packages () {
     if ${IS_SUDO}; then
         apt update &> /dev/null || (error "update the package lists"; exit 1)
@@ -71,9 +75,6 @@ function install_packages () {
 # -----------------------------------------------------------------------------
 function wsl_setup () {
     devops_setup
-
-    packages=("curl" "tree" "zip" "unzip")
-    install_packages ${packages[@]}
 }
 
 # devops setup
@@ -82,7 +83,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${dotfiles}/installs/install-terraform.sh && info "terraform install" || warn "terraform install failed"
+    bash ${dotfiles}/installs/install-terraform.sh
 }
 
 # sdk setup
@@ -90,19 +91,13 @@ function devops_setup () {
 function sdk_setup () {
     default_setup
 
-    packages=("build-essential")
-    install_packages ${packages[@]}
-
     # installs
-    bash ${dotfiles}/installs/install-nodejs.sh && info "nodejs install" || warn "nodejs install failed"
+    bash ${dotfiles}/installs/install-nodejs.sh
 }
 
 # default setup
 # -----------------------------------------------------------------------------
 function default_setup () {
-    packages=("git" "zsh")
-    install_packages ${packages[@]}
-
     # clone dotfiles
     dotfiles="${HOME}/.dotfiles"
     [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
@@ -110,8 +105,8 @@ function default_setup () {
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git $dotfiles &> /dev/null
 
     # setups
-    bash ${dotfiles}/zsh/setup.sh && info "zsh setup" || warn "zsh setup failed"
-    bash ${dotfiles}/git/setup.sh && info "git setup" || warn "git setup failed"
+    bash ${dotfiles}/zsh/setup.sh
+    bash ${dotfiles}/git/setup.sh
 }
 
 # main
@@ -144,8 +139,8 @@ elif [[ "$#" -gt 1 ]]; then
 fi
 
 case "$*" in
-    wsl) info "wsl setup"; wsl_setup; exit ;;
-    sdk) info "sdk setup"; sdk_setup; exit ;;
-    devops) info "sdk setup"; devops_setup; exit ;;
+    wsl) info "setting up wsl"; install_packages ${WSL_PACKAGES[@]}; wsl_setup; exit ;;
+    sdk) info "setting up sdk"; install_packages ${SDK_PACKAGES[@]}; sdk_setup; exit ;;
+    devops) info "setting up devops"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup; exit ;;
     *) error_usage "$* is not a valid setup" ;;
 esac

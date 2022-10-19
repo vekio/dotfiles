@@ -20,6 +20,7 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 if command -v terraform &>/dev/null; then
     warn "terraform already installed"; exit;
 fi
+info "installing terraform"
 
 # dependencies
 # -----------------------------------------------------------------------------
@@ -49,5 +50,3 @@ else
     sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
     sudo apt install -y terraform  &> /dev/null
 fi
-
-info "install terraform"

@@ -17,8 +17,9 @@ SRCDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # check zsh
 # -----------------------------------------------------------------------------
 if ! command -v zsh &>/dev/null; then
-    exit 1
+    error "zsh is not installed"; exit 1
 fi
+info "setting up zsh"
 
 # create zsh directories
 # -----------------------------------------------------------------------------
@@ -32,5 +33,5 @@ ln -fs "${SRCDIR}/aliases" "${HOME}/.config/zsh/.aliases"
 
 # change to zsh
 # -----------------------------------------------------------------------------
-chsh -s "$(command -v zsh)" && info "open a new terminal to change the shell to zsh"
+chsh -s "$(command -v zsh)" && warn "open a new terminal to change the shell to zsh"
 # exec bash -l

@@ -13,10 +13,11 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 # install nvm
 # -----------------------------------------------------------------------------
 NVM_VERSION="v0.39.2"
-if ! command -v nvm &>/dev/null; then
-    info "install nvm"
-    curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash &>/dev/null
+if command -v nvm &>/dev/null; then
+    warn "nvm already installed"; exit;
 fi
+info "installing nvm"
+curl -o- -s https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash &>/dev/null
 
 # load nvm
 NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
@@ -24,7 +25,9 @@ NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf 
 
 # install nodejs
 # -----------------------------------------------------------------------------
-if ! command -v node &>/dev/null; then
-    info "install nodejs"
-    nvm install --lts &>/dev/null
+if command -v node &>/dev/null; then
+    warn "nodejs already"; exit;
 fi
+
+info "installing nodejs"
+nvm install --lts &>/dev/null

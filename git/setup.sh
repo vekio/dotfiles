@@ -17,8 +17,9 @@ SRCDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 # check git
 # -----------------------------------------------------------------------------
 if ! command -v git &>/dev/null; then
-    exit 1
+    error "git is not installed"; exit 1
 fi
+info "setting up git"
 
 # git config
 # -----------------------------------------------------------------------------
