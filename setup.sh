@@ -27,8 +27,8 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
-IS_SUDO=false; if [[ ${EUID} -eq 0 ]]; then IS_SUDO=true; fi
 DOTFILES="${HOME}/.dotfiles"
+SUDO="sudo"; [[ "${EUID}" -eq 0 ]] && SUDO=""
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -65,13 +65,9 @@ WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
 function install_packages () {
     packages=("$@")
     info "installing packages $(echo ${packages[@]})"
-    if ${IS_SUDO}; then
-        apt update &> /dev/null || (error "update the package lists"; exit 1)
-        apt install -y ${packages[@]} &> /dev/null
-    else
-        sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
-        sudo apt install -y ${packages[@]}
-    fi
+
+    ${SUDO} apt update &> /dev/null || (error "update the package lists"; exit 1)
+    ${SUDO} apt install -y ${packages[@]} &> /dev/null
 }
 
 # wsl setup
