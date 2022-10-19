@@ -59,17 +59,18 @@ function error_usage () {
 # install packages
 # -----------------------------------------------------------------------------
 DEFAULT_PACKAGES=("git" "zsh")
-SDK_PACKAGES=(${DEFAULT_PACKAGES[@]} "build-essential")
-DEVOPS_PACKAGES=(${SDK_PACKAGES[@]})
-WSL_PACKAGES=(${DEVOPS_PACKAGES[@]} "curl" "tree" "zip" "unzip")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential")
+DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
+WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
 function install_packages () {
-    info "installing packages ${1}"
+    packages=("$@")
+    info "installing packages $(echo ${packages[@]})"
     if ${IS_SUDO}; then
         apt update &> /dev/null || (error "update the package lists"; exit 1)
-        apt install -y ${1} &> /dev/null
+        apt install -y ${packages[@]} &> /dev/null
     else
         sudo apt update &> /dev/null || (error "update the package lists"; exit 1)
-        sudo apt install -y ${1}  &> /dev/null
+        sudo apt install -y ${packages[@]}
     fi
 }
 
