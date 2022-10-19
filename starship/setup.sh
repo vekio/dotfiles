@@ -21,6 +21,6 @@ if ! command -v starship &>/dev/null; then
 fi
 info "setting up starship"
 
-# create zsh symlinks
+# create starship symlinks
 # -----------------------------------------------------------------------------
 ln -sf "${SRCDIR}/starship.toml" "${HOME}/.config/starship.toml"

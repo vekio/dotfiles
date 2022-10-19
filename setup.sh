@@ -102,13 +102,15 @@ function default_setup () {
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
+    # default setups
+    bash ${DOTFILES}/zsh/setup.sh
+    bash ${DOTFILES}/git/setup.sh
+
     # installs
     bash ${DOTFILES}/installs/install-starship.sh
 
     # setups
-    bash ${DOTFILES}/zsh/setup.sh
     bash ${DOTFILES}/starship/setup.sh
-    bash ${DOTFILES}/git/setup.sh
 }
 
 # main
