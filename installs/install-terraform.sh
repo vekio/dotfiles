@@ -30,7 +30,7 @@ ${SUDO} apt update &> /dev/null || (error "update the package lists"; exit 1)
 ${SUDO} apt install -y ${packages[@]} &> /dev/null
 
 # gpg key
-wget -O- https://apt.releases.hashicorp.com/gpg | \
+wget -O- --quiet https://apt.releases.hashicorp.com/gpg | \
     gpg --dearmor | \
     ${SUDO} tee /usr/share/keyrings/hashicorp-archive-keyring.gpg &> /dev/null
 
