@@ -82,7 +82,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${dotfiles}/installs/install-terraform.sh
+    bash ${dotfiles}/installs/install-terraform.sh && info "terraform install" || warn "terraform install failed"
 }
 
 # sdk setup
@@ -94,7 +94,7 @@ function sdk_setup () {
     install_packages ${packages[@]}
 
     # installs
-    bash ${dotfiles}/installs/install-nodejs.sh && info "terraform install" || warn "terraform install failed"
+    bash ${dotfiles}/installs/install-nodejs.sh && info "nodejs install" || warn "nodejs install failed"
 }
 
 # default setup
