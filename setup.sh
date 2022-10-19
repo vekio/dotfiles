@@ -97,19 +97,25 @@ function sdk_setup () {
 # default setup
 # -----------------------------------------------------------------------------
 function default_setup () {
+
+    # directories
+    mkdir -p "${HOME}/.config" \
+        "${HOME}/.cache" \
+        "${HOME}/.local/bin" \
+        "${HOME}/.local/share" \
+        "${HOME}/.local/state" \
+
     # clone dotfiles
     [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
-    # default setups
-    bash ${DOTFILES}/zsh/setup.sh
-    bash ${DOTFILES}/git/setup.sh
-
     # installs
     bash ${DOTFILES}/installs/install-starship.sh
 
-    # setups
+    # default setups
+    bash ${DOTFILES}/zsh/setup.sh
+    bash ${DOTFILES}/git/setup.sh
     bash ${DOTFILES}/starship/setup.sh
 }
 

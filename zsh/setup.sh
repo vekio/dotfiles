@@ -24,10 +24,7 @@ info "setting up zsh"
 # create zsh directories
 # -----------------------------------------------------------------------------
 mkdir -p "${HOME}/.config/zsh" \
-    "${HOME}/.cache/zsh" \
-    "${HOME}/.local/bin" \
-    "${HOME}/.local/share" \
-    "${HOME}/.local/state" \
+    "${HOME}/.cache/zsh"
 
 # create zsh symlinks
 # -----------------------------------------------------------------------------
