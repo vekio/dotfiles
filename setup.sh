@@ -63,6 +63,7 @@ SDK_PACKAGES=("build-essential"); SDK_PACKAGES+=(${DEFAULT_PACKAGES[@]})
 DEVOPS_PACKAGES=(); DEVOPS_PACKAGES+=("${SDK_PACKAGES[@]}")
 WSL_PACKAGES=("curl" "tree" "zip" "unzip"); WSL_PACKAGES+=(${DEVOPS_PACKAGES[@]})
 function install_packages () {
+    info "installing packages ${1}"
     if ${IS_SUDO}; then
         apt update &> /dev/null || (error "update the package lists"; exit 1)
         apt install -y ${1} &> /dev/null
@@ -100,7 +101,7 @@ function sdk_setup () {
 # -----------------------------------------------------------------------------
 function default_setup () {
     # clone dotfiles
-    [[ -d "$dotfiles" ]] && (error "$dotfiles folder exists, remove it"; exit 1)
+    [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
