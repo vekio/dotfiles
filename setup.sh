@@ -113,7 +113,7 @@ function default_setup () {
     # installs
     bash ${DOTFILES}/installs/install-starship.sh
     bash ${DOTFILES}/installs/install-fzf.sh
-
+    echo $?
     # default setups
     bash ${DOTFILES}/zsh/setup.sh
     bash ${DOTFILES}/git/setup.sh
