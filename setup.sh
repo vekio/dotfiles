@@ -30,15 +30,12 @@ SCRIPT_NAME="$(basename ${0})"
 DOTFILES="${HOME}/.dotfiles"
 SUDO="sudo"; [[ "${EUID}" -eq 0 ]] && SUDO=""
 DEFAULT_PACKAGES=("git" "zsh")
-SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "neovim")
 DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
 WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
 
 # loggers
 # -----------------------------------------------------------------------------
-# info() { printf "$(date +%FT%T) %b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
-# warn() { printf "$(date +%FT%T) %b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-# error() { printf "$(date +%FT%T) %b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; exit 1; }
 info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
 warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
 error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
@@ -92,6 +89,9 @@ function sdk_setup () {
 
     # installs
     bash ${DOTFILES}/installs/install-nodejs.sh
+
+    # setups
+    bash ${DOTFILES}/vim/setup.sh
 }
 
 # default setup
