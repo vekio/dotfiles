@@ -22,5 +22,5 @@ if [[ -d "${HOME}/.local/share/fzf" ]]; then
 fi
 info "installing fzf"
 
-git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" &>/dev/null && \
+git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" && \
     yes | "${HOME}/.local/share/fzf/install" --bin --no-update-rc
