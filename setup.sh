@@ -29,6 +29,10 @@ unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
 DOTFILES="${HOME}/.dotfiles"
 SUDO="sudo"; [[ "${EUID}" -eq 0 ]] && SUDO=""
+DEFAULT_PACKAGES=("git" "zsh")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential")
+DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
+WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -58,10 +62,6 @@ function error_usage () {
 
 # install packages
 # -----------------------------------------------------------------------------
-DEFAULT_PACKAGES=("git" "zsh")
-SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential")
-DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
-WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
 function install_packages () {
     packages=("$@")
     info "installing packages $(echo ${packages[@]})"
@@ -154,5 +154,5 @@ case "$*" in
     wsl) info "setting up wsl"; install_packages ${WSL_PACKAGES[@]}; wsl_setup; exit ;;
     sdk) info "setting up sdk"; install_packages ${SDK_PACKAGES[@]}; sdk_setup; exit ;;
     devops) info "setting up devops"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup; exit ;;
-    *) error_usage "$* is not a valid setup" ;;
+    *) info "setting up default"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup; exit ;;
 esac
