@@ -16,7 +16,7 @@ SRCDIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 info "setting up vim"
 
-# plugins
+# install plug (vim plugin manager)
 # -----------------------------------------------------------------------------
 curl -fLo "${HOME}/.vim/autoload/plug.vim" --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim &> /dev/null
