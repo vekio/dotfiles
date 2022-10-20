@@ -60,11 +60,20 @@ function error_usage () {
 # install packages
 # -----------------------------------------------------------------------------
 function install_packages () {
-    packages=("$@")
+    local packages=("$@")
     info "installing packages $(echo ${packages[@]})"
 
     ${SUDO} apt update &> /dev/null || (error "update the package lists"; exit 1)
     ${SUDO} apt install -y ${packages[@]} &> /dev/null
+}
+
+# link scripts
+# -----------------------------------------------------------------------------
+function link_scripts () {
+    local bin="${HOME}/.local/bin"
+    info "linking scripts at ${bin}"
+
+    ln -fs "${SRCDIR}/scripts/update-zsh-plugins" "${bin}/update-zsh-plugins"
 }
 
 # wsl setup
@@ -110,12 +119,15 @@ function default_setup () {
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
+    # scripts
+    link_scripts
+
     # installs
     bash ${DOTFILES}/installs/install-starship.sh
     bash ${DOTFILES}/installs/install-fzf.sh
-    echo "AWDAWD"
+
     # default setups
-    bash ${DOTFILES}/zsh/setup.sh
+    bash ${DOTFILES}/zsh/setup.sh; bash ${DOTFILES}/scripts/update-zsh-plugins
     bash ${DOTFILES}/git/setup.sh
     bash ${DOTFILES}/starship/setup.sh
     bash ${DOTFILES}/fzf/setup.sh

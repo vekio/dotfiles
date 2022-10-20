@@ -3,6 +3,17 @@
 [[ -f "${XDG_CONFIG_HOME}/zsh/.aliases" ]] && . "${XDG_CONFIG_HOME}/zsh/.aliases"
 [[ -f "${XDG_CONFIG_HOME}/zsh/.fzf" ]] && . "${XDG_CONFIG_HOME}/zsh/.fzf"
 
+# autocompletion
+# -----------------------------------------------------------------------------
+autoload -U +X compinit && compinit
+autoload -U +X bashcompinit && bashcompinit
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+
+# zsh plugins
+# -----------------------------------------------------------------------------
+. "${XDG_DATA_HOME}/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
+. "${XDG_DATA_HOME}/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
 # fzf
 # --------------------------------------------------------------------
 if [[ ! "${PATH}" == *${XDG_DATA_HOME}/fzf/bin* ]]; then
