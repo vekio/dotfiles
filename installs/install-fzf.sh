@@ -23,4 +23,4 @@ fi
 info "installing fzf"
 
 git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" && \
-    yes | "${HOME}/.local/share/fzf/install" --bin --no-update-rc
+    "${HOME}/.local/share/fzf/install" --bin --no-update-rc
