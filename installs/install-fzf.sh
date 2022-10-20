@@ -20,8 +20,7 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 if [[ -d "${HOME}/.local/share/fzf" ]]; then
     warn "fzf is already installed"; exit
 fi
-
 info "installing fzf"
 
-git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" &>/dev/null && \
-yes | "${HOME}/.local/share/fzf/install" --bin --no-update-rc &>/dev/null
+git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" && \
+    yes | "${HOME}/.local/share/fzf/install" --bin --no-update-rc
