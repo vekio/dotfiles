@@ -4,12 +4,6 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# loggers
-# -----------------------------------------------------------------------------
-info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
-warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
-
 # install or update zsh plugins.
 # -----------------------------------------------------------------------------
 export XDG_DATA_HOME="${XDG_DATA_HOME:-"${HOME}/.local/share"}"
@@ -19,12 +13,12 @@ function clone_or_pull {
     local project_path="${XDG_DATA_HOME}/${project}"
 
     if cd "${project_path}" > /dev/null 2>&1; then
-        info "updating ${repo_path}..."
+        echo "updating ${repo_path}..."
         git pull
         echo
         cd - > /dev/null 2>&1
     else
-        info "installing ${repo_path}..."
+        echo "installing ${repo_path}..."
         git clone "https://github.com/${repo_path}" "${project_path}"
         echo
     fi

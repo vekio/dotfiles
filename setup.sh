@@ -69,11 +69,10 @@ function install_packages () {
 
 # link scripts
 # -----------------------------------------------------------------------------
-function link_scripts () {
+function scripts () {
     local bin="${HOME}/.local/bin"
-    info "linking scripts at ${bin}"
 
-    ln -fs "${SRCDIR}/scripts/update-zsh-plugins" "${bin}/update-zsh-plugins"
+    ln -fs "${DOTFILES}/scripts/update-zsh-plugins" "${bin}/update-zsh-plugins"
 }
 
 # wsl setup
@@ -88,7 +87,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-terraform.sh
+    bash ${DOTFILES}/installs/install-terraform.sh &> /dev/null || error "terraform install"
 }
 
 # sdk setup
@@ -97,10 +96,10 @@ function sdk_setup () {
     default_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-nodejs.sh
+    bash ${DOTFILES}/installs/install-nodejs.sh &> /dev/null || error "nodejs install"
 
     # setups
-    bash ${DOTFILES}/vim/setup.sh
+    bash ${DOTFILES}/vim/setup.sh &> /dev/null || error "vim setup"
 }
 
 # default setup
@@ -113,29 +112,31 @@ function default_setup () {
         "${HOME}/.local/bin" \
         "${HOME}/.local/share" \
         "${HOME}/.local/state" \
+        "${HOME}/src/repos"
 
     # clone dotfiles
     [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
     info "cloning dotfiles"
     git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
 
-    # scripts
-    link_scripts
-
     # installs
-    bash ${DOTFILES}/installs/install-starship.sh
-    bash ${DOTFILES}/installs/install-fzf.sh
+    bash ${DOTFILES}/installs/install-starship.sh &> /dev/null || error "starship install"
+    bash ${DOTFILES}/installs/install-fzf.sh &> /dev/null || error "fzf install"
 
     # default setups
-    bash ${DOTFILES}/zsh/setup.sh; bash ${DOTFILES}/scripts/update-zsh-plugins
-    bash ${DOTFILES}/git/setup.sh
-    bash ${DOTFILES}/starship/setup.sh
-    bash ${DOTFILES}/fzf/setup.sh
+    bash ${DOTFILES}/zsh/setup.sh &> /dev/null || error "zsh setup"
+    bash ${DOTFILES}/git/setup.sh &> /dev/null || error "git setup"
+    bash ${DOTFILES}/starship/setup.sh &> /dev/null || error "starship setup"
+    bash ${DOTFILES}/fzf/setup.sh &> /dev/null || error "fzf setup"
+
+    # scripts
+    scripts
 }
+
 
 # main
 # -----------------------------------------------------------------------------
-# transform long options to short ones
+transform long options to short ones
 for ARG in "$@"; do
   shift
   case "${ARG}" in
