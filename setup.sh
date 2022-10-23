@@ -136,7 +136,7 @@ function default_setup () {
 
 # main
 # -----------------------------------------------------------------------------
-transform long options to short ones
+# transform long options to short ones
 for ARG in "$@"; do
   shift
   case "${ARG}" in
