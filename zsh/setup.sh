@@ -28,7 +28,7 @@ ln -fs "${SRCDIR}/helpers" "${HOME}/.config/zsh/.helpers"
 
 # plugins
 # -----------------------------------------------------------------------------
-bash ${DOTFILES}/scripts/update-zsh-plugins
+bash ${SRCDIR}/scripts/update-zsh-plugins
 
 # change to zsh
 # -----------------------------------------------------------------------------
