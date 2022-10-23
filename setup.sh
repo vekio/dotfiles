@@ -157,9 +157,9 @@ while getopts ":vh" FLAG; do
 done
 shift $((${OPTIND} -1))
 
-if [[ "$#" -eq 0 ]]; then
-    error_usage "expected at least one setup"
-elif [[ "$#" -gt 1 ]]; then
+# if [[ "$#" -eq 0 ]]; then
+#     error_usage "expected at least one setup"
+if [[ "$#" -gt 1 ]]; then
     error_usage "too many arguments"
 fi
 
