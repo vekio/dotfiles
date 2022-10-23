@@ -31,6 +31,7 @@ mkdir -p "${HOME}/.config/zsh" \
 ln -fs "${SRCDIR}/zshenv" "${HOME}/.zshenv"
 ln -fs "${SRCDIR}/zshrc" "${HOME}/.config/zsh/.zshrc"
 ln -fs "${SRCDIR}/aliases" "${HOME}/.config/zsh/.aliases"
+ln -fs "${SRCDIR}/helpers" "${HOME}/.config/zsh/.helpers"
 
 # change to zsh
 # -----------------------------------------------------------------------------

@@ -1,6 +1,7 @@
 # config files
 # -----------------------------------------------------------------------------
 [[ -f "${XDG_CONFIG_HOME}/zsh/.aliases" ]] && . "${XDG_CONFIG_HOME}/zsh/.aliases"
+[[ -f "${XDG_CONFIG_HOME}/zsh/.helpers" ]] && . "${XDG_CONFIG_HOME}/zsh/.helpers"
 [[ -f "${XDG_CONFIG_HOME}/zsh/.fzf" ]] && . "${XDG_CONFIG_HOME}/zsh/.fzf"
 
 # autocompletion
