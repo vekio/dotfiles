@@ -1,19 +1,19 @@
 # directories
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # paths
-alias dot='cd ${DOTFILES}'
-alias zz='cd ${ZDOTDIR}'
+alias dot="cd ${DOTFILES}"
+alias zz="cd ${ZDOTDIR}"
 
 # ls
-alias ls='ls --color=auto'
-alias ll='ls -l'
-alias la='ls -l --all'
-alias l='ls'
+alias ls="ls --color=auto"
+alias ll="ls -l"
+alias la="ls -l --all"
+alias l="ls"
 
 # source
-alias src='source ${ZDOTDIR}/.zshrc
+alias src="source ${ZDOTDIR}/.zshrc"
