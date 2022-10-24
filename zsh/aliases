@@ -1,42 +1,19 @@
-# functions
-# -----------------------------------------------------------------------------
-weather () {
-    curl "https://wttr.in/${1}"
-}
-
-project () {
-    conda create --force -y -q -n "${1}" python=3.9 poetry
-    conda activate "${1}"
-    mkdir -p "${PROJECTS}/${1}" && cd "${PROJECTS}/${1}"
-    git flow init -d
-    code .
-}
-
-newkey () {
-    ssh-keygen -t rsa -b 4096 -C "" -q -N "" -f "${HOME}/.ssh/${1}"
-}
-
-# aliases
-# -----------------------------------------------------------------------------
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
+# directories
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
 
 # paths
-alias dot='cd ${DOTFILES}'
-alias zz='cd ${ZDOTDIR}'
+alias dot="cd ${DOTFILES}"
+alias zz="cd ${ZDOTDIR}"
 
 # ls
-alias ls='ls --color=auto'
-alias ll='ls -l'
-alias la='ls -l --all'
-alias l='ls'
+alias ls="ls --color=auto"
+alias ll="ls -l"
+alias la="ls -l --all"
+alias l="ls"
 
-# vim
-alias vim='nvim'
-alias vv='vim $(fzf)'
-alias vi='vim'
-
-alias src='source ${ZDOTDIR}/.zshrc'
+# source
+alias src="source ${ZDOTDIR}/.zshrc"

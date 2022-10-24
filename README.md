@@ -1,10 +1,21 @@
 # dotfiles
 
-`git clone https://github.com/vekio/dotfiles.git ~/.dotfiles`
+## Create docker image
 
-## References
+```sh
+docker run -d -t --name dotfiles ubuntu:jammy
+docker exec -it dotfiles bash
 
-- [wfxr/dotfiles](https://github.com/wfxr/dotfiles)
-- [nickjj/dotfiles](https://github.com/nickjj/dotfiles)
-- [scudzy/dotfiles](https://github.com/scudzy/dotfiles)
-- [junegunn/dotfiles](https://github.com/junegunn/dotfiles)
+curl -o- -s https://gitea.casta.me/alberto/dotfiles/raw/branch/feature/new-setup/setup.sh | bash -s wsl
+
+apt update && apt install -y curl
+
+docker exec -it dotfiles zsh
+```
+
+## Export docker image as distro
+
+```sh
+docker export dotfiles > <Path/dotfiles.tar>
+wsl --import <Distro> <InstallLocation> <Path/dotfiles.tar>
+```
