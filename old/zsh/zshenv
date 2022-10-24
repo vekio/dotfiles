@@ -5,16 +5,20 @@ export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_DATA_HOME="${HOME}/.local/share"
 export XDG_STATE_HOME="${HOME}/.local/state"
 
+
 # other directories
 # -----------------------------------------------------------------------------
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${HOME}/.local/bin"
+export PROJECTS="${HOME}/projects"
+
 
 # editor
 # --------------------------------------------------------------------
-# export EDITOR="nvim"
-# export VISUAL="${EDITOR}"
+export EDITOR="nvim"
+export VISUAL="${EDITOR}"
+
 
 # history settings
 # -----------------------------------------------------------------------------
