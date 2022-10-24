@@ -16,6 +16,6 @@ docker exec -it dotfiles zsh
 ## Export docker image as distro
 
 ```sh
-docker export dotfiles > <Path/dotfiles.tar>
-wsl --import <Distro> <InstallLocation> <Path/dotfiles.tar>
+docker export dotfiles > dotfiles.tar
+wsl --import dotfiles ./dotfiles dotfiles.tar
 ```
