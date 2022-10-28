@@ -63,8 +63,8 @@ function install_packages () {
     local packages=("$@")
     info "installing packages $(echo ${packages[@]})"
 
-    ${SUDO} apt update &> /dev/null || (error "update the package lists"; exit 1)
-    ${SUDO} apt install -y ${packages[@]} &> /dev/null
+    ${SUDO} apt update # &> /dev/null || (error "update the package lists"; exit 1)
+    ${SUDO} apt install -y ${packages[@]} # &> /dev/null
 }
 
 # link scripts
@@ -87,7 +87,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-terraform.sh &> /dev/null || error "terraform install"
+    bash ${DOTFILES}/installs/install-terraform.sh # &> /dev/null || error "terraform install"
 }
 
 # sdk setup
@@ -96,10 +96,10 @@ function sdk_setup () {
     default_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-nodejs.sh &> /dev/null || error "nodejs install"
+    bash ${DOTFILES}/installs/install-nodejs.sh # &> /dev/null || error "nodejs install"
 
     # setups
-    bash ${DOTFILES}/vim/setup.sh &> /dev/null || error "vim setup"
+    bash ${DOTFILES}/vim/setup.sh # &> /dev/null || error "vim setup"
 }
 
 # default setup
@@ -117,17 +117,17 @@ function default_setup () {
     # clone dotfiles
     [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
     info "cloning dotfiles"
-    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} &> /dev/null
+    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} # &> /dev/null
 
     # installs
-    bash ${DOTFILES}/installs/install-starship.sh &> /dev/null || error "starship install"
-    bash ${DOTFILES}/installs/install-fzf.sh &> /dev/null || error "fzf install"
+    bash ${DOTFILES}/installs/install-starship.sh # &> /dev/null || error "starship install"
+    bash ${DOTFILES}/installs/install-fzf.sh # &> /dev/null || error "fzf install"
 
     # default setups
-    bash ${DOTFILES}/zsh/setup.sh &> /dev/null || error "zsh setup"
-    bash ${DOTFILES}/git/setup.sh &> /dev/null || error "git setup"
-    bash ${DOTFILES}/starship/setup.sh &> /dev/null || error "starship setup"
-    bash ${DOTFILES}/fzf/setup.sh &> /dev/null || error "fzf setup"
+    bash ${DOTFILES}/zsh/setup.sh # &> /dev/null || error "zsh setup"
+    bash ${DOTFILES}/git/setup.sh # &> /dev/null || error "git setup"
+    bash ${DOTFILES}/starship/setup.sh # &> /dev/null || error "starship setup"
+    bash ${DOTFILES}/fzf/setup.sh # &> /dev/null || error "fzf setup"
 
     # scripts
     scripts
