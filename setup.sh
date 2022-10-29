@@ -117,7 +117,7 @@ function default_setup () {
     # clone dotfiles
     [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
     info "cloning dotfiles"
-    git clone -b feature/new-setup https://gitea.casta.me/alberto/dotfiles.git ${DOTFILES} # &> /dev/null
+    git clone https://github.com/vekio/dotfiles.git ${DOTFILES} # &> /dev/null
 
     # installs
     bash ${DOTFILES}/installs/install-starship.sh # &> /dev/null || error "starship install"
