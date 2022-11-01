@@ -37,4 +37,9 @@ if ! command -v sudo &>/dev/null; then
 else
     sudo -k chsh -s "$(command -v zsh)"
 fi
+
+if ! [[ $? -ne 0 ]]; then
+    export SHELL="$(command -v zsh)"
+fi
+
 # exec zsh -l
