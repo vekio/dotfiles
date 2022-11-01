@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install fzf.
+# Install or update fzf.
 set -euo pipefail
 IFS=$'\n\t'
 
@@ -8,19 +8,49 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
+FZF_PATH="${HOME}/.local/share/fzf"
 
 # loggers
 # -----------------------------------------------------------------------------
 info() { printf "%b[info]%b %s\n" '\e[0;32m\033[1m' '\e[0m' "$*" >&2; }
 warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
-error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
+error() { printf "%b[error]%b %s (%s)\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
-# install fzf
+# functions
 # -----------------------------------------------------------------------------
-if [[ -d "${HOME}/.local/share/fzf" ]]; then
-    warn "fzf is already installed"; exit
-fi
-info "installing fzf"
+#######################################
+# Install fzf.
+# Globals:
+#   FZF_PATH
+# Arguments:
+#   None
+#######################################
+function install_fzf () {
+    git clone --depth 1 https://github.com/junegunn/fzf.git ${FZF_PATH} && \
+        "${FZF_PATH}/install" --bin --no-update-rc
+}
 
-git clone --depth 1 https://github.com/junegunn/fzf.git "${HOME}/.local/share/fzf" &> /dev/null && \
-    "${HOME}/.local/share/fzf/install" --bin --no-update-rc &> /dev/null
+#######################################
+# Update fzf.
+# Globals:
+#   FZF_PATH
+# Arguments:
+#   None
+#######################################
+function update_fzf () {
+    cd ${FZF_PATH} && git pull && ./install --bin --no-update-rc
+    cd -  &> /dev/null
+}
+
+# main
+# -----------------------------------------------------------------------------
+function main () {
+    if ! [[ -d "${HOME}/.local/share/fzf" ]]; then
+        info "installing fzf"
+        install_fzf
+    else
+        warn "updating fzf"
+        update_fzf
+    fi
+}
+main "$@"
