@@ -18,6 +18,8 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 #######################################
 # Install starship.
+# Globals:
+#   STARSHIP_PATH
 # Arguments:
 #   None
 #######################################
@@ -27,6 +29,8 @@ function install_starship () {
 
 #######################################
 # Update starship.
+# Globals:
+#   STARSHIP_PATH
 # Arguments:
 #   None
 #######################################
@@ -41,9 +45,9 @@ function main () {
     [[ -d "${STARSHIP_PATH}" ]] || mkdir -p ${STARSHIP_PATH}
 
     if ! command -v starship &>/dev/null; then
-        info "installing starship" #&& install_starship
+        info "installing starship" && install_starship
     else
-        warn "updating starship" #&& update_starship
+        warn "updating starship" && update_starship
     fi
 }
 main "$@"

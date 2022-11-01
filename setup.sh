@@ -134,36 +134,40 @@ function default_setup () {
 
 # main
 # -----------------------------------------------------------------------------
-# transform long options to short ones
-for ARG in "$@"; do
-  shift
-  case "${ARG}" in
-    --help) set -- "$@" '-h' ;;
-    --version) set -- "$@" '-v' ;;
-    *) set -- "$@" "$ARG" ;;
-  esac
-done
-
-# parse short options
-# adding : before the flags, I am telling getopts that I want to take control of flags that aren't in the list I set.
-while getopts ":vh" FLAG; do
-    case "${FLAG}" in
-        h) usagefull; exit ;;
-        v) echo "version"; exit ;;
-        *) error_usage "invalid option"; exit 1 ;;
+function main () {
+   # transform long options to short ones
+    for ARG in "$@"; do
+    shift
+    case "${ARG}" in
+        --help) set -- "$@" '-h' ;;
+        --version) set -- "$@" '-v' ;;
+        *) set -- "$@" "$ARG" ;;
     esac
-done
-shift $((${OPTIND} -1))
+    done
 
-if [[ "$#" -eq 0 ]]; then
-    info "setting up default"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup; exit
-elif [[ "$#" -gt 1 ]]; then
-    error_usage "too many arguments"; exit 1
-fi
+    # parse short options
+    # adding : before the flags, I am telling getopts that I want to take control of flags that aren't in the list I set.
+    while getopts ":vh" FLAG; do
+        case "${FLAG}" in
+            h) usagefull; exit ;;
+            v) echo "version"; exit ;;
+            *) error_usage "invalid option"; exit 1 ;;
+        esac
+    done
+    shift $((${OPTIND} -1))
 
-case "$*" in
-    wsl) info "setting up wsl"; install_packages ${WSL_PACKAGES[@]}; wsl_setup; exit ;;
-    sdk) info "setting up sdk"; install_packages ${SDK_PACKAGES[@]}; sdk_setup; exit ;;
-    devops) info "setting up devops"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup; exit ;;
-    *) error_usage "unknow setup"; exit 1 ;;
-esac
+    if [[ "$#" -eq 0 ]]; then
+        info "setting up default"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup
+    elif [[ "$#" -gt 1 ]]; then
+        error_usage "too many arguments"; exit 1
+    else
+        case "$*" in
+            wsl) info "setting up wsl"; install_packages ${WSL_PACKAGES[@]}; wsl_setup ;;
+            sdk) info "setting up sdk"; install_packages ${SDK_PACKAGES[@]}; sdk_setup ;;
+            devops) info "setting up devops"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup ;;
+            *) error_usage "unknow setup"; exit 1 ;;
+        esac
+    fi
+    exec zsh -l
+}
+main "$@"

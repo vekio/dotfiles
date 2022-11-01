@@ -32,5 +32,9 @@ bash ${SRCDIR}/../scripts/update-zsh-plugins
 
 # change to zsh
 # -----------------------------------------------------------------------------
-chsh -s "$(command -v zsh)"
-# exec bash -l
+if ! command -v sudo &>/dev/null; then
+    chsh -s "$(command -v zsh)" ${USER}
+else
+    sudo -k chsh -s "$(command -v zsh)" ${USER}
+fi
+# exec zsh -l
