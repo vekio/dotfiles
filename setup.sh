@@ -113,7 +113,7 @@ function default_setup () {
         cd - # &> /dev/null
     else
         info "cloning dotfiles"
-        git clone -b feature/rewrite https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} # &> /dev/null
+        git clone https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} # &> /dev/null
     fi
 
     # installs
