@@ -27,7 +27,7 @@ IFS=$'\n\t'
 # -----------------------------------------------------------------------------
 unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
-DOTFILES="${HOME}/.dotfiles"
+DOTFILES_PATH="${HOME}/.dotfiles"
 SUDO="sudo"; [[ "${EUID}" -eq 0 ]] && SUDO=""
 DEFAULT_PACKAGES=("git" "zsh")
 SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "neovim")
@@ -50,10 +50,10 @@ function usagefull () {
     printf "Usage: "; head -30 ${0} | grep -e "^#[%+-]" | sed -e "s/^#[%+-]//g" -e "s/\${SCRIPT_NAME}/${SCRIPT_NAME}/g";
 }
 function error_usage () {
-    if [[ -z "${1-}" ]]; then
-        usage; exit 1;
+    if [[ -z "${1:-}" ]]; then
+        usage
     else
-        error "${1-}"; usage; exit 1;
+        error "${1:-}"; usage
     fi
 }
 
@@ -65,14 +65,6 @@ function install_packages () {
 
     ${SUDO} apt update # &> /dev/null || (error "update the package lists"; exit 1)
     ${SUDO} apt install -y ${packages[@]} # &> /dev/null
-}
-
-# link scripts
-# -----------------------------------------------------------------------------
-function scripts () {
-    local bin="${HOME}/.local/bin"
-
-    ln -fs "${DOTFILES}/scripts/update-zsh-plugins" "${bin}/update-zsh-plugins"
 }
 
 # wsl setup
@@ -87,7 +79,7 @@ function devops_setup () {
     sdk_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-terraform.sh # &> /dev/null || error "terraform install"
+    bash ${DOTFILES_PATH}/installs/install-terraform.sh # &> /dev/null || error "terraform install"
 }
 
 # sdk setup
@@ -96,10 +88,10 @@ function sdk_setup () {
     default_setup
 
     # installs
-    bash ${DOTFILES}/installs/install-nodejs.sh # &> /dev/null || error "nodejs install"
+    bash ${DOTFILES_PATH}/installs/install-nodejs.sh # &> /dev/null || error "nodejs install"
 
     # setups
-    bash ${DOTFILES}/vim/setup.sh # &> /dev/null || error "vim setup"
+    bash ${DOTFILES_PATH}/vim/setup.sh # &> /dev/null || error "vim setup"
 }
 
 # default setup
@@ -115,22 +107,28 @@ function default_setup () {
         "${HOME}/src/repos"
 
     # clone dotfiles
-    [[ -d "${DOTFILES}" ]] && (error "${DOTFILES} folder exists, remove it"; exit 1)
-    info "cloning dotfiles"
-    git clone https://github.com/vekio/dotfiles.git ${DOTFILES} # &> /dev/null
+    if [[ -d "${DOTFILES_PATH}" ]]; then
+        info "updating dotfiles"
+        cd ${DOTFILES_PATH} && git pull # &> /dev/null
+        cd - # &> /dev/null
+    else
+        info "cloning dotfiles"
+        git clone -b feature/rewrite https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} # &> /dev/null
+    fi
 
     # installs
-    bash ${DOTFILES}/installs/install-starship.sh # &> /dev/null || error "starship install"
-    bash ${DOTFILES}/installs/install-fzf.sh # &> /dev/null || error "fzf install"
+    bash ${DOTFILES_PATH}/installs/install-starship.sh # &> /dev/null || error "starship install"
+    bash ${DOTFILES_PATH}/installs/install-fzf.sh # &> /dev/null || error "fzf install"
 
     # default setups
-    bash ${DOTFILES}/zsh/setup.sh # &> /dev/null || error "zsh setup"
-    bash ${DOTFILES}/git/setup.sh # &> /dev/null || error "git setup"
-    bash ${DOTFILES}/starship/setup.sh # &> /dev/null || error "starship setup"
-    bash ${DOTFILES}/fzf/setup.sh # &> /dev/null || error "fzf setup"
+    bash ${DOTFILES_PATH}/zsh/setup.sh # &> /dev/null || error "zsh setup"
+    bash ${DOTFILES_PATH}/git/setup.sh # &> /dev/null || error "git setup"
+    bash ${DOTFILES_PATH}/starship/setup.sh # &> /dev/null || error "starship setup"
+    bash ${DOTFILES_PATH}/fzf/setup.sh # &> /dev/null || error "fzf setup"
 
     # scripts
-    scripts
+    local bin="${HOME}/.local/bin"
+    ln -fs "${DOTFILES_PATH}/scripts/update-zsh-plugins" "${bin}/update-zsh-plugins"
 }
 
 
@@ -152,20 +150,20 @@ while getopts ":vh" FLAG; do
     case "${FLAG}" in
         h) usagefull; exit ;;
         v) echo "version"; exit ;;
-        *) error_usage "invalid option" ;;
+        *) error_usage "invalid option"; exit 1 ;;
     esac
 done
 shift $((${OPTIND} -1))
 
-# if [[ "$#" -eq 0 ]]; then
-#     error_usage "expected at least one setup"
-if [[ "$#" -gt 1 ]]; then
-    error_usage "too many arguments"
+if [[ "$#" -eq 0 ]]; then
+    info "setting up default"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup; exit
+elif [[ "$#" -gt 1 ]]; then
+    error_usage "too many arguments"; exit 1
 fi
 
 case "$*" in
     wsl) info "setting up wsl"; install_packages ${WSL_PACKAGES[@]}; wsl_setup; exit ;;
     sdk) info "setting up sdk"; install_packages ${SDK_PACKAGES[@]}; sdk_setup; exit ;;
     devops) info "setting up devops"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup; exit ;;
-    *) info "setting up default"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup; exit ;;
+    *) error_usage "unknow setup"; exit 1 ;;
 esac
