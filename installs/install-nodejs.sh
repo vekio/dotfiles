@@ -65,12 +65,16 @@ function update_node () {
 # main
 # -----------------------------------------------------------------------------
 function main () {
-    # load nvm if exists
+    # load nvm
     NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
     [[ -s "${NVM_DIR}/nvm.sh" ]] && \. "${NVM_DIR}/nvm.sh"
 
     if ! command -v nvm &>/dev/null; then
         info "installing nvm" && install_nvm
+
+        # load nvm
+        NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+        [[ -s "${NVM_DIR}/nvm.sh" ]] && \. "${NVM_DIR}/nvm.sh"
     else
         warn "updating nvm" && update_nvm
     fi
