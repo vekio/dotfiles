@@ -2,12 +2,14 @@
 
 ```txt
 Usage: SYNOPSIS
-  setup.sh [OPTIONS] COMMAND
+  dotfiles.sh [OPTIONS] COMMAND
 
 DESCRIPTION
   Installs and config different setups
+  If any command is given install default setup
 
 COMMANDS
+  default             install default setup
   wsl                 install wsl setup
   sdk                 install sdk setup
   devops              install devops setup
@@ -24,7 +26,7 @@ IMPLEMENTATION
 ## Install
 
 ```sh
-curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/setup.sh | bash -s [COMMAND]
+curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/dotfiles.sh | bash -s [COMMAND]
 ```
 
 ## WSL distro
@@ -37,7 +39,7 @@ docker exec -it dotfiles bash
 
 # execute inside the container
 > apt update && apt install -y curl
-> curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/setup.sh | bash -s wsl
+> curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/dotfiles.sh | bash -s wsl
 # exit from the container
 
 docker export dotfiles > dotfiles.tar
