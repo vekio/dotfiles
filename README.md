@@ -28,7 +28,7 @@ IMPLEMENTATION
 ```sh
 git clone https://github.com/vekio/dotfiles.git
 cd dotfiles && ./dotfiles.sh wsl
-chsh -s "$(command -v zsh)"
+chsh -s "$(command -v zsh)" && exec zsh -l
 ```
 
 ## WSL distro
@@ -41,7 +41,9 @@ docker exec -it dotfiles bash
 
 # execute inside the container
 > apt update && apt install -y curl
-> curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/dotfiles.sh | bash -s wsl
+> git clone https://github.com/vekio/dotfiles.git
+> cd dotfiles && ./dotfiles.sh wsl
+> chsh -s "$(command -v zsh)" && exec zsh -l
 # exit from the container
 
 docker export dotfiles > dotfiles.tar
