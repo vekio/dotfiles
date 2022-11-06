@@ -26,7 +26,8 @@ IMPLEMENTATION
 ## Install
 
 ```sh
-curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/dotfiles.sh | bash -s [COMMAND]
+git clone https://github.com/vekio/dotfiles.git
+cd dotfiles && ./dotfiles.sh wsl
 ```
 
 ## WSL distro
