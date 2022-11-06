@@ -2,12 +2,12 @@
 
 ```txt
 Usage: SYNOPSIS
-  setup.sh [OPTIONS] SETUP
+  setup.sh [OPTIONS] COMMAND
 
 DESCRIPTION
   Installs and config different setups
 
-SETUPS
+COMMANDS
   wsl                 install wsl setup
   sdk                 install sdk setup
   devops              install devops setup
@@ -24,7 +24,7 @@ IMPLEMENTATION
 ## Install
 
 ```sh
-curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/setup.sh | bash -s [SETUP]
+curl -o- -s https://raw.githubusercontent.com/vekio/dotfiles/master/setup.sh | bash -s [COMMAND]
 ```
 
 ## WSL distro
