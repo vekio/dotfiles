@@ -153,13 +153,6 @@ function default_setup () {
     else
         sudo -k chsh -s "$(command -v zsh)"
     fi
-    # check if the shell change was successful
-    if [[ "$?" -ne 0 ]]; then
-        error "change your default shell manually, chsh -s "$(command -v zsh)""
-    else
-        export SHELL="$(command -v zsh)"
-    fi
-    echo &>/dev/null
 
     bash ${DOTFILES_PATH}/scripts/zsh-plugins.sh
     local bin="${HOME}/.local/bin"
