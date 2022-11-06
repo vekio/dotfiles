@@ -28,6 +28,7 @@ IMPLEMENTATION
 ```sh
 git clone https://github.com/vekio/dotfiles.git
 cd dotfiles && ./dotfiles.sh wsl
+chsh -s "$(command -v zsh)"
 ```
 
 ## WSL distro
