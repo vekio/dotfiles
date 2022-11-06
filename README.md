@@ -6,7 +6,7 @@ Usage: SYNOPSIS
 
 DESCRIPTION
   Installs and config different setups
-  If any command is given install default setup
+  If no command is given, install default setup
 
 COMMANDS
   default             install default setup

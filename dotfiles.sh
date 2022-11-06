@@ -6,8 +6,10 @@
 #%
 #%DESCRIPTION
 #%  Installs and config different setups
+#%  If no command is given, install default setup
 #%
 #%COMMANDS
+#%  default             install default setup
 #%  wsl                 install wsl setup
 #%  sdk                 install sdk setup
 #%  devops              install devops setup
