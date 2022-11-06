@@ -28,7 +28,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-VERSION="0.3.2"
+VERSION="0.3.3"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
@@ -147,8 +147,19 @@ function default_setup () {
     bash ${DOTFILES_PATH}/scripts/git.sh
 
     bash ${DOTFILES_PATH}/scripts/zsh.sh
-    ${SUDO} chsh -s "$(command -v zsh)"
-    export SHELL="$(command -v zsh)"
+
+    if [[ -z "${SUDO}" ]]; then
+        chsh -s "$(command -v zsh)"
+    else
+        sudo -k chsh -s "$(command -v zsh)"
+    fi
+
+    # Check if the shell change was successful
+    if [[ "$?" -ne 0 ]]; then
+        error "change your default shell manually, chsh -s "$(command -v zsh)""
+    else
+        export SHELL="$(command -v zsh)"
+    fi
 
     bash ${DOTFILES_PATH}/scripts/zsh-plugins.sh
     local bin="${HOME}/.local/bin"
