@@ -28,7 +28,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-VERSION="0.3.1"
+VERSION="0.3.2"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
@@ -148,6 +148,7 @@ function default_setup () {
 
     bash ${DOTFILES_PATH}/scripts/zsh.sh
     ${SUDO} chsh -s "$(command -v zsh)"
+    export SHELL="$(command -v zsh)"
 
     bash ${DOTFILES_PATH}/scripts/zsh-plugins.sh
     local bin="${HOME}/.local/bin"
