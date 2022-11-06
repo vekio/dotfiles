@@ -6,8 +6,10 @@
 #%
 #%DESCRIPTION
 #%  Installs and config different setups
+#%  If no command is given, install default setup
 #%
 #%COMMANDS
+#%  default             install default setup
 #%  wsl                 install wsl setup
 #%  sdk                 install sdk setup
 #%  devops              install devops setup
@@ -26,7 +28,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-VERSION="0.3.0"
+VERSION="0.3.1"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
@@ -186,6 +188,7 @@ function main () {
         error "too many arguments"; usage; exit 1
     else
         case "$*" in
+            default) info "choose default setup!"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup ;;
             wsl) info "choose wsl setup!"; install_packages ${WSL_PACKAGES[@]}; wsl_setup ;;
             sdk) info "choose sdl setup!"; install_packages ${SDK_PACKAGES[@]}; sdk_setup ;;
             devops) info "choose devops setup!"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup ;;
