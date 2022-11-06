@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 #
-# Install starship.
+# Installs, updates and setup starship.
 set -euo pipefail
 IFS=$'\n\t'
 
 # global variables
 # -----------------------------------------------------------------------------
-unset SCRIPT_NAME
 SCRIPT_NAME="$(basename ${0})"
+SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 STARSHIP_PATH="${HOME}/.local/bin"
 
 # loggers
@@ -17,37 +17,45 @@ warn() { printf "%b[warn]%b %s\n" '\e[0;33m\033[1m' '\e[0m' "$*" >&2; }
 error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 
 #######################################
-# Install starship.
+# Install or update starship.
 # Globals:
 #   STARSHIP_PATH
 # Arguments:
 #   None
 #######################################
-function install_starship () {
-    curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b ${STARSHIP_PATH}
+function install_update_starship () {
+    if command -v starship &>/dev/null; then
+        curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b ${STARSHIP_PATH} &>/dev/null || {
+            error "update starship"
+            exit 1
+        } && info "update starship"
+    else
+        curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b ${STARSHIP_PATH} &>/dev/null || {
+            error "install starship"
+            exit 1
+        } && info "install starship"
+    fi
 }
 
 #######################################
-# Update starship.
+# Setup starship.
 # Globals:
-#   STARSHIP_PATH
+#   SRC_DIR
+#   HOME
 # Arguments:
 #   None
 #######################################
-function update_starship () {
-    curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b ${STARSHIP_PATH}
+function setup_starship () {
+    ln -sf "${SRC_DIR}/../starship/starship.toml" "${HOME}/.config/starship.toml" || {
+        error "setup starship"
+        exit 1
+    } && info "setup starship"
 }
 
 # main
 # -----------------------------------------------------------------------------
 function main () {
-    # folder
-    [[ -d "${STARSHIP_PATH}" ]] || mkdir -p ${STARSHIP_PATH}
-
-    if ! command -v starship &>/dev/null; then
-        info "installing starship" && install_starship
-    else
-        warn "updating starship" && update_starship
-    fi
+   install_update_starship
+    setup_starship
 }
 main "$@"
