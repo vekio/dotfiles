@@ -22,8 +22,7 @@
 #-  version             ${SCRIPT_NAME} ${VERSION}
 #-  author              Alberto Castañeiras
 # =============================================================================
-set -euo pipefail
-IFS=$'\n\t'
+set -e
 
 # global variables
 # -----------------------------------------------------------------------------
