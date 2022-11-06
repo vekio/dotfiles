@@ -26,7 +26,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-VERSION="0.1.0"
+VERSION="0.3.0"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
