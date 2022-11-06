@@ -148,6 +148,7 @@ function default_setup () {
 
     bash ${DOTFILES_PATH}/scripts/zsh.sh
     ${SUDO} chsh -s "$(command -v zsh)"
+    export SHELL="$(command -v zsh)"
 
     bash ${DOTFILES_PATH}/scripts/zsh-plugins.sh
     local bin="${HOME}/.local/bin"
