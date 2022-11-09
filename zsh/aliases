@@ -7,6 +7,7 @@ alias ......="cd ../../../../.."
 
 # paths
 alias dot="cd ${DOTFILES}"
+alias src="cd ${HOME}/src"
 alias zz="cd ${ZDOTDIR}"
 
 # ls
@@ -16,4 +17,9 @@ alias la="ls -l --all"
 alias l="ls"
 
 # source
-alias src="source ${ZDOTDIR}/.zshrc"
+alias load="source ${ZDOTDIR}/.zshrc"
+
+# wsl
+alias wexp="explorer.exe"
+alias wsrc="cd $(wslpath "$(wslvar USERPROFILE)")"
+alias cmd="cmd.exe"
