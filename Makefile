@@ -1,5 +1,5 @@
 build:
-	@docker build -q -t dotfiles-test-user .
+	@docker build -t dotfiles-test-user .
 test-user:
 	@docker run --rm -it -v ${PWD}:/home/alberto/.dotfiles --name dotfiles-test-user --hostname dotfiles-test-user dotfiles-test-user
 test-root:

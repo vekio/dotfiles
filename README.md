@@ -47,3 +47,15 @@ docker exec -it dotfiles bash
 docker export dotfiles > dotfiles.tar
 wsl --import dotfiles ./dotfiles dotfiles.tar
 ```
+
+## Development
+
+Tests with docker image.
+
+```sh
+# Test dotfiles in ubuntu image as a sudo user
+make test-user
+
+# Test dotfiles in ubuntu image as root
+make test-root
+```

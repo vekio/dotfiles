@@ -32,10 +32,10 @@ VERSION="0.4.0"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
-DEFAULT_PACKAGES=("git" "zsh")
+DEFAULT_PACKAGES=("git" "zsh" "curl")
 SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "neovim")
 DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
-WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
+WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "tree" "zip" "unzip" "wslu")
 
 SUDO=""; command -v sudo &>/dev/null && SUDO="sudo"
 
@@ -90,7 +90,7 @@ function install_packages () {
         error "update package list"
         exit 1
     }
-    ${SUDO} apt install -y ${packages[@]} &>/dev/null || {
+    ${SUDO} apt install --no-install-recommends -y ${packages[@]} &>/dev/null || {
         error "install packages"
         exit 1
     }
