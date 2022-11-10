@@ -25,12 +25,13 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 #######################################
 function setup_zsh () {
     mkdir -p "${HOME}/.config/zsh" \
-        "${HOME}/.cache/zsh"
+        "${HOME}/.cache/zsh" \
+        "${HOME}/.zfunc"
 
     ln -fs "${SRC_DIR}/../zsh/zshenv" "${HOME}/.zshenv" && \
     ln -fs "${SRC_DIR}/../zsh/zshrc" "${HOME}/.config/zsh/.zshrc" && \
     ln -fs "${SRC_DIR}/../zsh/aliases" "${HOME}/.config/zsh/.aliases" && \
-    ln -fs "${SRC_DIR}/../zsh/helpers" "${HOME}/.config/zsh/.helpers" || {
+    ln -fs "${SRC_DIR}/../zsh/helpers" "${HOME}/.zfunc/helpers" || {
         error "setup zsh"
         exit 1
     } && info "setup zsh"

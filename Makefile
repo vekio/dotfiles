@@ -6,3 +6,5 @@ test-root:
 	@docker run --rm -it -v ${PWD}:/root/.dotfiles --name dotfiles-test-root --hostname dotfiles-test-root ubuntu:jammy
 test-user-curl:
 	@docker run --rm -it --name dotfiles-test-user-curl --hostname dotfiles-test-user-curl dotfiles-test-user
+modX:
+	@chmod +x ./scripts/*.sh
