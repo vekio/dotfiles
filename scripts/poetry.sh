@@ -21,16 +21,16 @@ error() { printf "%b[error]%b %s\n" '\e[0;31m\033[1m' '\e[0m' "$*" >&2; }
 # #######################################
 function install_update_poetry () {
     if command -v poetry &>/dev/null; then
-        poetry self update || {
+        poetry self update &>/dev/null || {
             error "update poetry"
             exit 1
         } && info "update poetry"
     else
-        curl -sSL https://install.python-poetry.org | python3 - || {
+        curl -sSL https://install.python-poetry.org | python3 - &>/dev/null || {
             error "install poetry"
             exit 1
         } && info "install poetry"
-        poetry completions zsh > ~/.zfunc/poetry
+        ~/.local/bin/poetry completions zsh > ~/.zfunc/poetry
     fi
 }
 
