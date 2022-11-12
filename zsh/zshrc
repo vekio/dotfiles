@@ -5,7 +5,7 @@
 
 # Autocompletion
 # -----------------------------------------------------------------------------
-autoload -Uz +X compinit && compinit
+autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
 
@@ -37,4 +37,4 @@ export NVM_DIR="$([[ -z "${XDG_CONFIG_HOME-}" ]] && printf %s "${HOME}/.nvm" || 
 
 # Variable fpath
 # -----------------------------------------------------------------------------
-fpath=( ~/.zfunc "${fpath[@]}" )
+# fpath=( ~/.zfunc "${fpath[@]}" )

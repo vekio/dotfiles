@@ -23,3 +23,7 @@ alias load="source ${ZDOTDIR}/.zshrc"
 alias wexp="explorer.exe"
 # alias wsrc="cd $(wslpath "$(wslvar USERPROFILE)")"
 alias cmd="cmd.exe"
+
+function weather () {
+    curl "https://wttr.in/${1}"
+}

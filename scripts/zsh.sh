@@ -7,7 +7,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)
 
 # loggers
 # -----------------------------------------------------------------------------
@@ -28,10 +28,10 @@ function setup_zsh () {
         "${HOME}/.cache/zsh" \
         "${HOME}/.zfunc"
 
-    ln -fs "${SRC_DIR}/../zsh/zshenv" "${HOME}/.zshenv" && \
-    ln -fs "${SRC_DIR}/../zsh/zshrc" "${HOME}/.config/zsh/.zshrc" && \
-    ln -fs "${SRC_DIR}/../zsh/aliases" "${HOME}/.config/zsh/.aliases" && \
-    ln -fs "${SRC_DIR}/../zsh/helpers" "${HOME}/.zfunc/helpers" || {
+    # ln -fs "${SRC_DIR}/zsh/helpers" "${HOME}/.zfunc/helpers"
+    ln -fs "${SRC_DIR}/zsh/zshenv" "${HOME}/.zshenv" && \
+    ln -fs "${SRC_DIR}/zsh/zshrc" "${HOME}/.config/zsh/.zshrc" && \
+    ln -fs "${SRC_DIR}/zsh/aliases" "${HOME}/.config/zsh/.aliases" || {
         error "setup zsh"
         exit 1
     } && info "setup zsh"

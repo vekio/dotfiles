@@ -10,6 +10,7 @@ export XDG_STATE_HOME="${HOME}/.local/state"
 export ZDOTDIR="${XDG_CONFIG_HOME}/zsh"
 export DOTFILES="${HOME}/.dotfiles"
 export PATH="${PATH}:${HOME}/.local/bin"
+[[ $fpath = *zfunc* ]] || fpath=(~/.zfunc $fpath)
 
 # editor
 # --------------------------------------------------------------------
