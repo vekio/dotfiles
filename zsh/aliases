@@ -20,8 +20,8 @@ alias l="ls"
 alias load="source ${ZDOTDIR}/.zshrc"
 
 # wsl
-alias wexp="explorer.exe"
-# alias wsrc="cd $(wslpath "$(wslvar USERPROFILE)")"
+alias exp="explorer.exe"
+alias wsrc="cd $(wslpath "$(wslvar USERPROFILE)")/src"
 alias cmd="cmd.exe"
 
 function weather () {

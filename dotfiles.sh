@@ -33,7 +33,7 @@ DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
 DEFAULT_PACKAGES=("git" "zsh" "ca-certificates" "curl")
-SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "neovim" "python3" "python3-pip")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "git-flow" "neovim" "python3" "python3-pip")
 DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
 WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "tree" "zip" "unzip" "wslu")
 
@@ -118,6 +118,9 @@ function sdk_setup () {
     bash ${DOTFILES_PATH}/scripts/nodejs.sh
     bash ${DOTFILES_PATH}/scripts/vim.sh
     bash ${DOTFILES_PATH}/scripts/poetry.sh
+
+    # Python libs
+    pip3 install black &> /dev/null
 }
 
 # default setup
