@@ -32,10 +32,10 @@ VERSION="0.4.0"
 DOTFILES_PATH="${HOME}/.dotfiles"
 
 # packages
-DEFAULT_PACKAGES=("git" "zsh")
-SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "neovim")
+DEFAULT_PACKAGES=("git" "zsh" "ca-certificates" "curl")
+SDK_PACKAGES=("${DEFAULT_PACKAGES[@]}" "build-essential" "git-flow" "neovim" "python3" "python3-pip")
 DEVOPS_PACKAGES=("${SDK_PACKAGES[@]}")
-WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "curl" "tree" "zip" "unzip")
+WSL_PACKAGES=("${DEVOPS_PACKAGES[@]}" "tree" "zip" "unzip" "wslu")
 
 SUDO=""; command -v sudo &>/dev/null && SUDO="sudo"
 
@@ -90,7 +90,7 @@ function install_packages () {
         error "update package list"
         exit 1
     }
-    ${SUDO} apt install -y ${packages[@]} &>/dev/null || {
+    ${SUDO} apt install --no-install-recommends -y ${packages[@]} &>/dev/null || {
         error "install packages"
         exit 1
     }
@@ -117,6 +117,10 @@ function sdk_setup () {
 
     bash ${DOTFILES_PATH}/scripts/nodejs.sh
     bash ${DOTFILES_PATH}/scripts/vim.sh
+    bash ${DOTFILES_PATH}/scripts/poetry.sh
+
+    # Python libs
+    pip3 install black &> /dev/null
 }
 
 # default setup
@@ -130,22 +134,21 @@ function default_setup () {
         "${HOME}/.local/state" \
         "${HOME}/src"
 
-    # clone dotfiles
-    if [[ -d "${DOTFILES_PATH}" ]]; then
-        cd ${DOTFILES_PATH} && git pull &> /dev/null || {
-            error "update dotfiles"
-            exit 1
-        } && info "update dotfiles"
-        cd - &> /dev/null
-    else
-        git clone https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} &> /dev/null || {
-            error "clone dotfiles"
-            exit 1
-        } && info "clone dotfiles"
-    fi
+    # Clone dotfiles
+    # if [[ -d "${DOTFILES_PATH}" ]]; then
+    #     cd ${DOTFILES_PATH} && git pull &> /dev/null || {
+    #         error "update dotfiles"
+    #         exit 1
+    #     } && info "update dotfiles"
+    #     cd - &> /dev/null
+    # else
+    #     git clone https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} &> /dev/null || {
+    #         error "clone dotfiles"
+    #         exit 1
+    #     } && info "clone dotfiles"
+    # fi
 
     bash ${DOTFILES_PATH}/scripts/git.sh
-
     bash ${DOTFILES_PATH}/scripts/zsh.sh
 
     # if [[ -z "${SUDO}" ]]; then
@@ -195,7 +198,7 @@ function main () {
         case "$*" in
             default) info "choose default setup!"; install_packages ${DEFAULT_PACKAGES[@]}; default_setup ;;
             wsl) info "choose wsl setup!"; install_packages ${WSL_PACKAGES[@]}; wsl_setup ;;
-            sdk) info "choose sdl setup!"; install_packages ${SDK_PACKAGES[@]}; sdk_setup ;;
+            sdk) info "choose sdk setup!"; install_packages ${SDK_PACKAGES[@]}; sdk_setup ;;
             devops) info "choose devops setup!"; install_packages ${DEVOPS_PACKAGES[@]}; devops_setup ;;
             *) error "unknow setup"; usage; exit 1 ;;
         esac

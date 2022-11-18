@@ -7,7 +7,6 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-# nvm
 NVM_VERSION=""
 
 # loggers

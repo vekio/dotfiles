@@ -33,7 +33,7 @@ function install_terraform () {
         ${SUDO} apt install -y ${packages[@]} &>/dev/null || {
             error "install terraform dependencies"
             exit 1
-        } && info "install terraform dependencies"
+        }
 
         # gpg key
         wget -O- --quiet https://apt.releases.hashicorp.com/gpg | \

@@ -7,7 +7,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)
 STARSHIP_PATH="${HOME}/.local/bin"
 
 # loggers
@@ -46,7 +46,7 @@ function install_update_starship () {
 #   None
 #######################################
 function setup_starship () {
-    ln -sf "${SRC_DIR}/../starship/starship.toml" "${HOME}/.config/starship.toml" || {
+    ln -sf "${SRC_DIR}/starship/starship.toml" "${HOME}/.config/starship.toml" || {
         error "setup starship"
         exit 1
     } && info "setup starship"

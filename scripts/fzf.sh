@@ -7,7 +7,7 @@ IFS=$'\n\t'
 # global variables
 # -----------------------------------------------------------------------------
 SCRIPT_NAME="$(basename ${0})"
-SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+SRC_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)
 FZF_PATH="${HOME}/.local/share/fzf"
 
 # loggers
@@ -54,7 +54,7 @@ function install_update_fzf () {
 #   None
 #######################################
 function setup_fzf () {
-    ln -sf "${SRC_DIR}/../fzf/fzf" "${HOME}/.config/zsh/.fzf" || {
+    ln -sf "${SRC_DIR}/fzf/fzf" "${HOME}/.config/zsh/.fzf" || {
         error "setup fzf"
         exit 1
     } && info "setup fzf"
