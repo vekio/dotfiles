@@ -26,8 +26,8 @@ IMPLEMENTATION
 ## Install
 
 ```sh
-git clone https://github.com/vekio/dotfiles.git
-cd dotfiles && ./dotfiles.sh wsl
+git clone https://github.com/vekio/dotfiles.git ~/.dotfiles
+cd ~/.dotfiles && ./dotfiles.sh wsl
 chsh -s "$(command -v zsh)" && exec zsh -l
 ```
 

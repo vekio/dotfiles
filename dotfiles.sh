@@ -135,18 +135,18 @@ function default_setup () {
         "${HOME}/src"
 
     # Clone dotfiles
-    if [[ -d "${DOTFILES_PATH}" ]]; then
-        cd ${DOTFILES_PATH} && git pull &> /dev/null || {
-            error "update dotfiles"
-            exit 1
-        } && info "update dotfiles"
-        cd - &> /dev/null
-    else
-        git clone https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} &> /dev/null || {
-            error "clone dotfiles"
-            exit 1
-        } && info "clone dotfiles"
-    fi
+    # if [[ -d "${DOTFILES_PATH}" ]]; then
+    #     cd ${DOTFILES_PATH} && git pull &> /dev/null || {
+    #         error "update dotfiles"
+    #         exit 1
+    #     } && info "update dotfiles"
+    #     cd - &> /dev/null
+    # else
+    #     git clone https://github.com/vekio/dotfiles.git ${DOTFILES_PATH} &> /dev/null || {
+    #         error "clone dotfiles"
+    #         exit 1
+    #     } && info "clone dotfiles"
+    # fi
 
     bash ${DOTFILES_PATH}/scripts/git.sh
     bash ${DOTFILES_PATH}/scripts/zsh.sh
