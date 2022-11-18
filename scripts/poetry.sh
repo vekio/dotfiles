@@ -31,6 +31,7 @@ function install_update_poetry () {
             exit 1
         } && info "install poetry"
         ~/.local/bin/poetry completions zsh > ~/.zfunc/_poetry
+        ~/.local/bin/poetry config virtualenvs.in-project true
     fi
 }
 
