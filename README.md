@@ -1,63 +1,37 @@
 # dotfiles
 
-```txt
-Usage: SYNOPSIS
-  dotfiles.sh [OPTIONS] COMMAND
+Personal dotfiles configuration using Nix, Flakes and Home-Manager.
 
-DESCRIPTION
-  Installs and config different setups
-  If no command is given, install default setup
+## Installation
 
-COMMANDS
-  default             install default setup
-  wsl                 install wsl setup
-  sdk                 install sdk setup
-  devops              install devops setup
+Installation steps:
 
-OPTIONS
-  -v, --version       display version information and exit
-  -h, --help          display this help text and exit
+1. Installing Nix using [Determinate Nix installer](https://zero-to-nix.com/concepts/nix-installer): `curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install`
+2. Select the profile you want to apply its settings to: `nix run home-manager -- switch --flake .#PROFILE`
+3. Activate Zsh shell: `sudo chsh -s "$(which zsh)" "${USER}"`
 
-IMPLEMENTATION
-  version             setup.sh alpha
-  author              Alberto Castañeiras
-```
+After installation to change the profile you need to run: `home-manager switch --flake .#PROFILE`
 
-## Install
+## 💭 Inspired By
 
-```sh
-git clone https://github.com/vekio/dotfiles.git ~/.dotfiles
-cd ~/.dotfiles && ./dotfiles.sh wsl
-chsh -s "$(command -v zsh)" && exec zsh -l
-```
+- [sioodmy/dotfiles](https://github.com/sioodmy/dotfiles)
+- [hlissner/dotfiles](https://github.com/hlissner/dotfiles)
+- [fufexan/dotfiles](https://github.com/fufexan/dotfiles)
+- [viperML/dotfiles](https://github.com/viperML/dotfiles)
+- [colemickens/nixcfg](https://github.com/colemickens/nixcfg)
+- [Mic92/dotfiles](https://github.com/Mic92/dotfiles)
+- [LongerHV/nixos-configuration](https://github.com/LongerHV/nixos-configuration)
 
-## WSL distro
+## 💾 Resources
 
-Create a WSL distro with personal dotfiles in it.
+- [Home Manager Options](https://nix-community.github.io/home-manager/options.xhtml)
+- [Effortless dev environments with Nix and direnv](https://determinate.systems/posts/nix-direnv/)
+- [Zero to Nix](https://zero-to-nix.com/)
+- [vimjoyer](https://www.youtube.com/@vimjoyer/videos)
 
-```sh
-docker run -d -t --name dotfiles ubuntu:jammy
-docker exec -it dotfiles bash
+## ⚙️ Configs
 
-# execute inside the container
-> apt update && apt install -y curl
-> git clone https://github.com/vekio/dotfiles.git
-> cd dotfiles && ./dotfiles.sh wsl
-> chsh -s "$(command -v zsh)" && exec zsh -l
-# exit from the container
+### Windows Terminal
 
-docker export dotfiles > dotfiles.tar
-wsl --import dotfiles ./dotfiles dotfiles.tar
-```
-
-## Development
-
-Tests with docker image.
-
-```sh
-# Test dotfiles in ubuntu image as a sudo user
-make test-user
-
-# Test dotfiles in ubuntu image as root
-make test-root
-```
+- Theme: Gruvbox Dark (from gruvbox_dark.json file)
+- Font: Cascadia Mono PL
