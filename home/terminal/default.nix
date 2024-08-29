@@ -12,6 +12,7 @@ in {
     # LESSHISTFILE = "${cache}/less/history";
     # LESSKEY = "${conf}/less/lesskey";
     EDITOR = "nvim";
+    VISUAL = "code";
   };
   # directories to PATH
   home.sessionPath = [ "$HOME/.local/bin" ];
