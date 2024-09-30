@@ -26,6 +26,9 @@
     # asciidoc
     asciidoctor
 
+    # automation
+    ansible
+
     # TODO
     # zip
     # unzip
