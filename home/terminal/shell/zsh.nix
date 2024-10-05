@@ -42,7 +42,7 @@
       "...." = "cd ../../..";
 
       ls = "ls --color=auto";
-      la = "ls -A";
+      la = "ls -la";
       ll = "ls -lF";
       l = "ls -CF";
 
