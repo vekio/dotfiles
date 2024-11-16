@@ -1,7 +1,7 @@
 {
   programs.go = {
     enable = true;
-    goPath = ".local/share/go/bin";
+    goPath = ".local/share/go";
     # this only clone the repository
     # doesn't install it
     # packages = {
@@ -12,5 +12,5 @@
     # };
   };
 
-  home.sessionPath = [ "$GOPATH" ];
+  home.sessionPath = [ "$GOPATH/bin" ];
 }
