@@ -20,7 +20,6 @@
 
     # develop
     nixfmt-classic
-    gitflow
     gnumake
 
     # asciidoc
