@@ -4,7 +4,7 @@
   home = {
     username = "vekio";
     homeDirectory = "/home/vekio";
-    stateVersion = "24.05";
+    stateVersion = "25.05";
   };
 
   # let Home Manager install and manage itself.
