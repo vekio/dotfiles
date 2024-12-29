@@ -6,7 +6,7 @@
     extraConfig = {
       init.defaultBranch = "main";
       gitflow.branch.master = "main";
-      gitflow.branch.develop = "dev";
+      gitflow.branch.develop = "develop";
       gitflow.prefix.feature = "feature/";
       gitflow.prefix.release = "release/";
       gitflow.prefix.hotfix = "hotfix/";
