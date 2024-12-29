@@ -25,6 +25,9 @@
     # asciidoc
     asciidoctor
 
+    # charm
+    gum
+
     # TODO
     # zip
     # unzip
