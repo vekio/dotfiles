@@ -2,7 +2,7 @@
   programs.git = {
     enable = true;
     userName = "Alberto Castañeiras";
-    userEmail = "alberto@casta.me";
+    userEmail = "alberto@vekio.dev";
     extraConfig = {
       init.defaultBranch = "main";
       gitflow.branch.master = "main";
