@@ -21,6 +21,7 @@
     # develop
     nixfmt-classic
     gnumake
+    entr
 
     # asciidoc
     asciidoctor
