@@ -14,10 +14,10 @@
     system = "x86_64-linux";
     username = "alberto";
   in {
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+    nixosConfigurations.titan = nixpkgs.lib.nixosSystem {
       inherit system;
       modules = [
-        ./hosts/vm.nix
+        ./hosts/titan.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
