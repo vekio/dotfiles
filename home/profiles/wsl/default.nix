@@ -1,6 +1,0 @@
-{
-  imports = [
-    # editors
-    ../../editors/neovim
-  ];
-}
