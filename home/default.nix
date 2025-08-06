@@ -17,14 +17,11 @@
   };
   
   home.packages = with pkgs; [
-    htop
-    git
-    gitflow
     vim
-    vscodium
+    htop
+    gitflow
 
     # gui
-    brave
     protonvpn-gui
   ];
 
@@ -38,16 +35,16 @@
     };
   };
 
-  # programs.chromium = {
-  #   enable = true;
-  #   package = pkgs.brave;
-  #   extensions = [
-  #     { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark-reader
-  #     { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # proton-pass
-  #     { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # proton-vpn
-  #   ];
-  #   # commandLineArgs = [    ];
-  # };
+  programs.chromium = {
+    enable = true;
+    package = pkgs.brave;
+    extensions = [
+      { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark-reader
+      { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # proton-pass
+      { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # proton-vpn
+    ];
+    # commandLineArgs = [    ];
+  };
 
   programs.git = {
     enable = true;
