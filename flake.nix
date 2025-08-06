@@ -10,35 +10,35 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
-  let
-    system = "x86_64-linux";
-    username = "vekio";
-  in {
-    nixosConfigurations.titan = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ./hosts/titan/titan.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${username} = import ./home/default.nix;
-        }
-      ];
-    };
+    let
+      system = "x86_64-linux";
+      username = "vekio";
+    in {
+      nixosConfigurations.titan = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/titan/titan.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home/default.nix;
+          }
+        ];
+      };
 
-    nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-      inherit system;
-      modules = [
-        ./hosts/vm/vm.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.${username} = import ./home/default.nix;
-        }
-      ];
+      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./hosts/vm/vm.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.${username} = import ./home/default.nix;
+          }
+        ];
+      };
     };
-  };    
 }
 
