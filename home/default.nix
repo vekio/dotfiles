@@ -19,4 +19,3 @@
     protonvpn-gui
   ];
 }
-
