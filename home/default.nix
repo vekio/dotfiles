@@ -18,4 +18,17 @@
     # gui
     protonvpn-gui
   ];
+
+  # TODO sway
+  # wayland.windowManager.sway = {
+  #   enable = true;
+  #   config = {
+  #     modifier = "Mod4";
+  #     terminal = "alacritty";
+  #     # menu = "wofi --show drun";
+  #     startup = [{ command = "brave"; }];
+  #   };
+  # };
+
+  # services.mako.enable = true;
 }
