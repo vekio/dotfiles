@@ -23,8 +23,8 @@
     ];
 
     profiles.default.userSettings = {
-      "workbench.iconTheme" = "vscode-icons";
-      "workbench.colorTheme" = "GitHub Dark Default";
+      "workbench.iconTheme" = "catppuccin-icons";
+      "workbench.colorTheme" = "Catppuccin Mocha";
       "workbench.sideBar.location" = "right";
 
       "files.autoGuessEncoding" = true;
@@ -34,8 +34,9 @@
 
       "editor.formatOnSave" = true;
       "editor.renderFinalNewLine" = true;
-      "editor.fontFamily" = "consolas";
-      "editor.fontWeight" = "400";
+      "editor.fontFamily" = "FiraCode Nerd Font";
+      "editor.fontLigatures" = true;
+      "editor.fontWeight" = "normal";
       "editor.cursorStyle" = "block";
 
       "git.autofetch" = true;

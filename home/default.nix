@@ -14,7 +14,7 @@
     vim
     htop
     nixfmt-classic
-
+    neofetch
     # gui
     protonvpn-gui
   ];
