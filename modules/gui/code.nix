@@ -6,7 +6,7 @@
     package = pkgs.vscodium;
 
     profiles.default.extensions = with pkgs.vscode-extensions; [
-      vscode-icons-team.vscode-icons
+      # vscode-icons-team.vscode-icons
       jnoortheen.nix-ide
       usernamehw.errorlens
       asciidoctor.asciidoctor-vscode
@@ -23,8 +23,8 @@
     ];
 
     profiles.default.userSettings = {
-      "workbench.iconTheme" = "catppuccin-icons";
-      "workbench.colorTheme" = "Catppuccin Mocha";
+      "workbench.iconTheme" = "catppuccin-frappe";
+      "workbench.colorTheme" = "Catppuccin Mocha"; # "GitHub Dark Default"
       "workbench.sideBar.location" = "right";
 
       "files.autoGuessEncoding" = true;
