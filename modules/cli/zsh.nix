@@ -5,11 +5,19 @@
     syntaxHighlighting.enable = true;
     autocd = true;
 
+    initContent = ''
+      # bindkeys
+      bindkey '^ ' autosuggest-accept # ctrl + space
+      # insensitive tab completion
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+    '';
+
     # initContent = ''
     #   function rebuild {
     #     sudo nixos-rebuild switch --flake "$@"
     #   }
     # '';
+
     shellAliases = {
       ".." = "cd ..";
       "..." = "cd ../..";
@@ -19,6 +27,8 @@
       la = "ls -lA";
       ll = "ls -l";
       l = "ls -A";
+
+      code = "codium";
 
       reload = ".. && cd -";
     };
