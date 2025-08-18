@@ -18,6 +18,12 @@
     #   }
     # '';
 
+    plugins = [{
+      name = "forgit";
+      src = pkgs.zsh-forgit;
+      file = "share/zsh/zsh-forgit/forgit.plugin.zsh";
+    }];
+
     shellAliases = {
       ".." = "cd ..";
       "..." = "cd ../..";
