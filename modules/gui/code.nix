@@ -23,7 +23,7 @@
     ];
 
     profiles.default.userSettings = {
-      "workbench.iconTheme" = "catppuccin-frappe";
+      "workbench.iconTheme" = "catppuccin-mocha";
       "workbench.colorTheme" = "Catppuccin Mocha"; # "GitHub Dark Default"
       "workbench.sideBar.location" = "right";
 
@@ -33,7 +33,7 @@
       "files.trimTrailingWhitespace" = true;
 
       "editor.formatOnSave" = true;
-      "editor.renderFinalNewLine" = true;
+      "editor.renderFinalNewline" = true;
       "editor.fontFamily" = "FiraCode Nerd Font";
       "editor.fontLigatures" = true;
       "editor.fontWeight" = "normal";
