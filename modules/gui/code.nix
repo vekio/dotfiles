@@ -33,7 +33,7 @@
       "files.trimTrailingWhitespace" = true;
 
       "editor.formatOnSave" = true;
-      "editor.renderFinalNewline" = true;
+      "editor.renderFinalNewline" = "off";
       "editor.fontFamily" = "FiraCode Nerd Font";
       "editor.fontLigatures" = true;
       "editor.fontWeight" = "normal";
