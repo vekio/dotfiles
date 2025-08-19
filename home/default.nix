@@ -17,6 +17,9 @@
     neofetch
     # gui
     protonvpn-gui
+    proton-pass
+
+    gnumake
   ];
 
   # TODO sway
