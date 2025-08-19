@@ -10,8 +10,18 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    timeout = 15; # segundos antes de arrancar
+    systemd-boot = {
+      enable = true;
+      editor = false;
+      windows."win11" = {
+        efiDeviceHandle = "/dev/nvme0n1p3"; # la partición EFI del NVMe
+        title = "Windows 11";
+      };
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = "titan"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
