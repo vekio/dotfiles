@@ -12,7 +12,7 @@
       asciidoctor.asciidoctor-vscode
       golang.go
       ms-vscode.live-server
-      github.github-vscode-theme
+      # github.github-vscode-theme
       catppuccin.catppuccin-vsc
       catppuccin.catppuccin-vsc-icons
 
