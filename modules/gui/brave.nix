@@ -7,6 +7,7 @@
       { id = "eimadpbcbfnmbkopoojfekhnkhdbieeh"; } # dark-reader
       { id = "ghmbeldphafepmbegfdlkpapadhbakde"; } # proton-pass
       { id = "jplgfhpmjnbigmhklmmbgecoobifkmpa"; } # proton-vpn
+      { id = "occjjkgifpmdgodlplnacmkejpdionan"; } # auto-scroll
     ];
     # commandLineArgs = [
     #   "--disable-features=PasswordManagerEnable"
