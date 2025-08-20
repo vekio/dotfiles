@@ -1,1 +1,1 @@
-{ imports = [ ./code.nix ./brave.nix ]; }
+{ imports = [ ./code.nix ./brave.nix ./xdg.nix ]; }

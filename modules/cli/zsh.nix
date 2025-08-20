@@ -37,6 +37,9 @@
       code = "codium";
 
       reload = ".. && cd -";
+
+      dl = "cd ~/downloads";
+      src = "cd ~/source";
     };
   };
 }
