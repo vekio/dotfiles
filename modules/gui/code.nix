@@ -43,5 +43,62 @@
 
       "vsicons.dontShowNewVersionMessage" = true;
     };
+
+    profiles.default.keybindings = [
+      # Activar copyLinesUpAction
+      {
+        key = "shift+alt+up";
+        command = "editor.action.copyLinesUpAction";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "shift+alt+down";
+        command = "editor.action.copyLinesDownAction";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      # Desactivar copyLinesUpAction
+      {
+        key = "ctrl+shift+alt+up";
+        command = "-editor.action.copyLinesUpAction";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      {
+        key = "ctrl+shift+alt+down";
+        command = "-editor.action.copyLinesDownAction";
+        when = "editorTextFocus && !editorReadonly";
+      }
+      # Activar insertCursorAbove
+      {
+        key = "ctrl+alt+up";
+        command = "editor.action.insertCursorAbove";
+        when = "editorTextFocus";
+      }
+      {
+        key = "ctrl+alt+down";
+        command = "editor.action.insertCursorBelow";
+        when = "editorTextFocus";
+      }
+      # Desactivar insertCursorAbove
+      {
+        key = "ctrl+shift+up";
+        command = "-editor.action.insertCursorAbove";
+        when = "editorTextFocus";
+      }
+      {
+        key = "ctrl+shift+down";
+        command = "-editor.action.insertCursorBelow";
+        when = "editorTextFocus";
+      }
+      {
+        key = "shift+alt+up";
+        command = "-editor.action.insertCursorAbove";
+        when = "editorTextFocus";
+      }
+      {
+        key = "shift+alt+down";
+        command = "-editor.action.insertCursorBelow";
+        when = "editorTextFocus";
+      }
+    ];
   };
 }
