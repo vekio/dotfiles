@@ -18,7 +18,7 @@
     # gui
     protonvpn-gui
     proton-pass
-
+    vlc
     gnumake
   ];
 
