@@ -1,1 +1,1 @@
-{ imports = [ ./git.nix ./zsh.nix ./starship.nix ./fzf.nix ]; }
+{ imports = [ ./git.nix ./zsh.nix ./starship.nix ./fzf.nix ./direnv.nix ]; }
