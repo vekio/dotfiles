@@ -53,6 +53,9 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -98,7 +101,7 @@
   users.users.vekio = {
     isNormalUser = true;
     description = "vekio";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
     packages = with pkgs;
       [
