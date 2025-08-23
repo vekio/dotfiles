@@ -35,7 +35,8 @@
       l = "ls -A";
 
       code = ''
-        codium "$(find ~/source -type d -name .git -prune -printf "%h\n" | fzf --reverse --height 40)"'';
+        cd "$(find ~/source -type d -name .git -prune -printf "%h\n" | fzf --reverse --height 40)" && codium .
+      '';
 
       reload = ".. && cd -";
 
