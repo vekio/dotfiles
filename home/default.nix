@@ -22,6 +22,11 @@
     gnumake
   ];
 
+  home.sessionVariables = {
+    GOPATH = "${config.home.homeDirectory}/.local/share/go";
+    GOBIN = "${config.home.homeDirectory}/.local/share/go/bin";
+  };
+
   dconf.settings = {
     "org/gnome/desktop/wm/keybindings" = {
       # Cambiar entre workspaces con Ctrl+Super+flechas
