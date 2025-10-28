@@ -67,8 +67,9 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    nvidiaSettings = true; # Install NVIDIA control panel
     open = false;
+    powerManagement.enable = true;
+    nvidiaSettings = true; # Install NVIDIA control panel
   };
 
   # Aceleracion
