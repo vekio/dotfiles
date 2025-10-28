@@ -1,44 +1,46 @@
 {
-  description = "vekio's dotfiles with home-manager and flakes";
+  description = "vekio's dotfiles";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }:
+  outputs = { self, nixpkgs, home-manager, nix4vscode, ... }:
     let
       system = "x86_64-linux";
-      username = "vekio";
-    in {
-      nixosConfigurations.titan = nixpkgs.lib.nixosSystem {
+      username = "alberto";
+      pkgs = import nixpkgs {
         inherit system;
-        modules = [
-          ./hosts/titan/titan.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./home/default.nix;
-          }
-        ];
+        overlays = [ nix4vscode.overlays.default ];
+        config = { allowUnfree = true; };
       };
-
-      nixosConfigurations.vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          ./hosts/vm/vm.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./home/default.nix;
-          }
-        ];
+    in {
+      nixosConfigurations = {
+        # host titan
+        titan = nixpkgs.lib.nixosSystem {
+          inherit pkgs;
+          modules = [
+            ./hosts/titan/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = import ./home/default.nix;
+              };
+            }
+          ];
+        };
       };
     };
 }
-

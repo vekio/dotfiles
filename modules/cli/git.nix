@@ -1,9 +1,11 @@
 { pkgs, ... }: {
   programs.git = {
     enable = true;
-    userName = "Alberto Castañeiras";
-    userEmail = "alberto@casta.me";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Alberto Castañeiras";
+        email = "alberto@casta.me";
+      };
       init.defaultBranch = "main";
       gitflow.branch.master = "main";
       gitflow.branch.develop = "develop";

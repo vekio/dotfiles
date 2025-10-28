@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [ # Include the results of the hardware scan.
@@ -11,17 +11,21 @@
 
   # Bootloader.
   boot.loader = {
-    timeout = 15; # segundos antes de arrancar
+    timeout = 30; # Segundos antes de arrancar
     systemd-boot = {
       enable = true;
-      editor = false;
       windows."win11" = {
-        efiDeviceHandle = "/dev/nvme0n1p3"; # la partición EFI del NVMe
+        efiDeviceHandle = "/dev/nvme0n1p3";
         title = "Windows 11";
       };
     };
     efi.canTouchEfiVariables = true;
   };
+
+  boot.extraModprobeConfig = ''
+    options nvidia NVreg_PreserveVideoMemoryAllocation=1 NVreg_TemporaryFilePath=/var/tmp NVreg_EnableGpuFirmware=0
+    options nvidia_drm modeset=1 fbdev=1
+  '';
 
   networking.hostName = "titan"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -33,6 +37,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  # Enable experimental features
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Set your time zone.
@@ -53,28 +58,36 @@
     LC_TIME = "es_ES.UTF-8";
   };
 
-  # Enable Docker.
-  virtualisation.docker.enable = true;
-
   # Enable the X11 windowing system.
+  # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-  services.displayManager.gdm.wayland = true;
+  # Use NVIDIA driver
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    nvidiaSettings = true; # Install NVIDIA control panel
+    open = false;
+  };
+
+  # Aceleracion
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  # Enable the KDE Plasma Desktop Environment.
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
+  services.displayManager.sddm.wayland.enable =
+    true; # Opcional a true usa Wayland a false usa X11
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
   };
-
-  # sway
-  # programs.sway = {
-  #   enable = true;
-  #   wrapperFeatures.gtk = true;
-  # };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -98,27 +111,22 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.vekio = {
+  users.users.alberto = {
     isNormalUser = true;
-    description = "vekio";
+    description = "alberto";
     extraGroups = [ "networkmanager" "wheel" "docker" ];
     shell = pkgs.zsh;
-    packages = with pkgs;
-      [
-        #  thunderbird
-      ];
+    packages = with pkgs; [ ];
   };
-
-  fonts.packages = with pkgs; [ nerd-fonts.fira-code ];
-
-  # Install firefox.
-  # programs.firefox.enable = true;
 
   programs.zsh.enable = true;
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -126,33 +134,7 @@
     [
       #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       #  wget
-      # TODO sway
-      # waybar
-      # mako
-      # wofi
-      # grim
-      # slurp
-      # wl-clipboard
-      # swaybg
-      # swaylock
-      # swayidle
-      # alacritty
     ];
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

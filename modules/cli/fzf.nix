@@ -1,4 +1,4 @@
-{
+{ ... }: {
   # TODO customize fzf
   programs.fzf = {
     enable = true;
