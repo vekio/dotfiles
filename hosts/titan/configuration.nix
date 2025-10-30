@@ -23,7 +23,7 @@
   };
 
   boot.extraModprobeConfig = ''
-    options nvidia NVreg_PreserveVideoMemoryAllocation=1 NVreg_TemporaryFilePath=/var/tmp NVreg_EnableGpuFirmware=0
+    options nvidia NVreg_PreserveVideoMemoryAllocations=1
     options nvidia_drm modeset=1 fbdev=1
   '';
 
