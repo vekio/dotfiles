@@ -9,7 +9,7 @@
     stateVersion = "25.05";
   };
 
-  home.packages = with pkgs; [ nixfmt-classic gnumake gum ];
+  home.packages = with pkgs; [ nixfmt-classic gnumake ];
 
   home.file = { };
 
