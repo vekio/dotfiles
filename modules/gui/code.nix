@@ -21,6 +21,7 @@ in {
         ms-vscode.live-server
         vue.volar
         docker.docker
+        bradlc.vscode-tailwindcss
 
         # Themes
         # github.github-vscode-theme
