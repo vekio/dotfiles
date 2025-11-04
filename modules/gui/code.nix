@@ -22,6 +22,7 @@ in {
         vue.volar
         docker.docker
         bradlc.vscode-tailwindcss
+        astro-build.astro-vscode
 
         # Themes
         # github.github-vscode-theme
