@@ -1,7 +1,11 @@
 { config, pkgs, ... }:
 
 let
-  vscodeExtensions = pkgs.nix4vscode.forVscode [ "openai.chatgpt" "a-h.templ" ];
+  vscodeExtensions = pkgs.nix4vscode.forVscode [
+    "openai.chatgpt"
+    "a-h.templ"
+    "Serhioromano.vscode-gitflow"
+  ];
 in {
   programs.vscode = {
     enable = true;
