@@ -4,7 +4,7 @@
     settings = {
       user = {
         name = "Alberto Castañeiras";
-        email = "alberto@casta.me";
+        email = "alberto@vekio.dev";
       };
       init.defaultBranch = "main";
       gitflow.branch.master = "main";

@@ -5,6 +5,10 @@ let
     "openai.chatgpt"
     "a-h.templ"
     "Serhioromano.vscode-gitflow"
+    "redhat.ansible"
+    "redhat.vscode-yaml"
+    "ms-python.python"
+    "hashicorp.terraform"
   ];
 in {
   programs.vscode = {
@@ -46,6 +50,7 @@ in {
         "workbench.iconTheme" = "catppuccin-mocha";
         "workbench.colorTheme" = "Catppuccin Mocha"; # "GitHub Dark Default"
         "workbench.sideBar.location" = "right";
+        "terminal.integrated.stickyScroll.enabled" = false;
 
         "files.autoGuessEncoding" = true;
         "files.trimFinalNewlines" = true;
@@ -62,6 +67,7 @@ in {
         "git.autofetch" = true;
 
         "vsicons.dontShowNewVersionMessage" = true;
+        "redhat.telemetry.enabled" = false;
       };
 
       keybindings = [

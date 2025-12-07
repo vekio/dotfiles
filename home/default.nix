@@ -6,7 +6,7 @@
   home = {
     username = "alberto";
     homeDirectory = "/home/alberto";
-    stateVersion = "25.05";
+    stateVersion = "25.11";
   };
 
   home.packages = with pkgs; [ nixfmt-classic gnumake ];
@@ -16,6 +16,7 @@
   home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/.local/share/go";
     GOBIN = "${config.home.homeDirectory}/.local/share/go/bin";
+    VISUAL = "codium";
   };
 
   # Let Home Manager install and manage itself.

@@ -36,13 +36,13 @@
       l = "ls -A";
 
       code = ''
-        cd "$(find ~/source -type d -name .git -prune -printf "%h\n" | fzf --reverse --height 40)" && codium .
+        cd "$(find ~/Source -type d -name .git -prune -printf "%h\n" | fzf --reverse --height 40)" && codium .
       '';
 
       reload = ".. && cd -";
 
-      dl = "cd ~/downloads";
-      src = "cd ~/source";
+      dl = "cd ~/Downloads";
+      src = "cd ~/Source";
     };
   };
 }
