@@ -7,6 +7,10 @@
     settings = {
       add_newline = false;
       time = { disabled = true; };
+      docker_context = {
+        format = "via [🐳 $context](blue bold) ";
+        only_with_files = false;
+      };
     };
   };
 }
