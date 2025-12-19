@@ -115,6 +115,11 @@
   # Enable Docker.
   virtualisation.docker.enable = true;
 
+  # Gaming stack
+  programs.gamemode.enable = true;
+  programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.alberto = {
     isNormalUser = true;
