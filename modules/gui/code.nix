@@ -31,6 +31,7 @@ in {
         docker.docker
         bradlc.vscode-tailwindcss
         astro-build.astro-vscode
+        continue.continue
 
         # Themes
         # github.github-vscode-theme
@@ -68,6 +69,11 @@ in {
 
         "vsicons.dontShowNewVersionMessage" = true;
         "redhat.telemetry.enabled" = false;
+
+        "yaml.schemas" = {
+          "file://${config.home.homeDirectory}/.vscode-oss/extensions/Continue.continue/config-yaml-schema.json" =
+            [ ".continue/**/*.yaml" ];
+        };
       };
 
       keybindings = [
