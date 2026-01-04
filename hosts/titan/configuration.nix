@@ -14,10 +14,6 @@
     timeout = 30; # Segundos antes de arrancar
     systemd-boot = {
       enable = true;
-      windows."win11" = {
-        efiDeviceHandle = "/dev/nvme0n1p3";
-        title = "Windows 11";
-      };
     };
     efi.canTouchEfiVariables = true;
   };
@@ -174,7 +170,7 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
   systemd.targets.hibernate.enable = false;
   systemd.targets.hybrid-sleep.enable = false;
