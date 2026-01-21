@@ -6,7 +6,7 @@
   home = {
     username = "alberto";
     homeDirectory = "/home/alberto";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
   };
 
   home.packages = with pkgs; [ nixfmt-classic gnumake ];
