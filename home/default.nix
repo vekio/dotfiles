@@ -9,7 +9,7 @@
     stateVersion = "26.05";
   };
 
-  home.packages = with pkgs; [ nixfmt-classic gnumake ];
+  home.packages = with pkgs; [ nixfmt gnumake ];
 
   home.file = { "${config.home.homeDirectory}/.local/bin/.keep".text = ""; };
 
