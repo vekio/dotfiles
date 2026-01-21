@@ -12,9 +12,7 @@
   # Bootloader.
   boot.loader = {
     timeout = 30; # Segundos antes de arrancar
-    systemd-boot = {
-      enable = true;
-    };
+    systemd-boot = { enable = true; };
     efi.canTouchEfiVariables = true;
   };
 
@@ -83,7 +81,7 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
-    variant = "";
+    variant = "altgr-intl";
   };
 
   # Enable CUPS to print documents.
