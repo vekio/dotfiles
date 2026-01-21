@@ -11,13 +11,15 @@
 
   home.packages = with pkgs; [ nixfmt-classic gnumake ];
 
-  home.file = { };
+  home.file = { "${config.home.homeDirectory}/.local/bin/.keep".text = ""; };
 
   home.sessionVariables = {
     GOPATH = "${config.home.homeDirectory}/.local/share/go";
     GOBIN = "${config.home.homeDirectory}/.local/share/go/bin";
     VISUAL = "codium";
   };
+
+  home.sessionPath = [ "${config.home.homeDirectory}/.local/bin" ];
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
