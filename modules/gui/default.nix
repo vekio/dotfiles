@@ -14,6 +14,7 @@
     vlc
     kdePackages.isoimagewriter
     wl-clipboard
+    sqlitebrowser
     qbittorrent
     obs-studio
     kdePackages.kcolorchooser
