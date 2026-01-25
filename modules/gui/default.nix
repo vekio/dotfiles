@@ -14,6 +14,7 @@
     vlc
     kdePackages.isoimagewriter
     wl-clipboard
+    bruno
     sqlitebrowser
     qbittorrent
     obs-studio
