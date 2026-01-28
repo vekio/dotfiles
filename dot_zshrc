@@ -1,21 +1,22 @@
-# Basic sanity
-export SHELL=/usr/bin/zsh
-export EDITOR=nvim
-export VISUAL=nvim
+export EDITOR=vi
+export VISUAL=vi
 
-# History
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt inc_append_history
-setopt share_history
+# Init completion
+autoload -Uz compinit
+compinit
 
-# Prompt simple
+# Load modular config files
+for f in ~/.zsh/*.zsh; do
+  [ -r "$f" ] && source "$f"
+done
+
+# Simple prompt
 PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
 
-# Auto-start tmux 
-if command -v tmux >/dev/null 2>&1; then
+# Auto-start tmux (only for interactive shells, and only if not already inside tmux)
+if [[ -o interactive ]] && command -v tmux >/dev/null 2>&1; then
   if [ -z "$TMUX" ]; then
     exec tmux
   fi
 fi
+
