@@ -1,0 +1,19 @@
+# Basic sanity
+export SHELL=/usr/bin/zsh
+
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt inc_append_history
+setopt share_history
+
+# Prompt simple
+PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
+
+# Auto-start tmux (solo si no estás ya dentro)
+#if command -v tmux >/dev/null 2>&1; then
+#  if [ -z "$TMUX" ]; then
+#    exec tmux
+#  fi
+#fi

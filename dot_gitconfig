@@ -1,0 +1,17 @@
+[user]
+  name = Alberto Castañeiras
+  email = alberto@vekio.dev
+
+[init]
+  defaultBranch = main
+
+[gitflow "branch"]
+  master = main
+  develop = develop
+
+[gitflow "prefix"]
+  feature = feature/
+  release = release/
+  hotfix = hotfix/
+  support = support/
+  versiontag = v
