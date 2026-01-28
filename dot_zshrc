@@ -13,9 +13,9 @@ setopt share_history
 # Prompt simple
 PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
 
-# Auto-start tmux (solo si no estás ya dentro)
-#if command -v tmux >/dev/null 2>&1; then
-#  if [ -z "$TMUX" ]; then
-#    exec tmux
-#  fi
-#fi
+# Auto-start tmux 
+if command -v tmux >/dev/null 2>&1; then
+  if [ -z "$TMUX" ]; then
+    exec tmux
+  fi
+fi
