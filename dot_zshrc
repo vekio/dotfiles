@@ -1,5 +1,7 @@
 # Basic sanity
 export SHELL=/usr/bin/zsh
+export EDITOR=nvim
+export VISUAL=nvim
 
 # History
 HISTFILE=~/.zsh_history
