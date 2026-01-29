@@ -23,3 +23,5 @@ zstyle ':completion:*' list-colors ''
 # Keybindings (Ctrl+R history search)
 bindkey '^R' history-incremental-search-backward
 
+# Bind: Ctrl+Space acepta autosuggest (requiere autosuggestions)
+bindkey '^e' autosuggest-accept
