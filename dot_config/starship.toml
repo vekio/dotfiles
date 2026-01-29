@@ -1,0 +1,9 @@
+add_newline = false
+
+[docker_context]
+format = "via [🐳 $context](blue bold) "
+only_with_files = false
+
+[time]
+disabled = true
+
