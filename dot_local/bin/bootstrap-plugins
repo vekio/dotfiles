@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -e
+
+BASE="$HOME/.zsh/plugins"
+
+echo "zsh plugins"
+
+mkdir -p "$BASE"
+
+clone_or_update () {
+  local name="$1"
+  local repo="$2"
+  local dir="$BASE/$name"
+
+  if [ -d "$dir/.git" ]; then
+    echo "Updating $name"
+    git -C "$dir" pull --ff-only
+  else
+    echo "Cloning $name"
+    git clone "$repo" "$dir"
+  fi
+}
+
+clone_or_update zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions
+clone_or_update zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting
+clone_or_update forgit https://github.com/wfxr/forgit
+

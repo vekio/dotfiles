@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+echo "bootstrapping system"
+
+bootstrap-ostree-remove
+bootstrap-ostree
+bootstrap-flatpak
+bootstrap-toolbox
+bootstrap-plugins
+
+echo "Done. Reboot if rpm-ostree changed anything."
+

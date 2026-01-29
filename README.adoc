@@ -1,0 +1,11 @@
+= README
+
+rpm-ostree install chezmoi
+reboot
+
+chezmoi init git@github.com:vekio/dotfiles.git
+chezmoi apply
+
+bootstrap
+reboot
+

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+PKGS="$HOME/.config/bootstrap/flatpaks.txt"
+[ -f "$PKGS" ] || exit 0
+
+echo "flatpak setup"
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Build list (ignore comments/blank lines)
+LIST="$(grep -vE '^\s*#|^\s*$' "$PKGS" | xargs || true)"
+[ -n "${LIST:-}" ] || exit 0
+
+flatpak install -y flathub $LIST 
+

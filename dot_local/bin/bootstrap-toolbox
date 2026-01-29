@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+NAME="main"
+PKGS="$HOME/.config/bootstrap/toolbox-main.pkgs"
+[ -f "$PKGS" ] || exit 0
+
+# Build list (ignore comments/blank lines)
+LIST="$(grep -vE '^\s*#|^\s*$' "$PKGS" | xargs || true)"
+[ -n "${LIST:-}" ] || exit 0
+
+echo "toolbox: $NAME"
+toolbox create -y "$NAME" || true
+
+toolbox run -c "$NAME" sudo dnf install -y $LIST
+
