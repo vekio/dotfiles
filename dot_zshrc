@@ -10,10 +10,23 @@ for f in ~/.zsh/*.zsh; do
   [ -r "$f" ] && source "$f"
 done
 
-# Simple prompt
-PROMPT='%F{cyan}%n@%m%f %F{yellow}%~%f %# '
+# --- Plugins (~/.zsh/plugins/*) ---
+# autosuggestions
+if [ -r ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
-# --- Starship (si está instalado) ---
+# syntax highlighting (debe ir al final de plugins)
+if [ -r ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# forgit
+if [ -r ~/.zsh/plugins/forgit/forgit.plugin.zsh ]; then
+  source ~/.zsh/plugins/forgit/forgit.plugin.zsh
+fi
+
+# --- Starship ---
 if command -v starship >/dev/null 2>&1; then
   export STARSHIP_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/starship"
   eval "$(starship init zsh)"
