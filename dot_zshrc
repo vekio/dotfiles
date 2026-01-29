@@ -16,7 +16,7 @@ if [ -r ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
   source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# syntax highlighting (debe ir al final de plugins)
+# syntax highlighting
 if [ -r ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
   source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
