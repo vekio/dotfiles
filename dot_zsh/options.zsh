@@ -14,6 +14,7 @@ setopt CORRECT           # minor typo correction for commands
 
 # Completion: case-insensitive
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' menu select
 
 # Better completion menu
 zstyle ':completion:*' menu select
