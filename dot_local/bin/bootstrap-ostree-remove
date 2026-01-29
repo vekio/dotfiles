@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 PKGS="$HOME/.config/bootstrap/ostree-remove.pkgs"
 [ -f "$PKGS" ] || exit 0
