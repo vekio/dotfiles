@@ -14,3 +14,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+# Toolbox
+alias podman='podman-remote'
+
