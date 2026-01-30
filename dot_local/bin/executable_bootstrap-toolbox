@@ -10,7 +10,7 @@ LIST="$(grep -vE '^\s*#|^\s*$' "$PKGS" | xargs || true)"
 [ -n "${LIST:-}" ] || exit 0
 
 echo "toolbox: $NAME"
-toolbox create -y "$NAME" || true
+#toolbox create -y "$NAME" || true
 
 # Enable COPR for starship
 toolbox run -c "$NAME" sudo dnf -y copr enable atim/starship || true
