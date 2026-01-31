@@ -1,5 +1,4 @@
 export EDITOR=vi
-export VISUAL=vi
 
 # Init completion
 autoload -Uz compinit
