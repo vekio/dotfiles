@@ -1,0 +1,8 @@
+brew "zsh"
+brew "tmux"
+brew "git"
+brew "fzf"
+brew "starship"
+brew "mise"
+brew "btop"
+brew "jq"

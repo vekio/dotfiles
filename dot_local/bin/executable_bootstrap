@@ -1,13 +1,33 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-echo "bootstrapping system"
+. "$DOTLIB/log.sh"
 
-bootstrap-ostree-remove
-bootstrap-ostree
-bootstrap-flatpak
-bootstrap-toolbox
-bootstrap-plugins
+# # codium
+# # 0) Asegura que codium existe (alias recomendado: codium="flatpak run com.vscodium.codium")
+# command -v codium >/dev/null 2>&1 || {
+#   echo "No encuentro 'codium' en PATH. Crea alias o wrapper a flatpak run com.vscodium.codium" >&2
+#   exit 1
+# }
 
-echo "Done. Reboot if rpm-ostree changed anything."
+# # 1) Instala vsix-manager (si no está)
+# if ! codium --list-extensions | grep -qx 'zokugun.vsix-manager'; then
+#   echo "Instalando vsix-manager..."
+#   codium --install-extension zokugun.vsix-manager
+# fi
 
+# -----------------------------------------------------------------------------
+# Brew
+# -----------------------------------------------------------------------------
+brew_bundle_file="$HOME/.config/bootstrap/brewfile"
+
+if command -v brew >/dev/null 2>&1; then
+  if [ -f "$brew_bundle_file" ]; then
+    log_info "Installing brew packages from: $brew_bundle_file"
+    brew bundle --file "$brew_bundle_file"
+  else
+    log_warn "No Brewfile found at: $brew_bundle_file"
+  fi
+else
+  log_warn "brew not found; skipping brew package install."
+fi
