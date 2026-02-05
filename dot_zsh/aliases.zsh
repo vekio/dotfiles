@@ -2,7 +2,6 @@
 alias dl='cd ~/Downloads'
 alias docs='cd ~/Documents'
 alias src='cd ~/Source'
-alias dot='cd ~/Source/dotfiles'
 
 # Listing
 alias ll='ls -lh'
@@ -17,3 +16,4 @@ alias ....='cd ../../..'
 # Toolbox
 alias podman='podman-remote'
 
+alias dotfiles='codium "$(chezmoi source-path)"'
