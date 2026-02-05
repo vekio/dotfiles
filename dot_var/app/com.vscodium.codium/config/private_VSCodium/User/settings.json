@@ -1,0 +1,16 @@
+{
+    "terminal.integrated.defaultProfile.linux": "devbox",
+    "terminal.integrated.profiles.linux": {
+        "devbox": {
+            "path": "/usr/bin/flatpak-spawn",
+            "args": [
+                "--host",
+                "toolbox",
+                "enter",
+                "tools"
+            ],
+            "icon": "terminal-bash",
+            "overrideName": true,
+        }
+    },
+}
