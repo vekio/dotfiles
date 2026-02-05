@@ -1,3 +1,6 @@
+# -----------------------------------------------------------------------------
+# Go environment
+# -----------------------------------------------------------------------------
 export VISUAL=code
 export GOPATH="$HOME/.local/share/go"
 export GOBIN="$HOME/.local/share/go/bin"

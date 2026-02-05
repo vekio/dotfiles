@@ -1,4 +1,6 @@
+# -----------------------------------------------------------------------------
 # History
+# -----------------------------------------------------------------------------
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
@@ -7,21 +9,29 @@ setopt SHARE_HISTORY
 setopt HIST_IGNORE_DUPS
 setopt HIST_REDUCE_BLANKS
 
+# -----------------------------------------------------------------------------
 # Quality of life
+# -----------------------------------------------------------------------------
 setopt AUTO_CD           # cd into directories by typing their name
 setopt CORRECT           # minor typo correction for commands
 # setopt CORRECT_ALL     # uncomment if you want correction for args too (can be annoying)
 
-# Completion: case-insensitive
+# -----------------------------------------------------------------------------
+# Completion
+# -----------------------------------------------------------------------------
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' menu select
 
-# Better completion menu
+# -----------------------------------------------------------------------------
+# Completion menu
+# -----------------------------------------------------------------------------
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
 
-# Keybindings (Ctrl+R history search)
+# -----------------------------------------------------------------------------
+# Keybindings
+# -----------------------------------------------------------------------------
 #bindkey '^R' history-incremental-search-backward
 
-# Bind: Ctrl+Space acepta autosuggest (requiere autosuggestions)
+# Bind: ctrl+e acepta autosuggest (requiere autosuggestions)
 bindkey '^e' autosuggest-accept
