@@ -1,19 +1,27 @@
-# Home shortcuts
+# -----------------------------------------------------------------------------
+# Navigation
+# -----------------------------------------------------------------------------
 alias dl='cd ~/Downloads'
 alias docs='cd ~/Documents'
 alias src='cd ~/Source'
-
-# Listing
-alias ll='ls -lh'
-alias la='ls -lha'
-alias l='ls -lh'
 
 # Quick directory jumps
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-# Toolbox
+# -----------------------------------------------------------------------------
+# Listing
+# -----------------------------------------------------------------------------
+alias l='ls -lh'
+alias ll='ls -alh'
+alias la='ls -Ahl'
+
+# -----------------------------------------------------------------------------
+# Tooling
+# -----------------------------------------------------------------------------
+# Use toolbox remote for podman inside containers.
 alias podman='podman-remote'
 
+# Open chezmoi source in Codium (no cd required).
 alias dotfiles='codium "$(chezmoi source-path)"'
