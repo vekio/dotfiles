@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
-exec flatpak-spawn --host flatpak run com.vscodium.codium "$@"
+set -euo pipefail
 
+exec flatpak-spawn --host \
+    env --unset=FLATPAK_ID \
+    flatpak run com.vscodium.codium "$@" >/dev/null 2>&1
