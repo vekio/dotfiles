@@ -1,0 +1,6 @@
+# One Flatpak application ID per line (from Flathub).
+# Example: com.vscodium.codium
+com.brave.Browser
+org.videolan.VLC
+com.obsproject.Studio
+com.vscodium.codium

@@ -3,19 +3,6 @@ set -euo pipefail
 
 . "$DOTLIB/log.sh"
 
-# # codium
-# # 0) Asegura que codium existe (alias recomendado: codium="flatpak run com.vscodium.codium")
-# command -v codium >/dev/null 2>&1 || {
-#   echo "No encuentro 'codium' en PATH. Crea alias o wrapper a flatpak run com.vscodium.codium" >&2
-#   exit 1
-# }
-
-# # 1) Instala vsix-manager (si no está)
-# if ! codium --list-extensions | grep -qx 'zokugun.vsix-manager'; then
-#   echo "Instalando vsix-manager..."
-#   codium --install-extension zokugun.vsix-manager
-# fi
-
 # -----------------------------------------------------------------------------
 # Brew
 # -----------------------------------------------------------------------------
@@ -30,4 +17,43 @@ if command -v brew >/dev/null 2>&1; then
   fi
 else
   log_warn "brew not found; skipping brew package install."
+fi
+
+# -----------------------------------------------------------------------------
+# flatpak
+# -----------------------------------------------------------------------------
+flatpak_pkg_file="$HOME/.config/bootstrap/flatpak.pkgs"
+
+if command -v flatpak >/dev/null 2>&1; then
+  log_info "Ensuring Flathub remote is present and enabled."
+  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
+  flatpak remote-modify --enable flathub >/dev/null 2>&1 || true
+
+  if [ -f "$flatpak_pkg_file" ]; then
+    log_info "Installing flatpak packages from: $flatpak_pkg_file"
+    while IFS= read -r app; do
+      case "$app" in
+        ""|\#*) continue ;;
+        *) flatpak install -y flathub "$app" ;;
+      esac
+    done < "$flatpak_pkg_file"
+  else
+    log_warn "No flatpak package list found at: $flatpak_pkg_file"
+  fi
+else
+  log_warn "flatpak not found; skipping flatpak package install."
+fi
+
+# -----------------------------------------------------------------------------
+# VSCodium extensions (code wrapper)
+# -----------------------------------------------------------------------------
+if command -v code >/dev/null 2>&1; then
+  if ! code --list-extensions | grep -qx 'zokugun.vsix-manager'; then
+    log_info "Installing VSCodium extension: zokugun.vsix-manager"
+    code --install-extension zokugun.vsix-manager
+  else
+    log_info "VSCodium extension already installed: zokugun.vsix-manager"
+  fi
+else
+  log_warn "code not found; skipping VSCodium extension install."
 fi
