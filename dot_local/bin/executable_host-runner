@@ -6,18 +6,8 @@ target="$executable"
 
 case "$executable" in
   host-*) target="${executable#host-}" ;;
-  flatpak-*) target="${executable#flatpak-}" ;;
 esac
 
-case "$executable" in
-  host-*)
-    exec flatpak-spawn --host \
-      env --unset=FLATPAK_ID \
-      "$target" "$@"
-    ;;
-  flatpak-*)
-    exec flatpak-spawn --host \
-      env --unset=FLATPAK_ID \
-      flatpak run "$target" "$@" >/dev/null 2>&1
-    ;;
-esac
+exec flatpak-spawn --host \
+  env --unset=FLATPAK_ID \
+  "$target" "$@"
