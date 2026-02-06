@@ -1,9 +1,19 @@
-add_newline = false
+add_newline = true
+
+format = "${custom.toolbox}$directory\n$time$character"
+
+[custom.toolbox]
+description = "The activated toolbox container"
+when = 'test -f /run/.toolboxenv'
+command = "grep -E '^name=' /run/.containerenv | cut -d= -f2- | tr -d '\"'"
+style = "yellow bold"
+format = "[\\[$symbol$output\\]]($style) "
 
 [docker_context]
-format = "via [🐳 $context](blue bold) "
 only_with_files = false
 
 [time]
-disabled = true
-
+disabled = false
+style = "black"
+format = "[$time]($style) "
+time_format = "%H:%M"
