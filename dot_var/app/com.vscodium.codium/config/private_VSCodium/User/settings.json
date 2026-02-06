@@ -63,6 +63,7 @@
         "base": [
             "opn:usernamehw.errorlens",
             "opn:openai.chatgpt",
+            "opn:tamasfe.even-better-toml",
         ]
     },
     "vsix.extensions": [
