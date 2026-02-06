@@ -24,17 +24,24 @@ fi
 # -----------------------------------------------------------------------------
 flatpak_pkg_file="$HOME/.config/bootstrap/flatpak.pkgs"
 
+flatpak_cmd=""
 if command -v flatpak >/dev/null 2>&1; then
+  flatpak_cmd="flatpak"
+elif command -v flatpak-spawn >/dev/null 2>&1; then
+  flatpak_cmd="flatpak-spawn --host flatpak"
+fi
+
+if [ -n "$flatpak_cmd" ]; then
   log_info "Ensuring Flathub remote is present and enabled."
-  flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
-  flatpak remote-modify --enable flathub >/dev/null 2>&1 || true
+  $flatpak_cmd remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
+  $flatpak_cmd remote-modify --enable flathub >/dev/null 2>&1 || true
 
   if [ -f "$flatpak_pkg_file" ]; then
     log_info "Installing flatpak packages from: $flatpak_pkg_file"
     while IFS= read -r app; do
       case "$app" in
         ""|\#*) continue ;;
-        *) flatpak install -y flathub "$app" ;;
+        *) $flatpak_cmd install -y flathub "$app" ;;
       esac
     done < "$flatpak_pkg_file"
   else
