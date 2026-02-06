@@ -20,8 +20,9 @@ alias la='ls -Ahl'
 # -----------------------------------------------------------------------------
 # Tooling
 # -----------------------------------------------------------------------------
-# Use toolbox remote for podman inside containers.
-alias podman='podman-remote'
-
 # Open chezmoi source in Codium (no cd required).
 alias dotfiles='codium "$(chezmoi source-path)"'
+
+# Use from toolbox (workaround: flatpak-spawn + alias).
+alias podman='host-podman'
+alias code='flatpak-com.vscodium.codium'
