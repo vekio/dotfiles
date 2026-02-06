@@ -1,7 +1,34 @@
 # One Flatpak application ID per line (from Flathub).
-# Example: com.vscodium.codium
+# Lines starting with # are ignored by the bootstrap script.
+
+# Browsers
 com.brave.Browser
-org.videolan.VLC
-com.obsproject.Studio
+
+# Communication
+org.mozilla.Thunderbird
+
+# Dev tools
+com.usebruno.Bruno
 com.vscodium.codium
+io.github.flattool.Ignition
+io.github.flattool.Warehouse
 io.podman_desktop.PodmanDesktop
+org.godotengine.Godot
+org.prismlauncher.PrismLauncher
+
+# Media
+com.obsproject.Studio
+com.spotify.Client
+org.videolan.VLC
+
+# System & utilities
+com.github.tchx84.Flatseal
+com.mattjakeman.ExtensionManager
+io.gitlab.adhami3310.Impression
+io.github.getnf.embellish
+io.missioncenter.MissionCenter
+org.fedoraproject.MediaWriter
+org.gnome.DejaDup
+org.gnome.FileRoller
+org.gnome.Firmware
+page.tesk.Refine
