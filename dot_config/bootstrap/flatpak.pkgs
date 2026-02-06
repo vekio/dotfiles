@@ -15,6 +15,7 @@ io.github.flattool.Warehouse
 io.podman_desktop.PodmanDesktop
 org.godotengine.Godot
 org.prismlauncher.PrismLauncher
+org.gnome.Boxes
 
 # Media
 com.obsproject.Studio
@@ -32,3 +33,10 @@ org.gnome.DejaDup
 org.gnome.FileRoller
 org.gnome.Firmware
 page.tesk.Refine
+com.rustdesk.RustDesk
+com.protonvpn.www
+org.flameshot.Flameshot
+
+# Gaming
+#net.lutris.Lutris
+io.github.Faugus.faugus-launcher
