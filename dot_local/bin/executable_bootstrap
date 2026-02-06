@@ -3,64 +3,19 @@ set -euo pipefail
 
 . "$DOTLIB/log.sh"
 
-# -----------------------------------------------------------------------------
-# Brew
-# -----------------------------------------------------------------------------
-brew_bundle_file="$HOME/.config/bootstrap/brewfile"
+bootstrap_dir="$DOTLIB/bootstrap"
 
-if command -v brew >/dev/null 2>&1; then
-  if [ -f "$brew_bundle_file" ]; then
-    log_info "Installing brew packages from: $brew_bundle_file"
-    brew bundle --file "$brew_bundle_file"
+run_block() {
+  block="$1"
+  block_file="$bootstrap_dir/$block.sh"
+  if [ -r "$block_file" ]; then
+    # shellcheck source=/dev/null
+    . "$block_file"
   else
-    log_warn "No Brewfile found at: $brew_bundle_file"
+    log_warn "Bootstrap block not found: $block_file"
   fi
-else
-  log_warn "brew not found; skipping brew package install."
-fi
+}
 
-# -----------------------------------------------------------------------------
-# flatpak
-# -----------------------------------------------------------------------------
-flatpak_pkg_file="$HOME/.config/bootstrap/flatpak.pkgs"
-
-flatpak_cmd=""
-if command -v flatpak >/dev/null 2>&1; then
-  flatpak_cmd="flatpak"
-elif command -v flatpak-spawn >/dev/null 2>&1; then
-  flatpak_cmd="flatpak-spawn --host flatpak"
-fi
-
-if [ -n "$flatpak_cmd" ]; then
-  log_info "Ensuring Flathub remote is present and enabled."
-  $flatpak_cmd remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo >/dev/null 2>&1 || true
-  $flatpak_cmd remote-modify --enable flathub >/dev/null 2>&1 || true
-
-  if [ -f "$flatpak_pkg_file" ]; then
-    log_info "Installing flatpak packages from: $flatpak_pkg_file"
-    while IFS= read -r app; do
-      case "$app" in
-        ""|\#*) continue ;;
-        *) $flatpak_cmd install -y flathub "$app" ;;
-      esac
-    done < "$flatpak_pkg_file"
-  else
-    log_warn "No flatpak package list found at: $flatpak_pkg_file"
-  fi
-else
-  log_warn "flatpak not found; skipping flatpak package install."
-fi
-
-# -----------------------------------------------------------------------------
-# VSCodium extensions (code wrapper)
-# -----------------------------------------------------------------------------
-if command -v code >/dev/null 2>&1; then
-  if ! code --list-extensions | grep -qx 'zokugun.vsix-manager'; then
-    log_info "Installing VSCodium extension: zokugun.vsix-manager"
-    code --install-extension zokugun.vsix-manager
-  else
-    log_info "VSCodium extension already installed: zokugun.vsix-manager"
-  fi
-else
-  log_warn "code not found; skipping VSCodium extension install."
-fi
+run_block "brew"
+run_block "flatpak"
+run_block "codium"
