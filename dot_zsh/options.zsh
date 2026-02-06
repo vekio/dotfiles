@@ -20,7 +20,6 @@ setopt CORRECT           # minor typo correction for commands
 # Completion
 # -----------------------------------------------------------------------------
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' menu select
 
 # -----------------------------------------------------------------------------
 # Completion menu
