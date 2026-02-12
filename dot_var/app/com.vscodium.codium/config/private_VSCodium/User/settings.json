@@ -61,6 +61,7 @@
             "opn:a-h.templ",
         ],
         "base": [
+            "opn:asciidoctor.asciidoctor-vscode",
             "opn:usernamehw.errorlens",
             "opn:openai.chatgpt",
             "opn:tamasfe.even-better-toml",
