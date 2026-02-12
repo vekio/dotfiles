@@ -55,6 +55,8 @@
         "infra": [
             "opn:hashicorp.terraform",
             "opn:OpenTofu.vscode-opentofu",
+            "opn:ms-azuretools.vscode-containers",
+            "opn:ms-azuretools.vscode-docker",
         ],
         "golang": [
             "opn:golang.Go",
