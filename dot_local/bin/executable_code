@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+mise_path=""
+if command -v mise >/dev/null 2>&1; then
+  mise_path="$(mise doctor path 2>/dev/null || true)"
+fi
+
 exec flatpak-spawn --host \
-    env --unset=FLATPAK_ID \
-    flatpak run com.vscodium.codium "$@" >/dev/null 2>&1
+  env --unset=FLATPAK_ID \
+  flatpak run --env=PATH="/app/bin:/usr/bin:$mise_path" \
+  com.vscodium.codium "$@" >/dev/null 2>&1
