@@ -1,28 +1,27 @@
 {
-    // ui
-    "workbench.sideBar.location": "right",
-    "workbench.iconTheme": "catppuccin-mocha",
+    // [ui]
     "workbench.colorTheme": "Catppuccin Mocha",
-    // git
+    "workbench.iconTheme": "catppuccin-mocha",
+    "workbench.sideBar.location": "right",
+    // [git]
     "git.autofetch": true,
     "scm.defaultViewMode": "tree",
-    // files
+    // [files]
     "files.autoGuessEncoding": true,
-    "files.trimFinalNewlines": true,
     "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
     "files.trimTrailingWhitespace": true,
-    // editor
-    "editor.formatOnSave": true,
-    "editor.renderFinalNewline": "on",
+    // [editor]
+    "editor.cursorStyle": "block",
     "editor.fontFamily": "FiraCode Nerd Font",
     "editor.fontLigatures": true,
     "editor.fontWeight": "normal",
-    "editor.cursorStyle": "block",
-    // terminal: open your toolbox "tools" from inside Flatpak Codium via flatpak-spawn
+    "editor.formatOnSave": true,
+    "editor.renderFinalNewline": "on",
+    // [terminal] open your toolbox "tools" from inside Flatpak Codium via flatpak-spawn
     "terminal.integrated.defaultProfile.linux": "devbox",
     "terminal.integrated.profiles.linux": {
         "devbox": {
-            "path": "/usr/bin/flatpak-spawn",
             "args": [
                 "--host",
                 "--env=TERM=xterm-256color",
@@ -32,42 +31,12 @@
             ],
             "icon": "terminal-bash",
             "overrideName": true,
+            "path": "/usr/bin/flatpak-spawn"
         }
     },
-    // vsix-manager (Open VSX)
-    "vsix.sources": {
-        "opn": {
-            "type": "marketplace",
-            "serviceUrl": "https://open-vsx.org/vscode/gallery",
-        },
-    },
-    "vsix.groups": {
-        "web": [
-            "opn:ms-vscode.live-server",
-            "opn:Vue.volar",
-            "opn:astro-build.astro-vscode",
-            "opn:bradlc.vscode-tailwindcss",
-        ],
-        "theme": [
-            "opn:Catppuccin.catppuccin-vsc",
-            "opn:Catppuccin.catppuccin-vsc-icons",
-        ],
-        "infra": [
-            "opn:hashicorp.terraform",
-            "opn:OpenTofu.vscode-opentofu",
-            "opn:ms-azuretools.vscode-containers",
-            "opn:ms-azuretools.vscode-docker",
-        ],
-        "golang": [
-            "opn:golang.Go",
-            "opn:a-h.templ",
-        ],
-        "base": [
-            "opn:asciidoctor.asciidoctor-vscode",
-            "opn:usernamehw.errorlens",
-            "opn:openai.chatgpt",
-            "opn:tamasfe.even-better-toml",
-        ]
+    // [vsix-manager] Open VSX
+    "vsix.crons": {
+        "update": "0 12 * * *"
     },
     "vsix.extensions": [
         "base",
@@ -76,7 +45,48 @@
         "theme",
         "infra"
     ],
-    "vsix.crons": {
-        "update": "0 12 * * *"
+    "vsix.groups": {
+        "base": [
+            "opn:asciidoctor.asciidoctor-vscode",
+            "opn:openai.chatgpt",
+            "opn:redhat.vscode-yaml",
+            "opn:tamasfe.even-better-toml",
+            "opn:usernamehw.errorlens"
+        ],
+        "golang": [
+            "opn:a-h.templ",
+            "opn:golang.Go"
+        ],
+        "infra": [
+            "opn:OpenTofu.vscode-opentofu",
+            "opn:ms-azuretools.vscode-containers"
+        ],
+        "theme": [
+            "opn:Catppuccin.catppuccin-vsc",
+            "opn:Catppuccin.catppuccin-vsc-icons"
+        ],
+        "web": [
+            "opn:astro-build.astro-vscode",
+            "opn:bradlc.vscode-tailwindcss",
+            "opn:ms-vscode.live-server",
+            "opn:Vue.volar"
+        ]
+    },
+    "vsix.sources": {
+        "opn": {
+            "serviceUrl": "https://open-vsx.org/vscode/gallery",
+            "type": "marketplace"
+        }
+    },
+    // [extensions]
+    "docker.extension.enableComposeLanguageServer": false,
+    // [telemetry]
+    "redhat.telemetry.enabled": false,
+    // [language:yaml]
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json": "compose.yml"
     }
 }
