@@ -16,6 +16,7 @@ alias ....='cd ../../..'
 alias l='ls -lh'
 alias ll='ls -alh'
 alias la='ls -Ahl'
+alias ls='ls --color=auto'
 
 # -----------------------------------------------------------------------------
 # Tooling
