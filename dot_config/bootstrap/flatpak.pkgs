@@ -16,6 +16,7 @@ io.podman_desktop.PodmanDesktop
 org.godotengine.Godot
 org.prismlauncher.PrismLauncher
 org.gnome.Boxes
+io.dbeaver.DBeaverCommunity
 
 # Media
 com.obsproject.Studio
