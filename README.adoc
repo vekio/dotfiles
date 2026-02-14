@@ -1,6 +1,6 @@
 = dotfiles
 
-Personal dotfiles Using https://www.chezmoi.io/[chezmoi] on my Fedora Workstation.
+Personal dotfiles using https://www.chezmoi.io/[chezmoi] on my Fedora Workstation.
 
 == Install
 
