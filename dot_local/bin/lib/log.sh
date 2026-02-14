@@ -28,5 +28,10 @@ log_info() { log__emit INFO 34 "$@"; }
 log_warn() { log__emit WARN 33 "$@"; }
 log_error() { log__emit ERROR 31 "$@"; }
 log_debug() {
-  [ "${LOG_LEVEL:-}" = "debug" ] && log__emit DEBUG 90 "$@"
+  # Always succeed (return 0). Many scripts use `set -e` and a debug
+  # logger must not abort the script when LOG_LEVEL is not "debug".
+  if [ "${LOG_LEVEL:-}" = "debug" ]; then
+    log__emit DEBUG 90 "$@"
+  fi
+  return 0
 }
