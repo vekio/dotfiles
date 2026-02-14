@@ -1,11 +1,72 @@
-= README
+= dotfiles
 
-rpm-ostree install chezmoi
-reboot
+Personal dotfiles Using https://www.chezmoi.io/[chezmoi] on my Fedora Workstation.
 
+== Install
+
+[source,bash]
+----
+sudo dnf -y install git chezmoi
+----
+
+== Init and Apply
+
+[source,bash]
+----
 chezmoi init git@github.com:vekio/dotfiles.git
 chezmoi apply
+----
 
+== Bootstrap
+
+The `bootstrap` command runs a set of "blocks" (scripts) under `$DOTLIB/bootstrap`.
+
+Default blocks (in order):
+
+. `pre-install`
+. `dnf`
+. `codium`
+. `flatpak`
+
+Run everything:
+
+[source,bash]
+----
 bootstrap
-reboot
+----
 
+Run specific blocks:
+
+[source,bash]
+----
+bootstrap pre-install dnf
+bootstrap codium
+----
+
+Enable debug logs:
+
+[source,bash]
+----
+bootstrap --debug
+----
+
+== Packages Files
+
+These live under `${XDG_CONFIG_HOME:-$HOME/.config}/bootstrap`:
+
+* `codium.extensions`: VSCodium extensions
+* `dnf.pkgs`: dnf packages
+* `flatpak.pkgs`: flatpak app ids
+
+== Notes
+
+After bootstrap, you may want to restart your shell session, and optionally reboot:
+
+[source,bash]
+----
+reboot
+----
+
+== NVIDIA drivers
+
+Follow this guide https://github.com/Comprehensive-Wall28/Nvidia-Fedora-Guide?tab=readme-ov-file#installing-nvidia-drivers-on-fedora-workstation-and-its-spins[NVIDIA drivers on Fedora Workstation]
