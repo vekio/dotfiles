@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-. "$DOTLIB/log.sh"
-LOG_LEVEL="debug"
+source "$DOTLIB/log.sh"
 
 if ! command -v codium >/dev/null 2>&1; then
   log_warn "codium not found; skipping extension install"
@@ -13,7 +12,7 @@ BOOTSTRAP_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/bootstrap"
 PKGS="$BOOTSTRAP_CONFIG_DIR/codium.extensions"
 log_debug "codium extensions file: $PKGS"
 if [ ! -f "$PKGS" ]; then
-  log_debug "codium extensions file not found ($PKGS); skipping"
+  log_info "codium extensions file not found ($PKGS); skipping"
   exit 0
 fi
 
