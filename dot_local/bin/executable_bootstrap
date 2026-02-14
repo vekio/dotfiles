@@ -5,17 +5,68 @@ set -euo pipefail
 
 bootstrap_dir="$DOTLIB/bootstrap"
 
+usage() {
+  cat <<'EOF' >&2
+usage: bootstrap [--debug|-d] [block...]
+
+options:
+  -d, --debug   enable debug logging (LOG_LEVEL=debug)
+EOF
+}
+
+if [ "${1:-}" = "-h" ] || [ "${1:-}" = "--help" ]; then
+  usage
+  exit 0
+fi
+
+# Optional debug flag (consume leading flags only).
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -d|--debug)
+      export LOG_LEVEL=debug
+      shift
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      log_error "unknown option: $1"
+      usage
+      exit 2
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
 run_block() {
   block="$1"
   block_file="$bootstrap_dir/$block.sh"
   if [ -r "$block_file" ]; then
-    # shellcheck source=/dev/null
-    . "$block_file"
+    log_info "bootstrap: running $block"
+    # Run each block in a subshell so `exit` inside a block does not terminate
+    # the whole bootstrap run (blocks are sourced scripts).
+    if ( . "$block_file" ); then
+      log_debug "bootstrap: finished $block"
+    else
+      log_error "bootstrap: block failed ($block): $block_file"
+      return 1
+    fi
   else
     log_warn "Bootstrap block not found: $block_file"
   fi
 }
 
-run_block "brew"
-run_block "flatpak"
-run_block "codium"
+if [ "$#" -gt 0 ]; then
+  for block in "$@"; do
+    run_block "$block"
+  done
+else
+  # Default bootstrap blocks (edit as needed).
+  run_block "pre-install"
+  run_block "dnf"
+  run_block "codium"
+  run_block "flatpak"
+fi
