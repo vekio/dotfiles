@@ -1,0 +1,13 @@
+# Packages to install via dnf.
+
+git
+zsh
+tmux
+fzf
+jq
+btop
+podman
+podman-compose
+mise
+starship
+codium

@@ -1,5 +1,5 @@
-# One extension ID per line (as shown by `codium --list-extensions`).
-# Example: golang.Go
+# Extension to install at vscodium.
+
 asciidoctor.asciidoctor-vscode
 openai.chatgpt
 redhat.vscode-yaml

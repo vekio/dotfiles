@@ -4,40 +4,54 @@
 # Browsers
 com.brave.Browser
 
-# Communication
+# Email
 org.mozilla.Thunderbird
 
-# Dev tools
+# Dev
 com.usebruno.Bruno
-com.vscodium.codium
-io.github.flattool.Ignition
-io.github.flattool.Warehouse
-io.podman_desktop.PodmanDesktop
-org.godotengine.Godot
-org.prismlauncher.PrismLauncher
-org.gnome.Boxes
 io.dbeaver.DBeaverCommunity
+org.godotengine.Godot
+
+# Gaming
+io.github.Faugus.faugus-launcher
+org.prismlauncher.PrismLauncher
 
 # Media
 com.obsproject.Studio
 com.spotify.Client
 org.videolan.VLC
 
-# System & utilities
+# Utilities
 com.github.tchx84.Flatseal
 com.mattjakeman.ExtensionManager
 io.gitlab.adhami3310.Impression
 io.github.getnf.embellish
 io.missioncenter.MissionCenter
-org.fedoraproject.MediaWriter
-org.gnome.DejaDup
-org.gnome.FileRoller
-org.gnome.Firmware
 page.tesk.Refine
 com.rustdesk.RustDesk
-com.protonvpn.www
 org.flameshot.Flameshot
+io.github.flattool.Ignition
+io.github.flattool.Warehouse
 
-# Gaming
-#net.lutris.Lutris
-io.github.Faugus.faugus-launcher
+# GNOME
+org.gnome.Calculator
+org.gnome.Calendar
+org.gnome.Snapshot
+org.gnome.Characters
+org.gnome.clocks
+org.gnome.Decibels
+org.gnome.Contacts
+org.gnome.Connections
+org.gnome.Weather
+
+org.gnome.Firmware
+org.gnome.Boxes
+
+org.gnome.FileRoller
+org.fedoraproject.MediaWriter
+org.gnome.DejaDup
+
+com.protonvpn.www
+ch.protonmail.protonmail-bridge
+
+org.libreoffice.LibreOffice
