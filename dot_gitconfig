@@ -1,0 +1,14 @@
+[user]
+  name = Alberto Castañeiras
+  email = alberto@vekio.dev
+  signingkey = 9E80B7B79DF8DFDF
+
+[commit]
+  gpgsign = true
+
+[init]
+  defaultBranch = main
+
+[fetch]
+  prune = true
+  pruneTags = true

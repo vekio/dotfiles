@@ -1,0 +1,8 @@
+bootstrap.sh
+install.sh
+scripts/
+scripts/**
+packages/
+packages/**
+README.adoc
+LICENSE
