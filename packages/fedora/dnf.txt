@@ -1,23 +1,31 @@
-git
-curl
-#wget
+# Core
 ca-certificates
+curl
+git
+# wget
 unzip
+
+# Shell
+direnv
+fish
 fzf
 jq
-yq
-direnv
 tmux
-fish
+yq
 
+# Security keys
+fido2-tools
 gnupg2-scdaemon
 pcsc-lite
 pcsc-lite-ccid
-fido2-tools
 yubikey-manager
 
-zed
-
+# Browsers
 brave-origin
-#brave-browser
+# brave-browser
+
+# Terminal
 alacritty
+
+# Editors
+zed
