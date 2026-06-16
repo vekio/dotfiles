@@ -1,3 +1,7 @@
+if not status is-interactive
+    return
+end
+
 # Navigation
 alias dl='cd ~/Downloads'
 alias docs='cd ~/Documents'
@@ -20,4 +24,3 @@ alias dotfiles='zed (chezmoi source-path)'
 alias path='printf "%s\n" $PATH'
 alias z='zed .'
 alias v='vek'
-
