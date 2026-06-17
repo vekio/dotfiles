@@ -121,7 +121,6 @@ main() {
     run chezmoi init --branch "$DOTFILES_BRANCH" "$DOTFILES_REPO"
   fi
 
-  title "Running dotfiles installer"
   run_script "$(chezmoi source-path)/dot_local/bin/executable_dotfiles-install"
 
   success "Bootstrap complete"

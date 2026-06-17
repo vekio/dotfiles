@@ -2,7 +2,7 @@
 
 # Print a major step header.
 title() {
-  printf "\n\033[1;34m== %s ==\033[0m\n" "$*"
+  printf "\033[1;34m== %s ==\033[0m\n" "$*"
 }
 
 # Print an informational message.

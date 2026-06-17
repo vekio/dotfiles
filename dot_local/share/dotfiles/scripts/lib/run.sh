@@ -23,11 +23,13 @@ run() {
 run_script() {
   local script="$1"
   local previous_script="${DOTFILES_CURRENT_SCRIPT:-}"
+  local command
   local status
 
   [ -f "$script" ] || fail "Missing script: $script"
 
-  title "Running $script"
+  command="$(command_string bash "$script")"
+  printf "\033[2m+ %s\033[0m\n" "$command"
 
   set +e
   DOTFILES_CURRENT_SCRIPT="$script" bash "$script"
