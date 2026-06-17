@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Report unhandled command failures with script, line, exit code, and command.
 on_error() {
   local exit_code="$1"
   local line="$2"
