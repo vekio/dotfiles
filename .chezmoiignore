@@ -1,8 +1,5 @@
 bootstrap.sh
-install.sh
-scripts/
-scripts/**
-packages/
-packages/**
+scripts.bak/
+scripts.bak/**
 README.adoc
 LICENSE
