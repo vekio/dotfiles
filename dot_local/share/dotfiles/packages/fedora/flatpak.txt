@@ -1,1 +1,15 @@
+# Media
+com.obsproject.Studio
+org.videolan.VLC
 com.spotify.Client
+
+# Utilities
+
+# Communication
+# com.discordapp.Discord
+
+# Notes
+# md.obsidian.Obsidian
+
+# Development
+com.usebruno.Bruno

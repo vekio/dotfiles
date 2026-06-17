@@ -31,6 +31,8 @@ info "Source: $DOTFILES_SOURCE"
 
 run chezmoi apply
 
+run_script "$DOTFILES_SCRIPTS/05-fedora-repos.sh"
+run_script "$DOTFILES_SCRIPTS/10-dnf-apps.sh"
 run_script "$DOTFILES_SCRIPTS/20-flatpak-apps.sh"
 
 success "Install complete"
