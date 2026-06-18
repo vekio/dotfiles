@@ -1,0 +1,49 @@
+= NVIDIA driver on Fedora
+
+NVIDIA setup is optional and machine-specific. It is not part of the default
+dotfiles install flow.
+
+== Optional script
+
+Run:
+
+----
+~/.local/share/dotfiles/scripts/optional/nvidia.sh
+----
+
+The script:
+
+* requires Fedora
+* requires RPM Fusion nonfree
+* checks for an NVIDIA GPU with `lspci`
+* aborts if Secure Boot appears enabled
+* installs the RPM Fusion NVIDIA packages
+* runs `akmods --force`
+* regenerates initramfs
+
+Use `--force` only when you understand why the checks failed:
+
+----
+~/.local/share/dotfiles/scripts/optional/nvidia.sh --force
+----
+
+== Manual equivalent
+
+Make sure RPM Fusion nonfree is configured, then:
+
+----
+sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda nvidia-settings
+sudo akmods --force
+sudo dracut --force
+----
+
+Reboot, then verify:
+
+----
+nvidia-smi
+----
+
+== Secure Boot
+
+If Secure Boot is enabled, unsigned NVIDIA kernel modules will not load unless
+you handle module signing. The optional script aborts in this case by default.

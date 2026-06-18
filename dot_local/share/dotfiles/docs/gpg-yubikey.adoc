@@ -1,0 +1,62 @@
+= GPG + YubiKey smartcard
+
+This machine uses GnuPG's agent as the SSH agent and a YubiKey OpenPGP
+smartcard for the authentication key.
+
+== Managed config
+
+The relevant dotfiles are:
+
+----
+~/.gnupg/gpg-agent.conf
+~/.gnupg/scdaemon.conf
+~/.gnupg/sshcontrol
+~/.config/fish/conf.d/10-gpg.fish
+----
+
+`scdaemon.conf` uses:
+
+----
+disable-ccid
+----
+
+That makes GnuPG use `pcscd` for smartcard access instead of trying to talk to
+the YubiKey through its own CCID driver. This avoids common reader ownership
+conflicts with `pcscd` and FIDO tooling.
+
+== Safe check script
+
+Run:
+
+----
+~/.local/share/dotfiles/scripts/optional/gpg-card-check.sh
+----
+
+It does only safe operational work:
+
+* enables and starts `pcscd.socket`
+* restarts the user GnuPG agents
+* prints `pcscd` status
+* runs `gpg --card-status`
+
+It does not modify keys, card data, trust, LUKS, or boot configuration.
+
+== Manual checks
+
+Useful commands:
+
+----
+gpg --card-status
+gpgconf --list-dirs agent-ssh-socket
+ssh-add -L
+systemctl status pcscd.socket
+----
+
+If the card disappears after suspend/resume, start with:
+
+----
+gpgconf --kill scdaemon
+gpgconf --kill gpg-agent
+sudo systemctl restart pcscd.socket
+gpg --card-status
+----

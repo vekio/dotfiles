@@ -1,0 +1,85 @@
+= LUKS unlock with YubiKey/FIDO2
+
+This is intentionally documented as a manual procedure, not part of the default
+installer. A bad LUKS or initramfs change can lock you out at boot.
+
+== Safety rules
+
+* Keep the existing LUKS passphrase as a recovery method.
+* Do not hardcode block devices.
+* Verify the target device with `lsblk -f`.
+* Test the next boot while you still have recovery access.
+
+== Prerequisites
+
+----
+sudo dnf install -y systemd cryptsetup fido2-tools yubikey-manager
+----
+
+Optional FIDO checks:
+
+----
+ykman fido info
+ykman fido access change-pin
+----
+
+== Identify the LUKS device
+
+----
+lsblk -f
+sudo cryptsetup luksDump /dev/nvme0n1pX
+----
+
+This procedure requires LUKS2:
+
+----
+sudo cryptsetup luksDump /dev/nvme0n1pX | grep 'Version:'
+----
+
+== Enroll the YubiKey
+
+Use the actual LUKS device from `lsblk -f`:
+
+----
+sudo systemd-cryptenroll \
+  --fido2-device=auto \
+  --fido2-with-client-pin=yes \
+  /dev/nvme0n1pX
+----
+
+You will be asked for the current LUKS passphrase and then for the YubiKey
+PIN/touch flow.
+
+== Configure initramfs support
+
+----
+echo 'add_dracutmodules+=" fido2 "' | sudo tee /etc/dracut.conf.d/fido2.conf
+----
+
+== Update crypttab
+
+Get the UUID:
+
+----
+sudo blkid -s UUID -o value /dev/nvme0n1pX
+----
+
+Edit:
+
+----
+sudoedit /etc/crypttab
+----
+
+Add `fido2-device=auto` to the relevant LUKS entry. Example:
+
+----
+luks-UUID UUID=UUID none discard,fido2-device=auto
+----
+
+== Rebuild initramfs
+
+----
+sudo dracut -f
+----
+
+Reboot and test. Keep the passphrase path working.
