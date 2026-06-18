@@ -2,3 +2,4 @@
 node = "24"
 pnpm = "latest"
 usage = "latest"
+go = "latest"
