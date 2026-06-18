@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Public dotfiles installer command. It is installed in ~/.local/bin and keeps
-# internal installer steps under ~/.local/share/dotfiles/scripts.
+# Main dotfiles installer. It lives with the internal installer scripts and is
+# exposed on PATH through ~/.local/bin/dotfiles-install.
 
 set -Eeuo pipefail
 
@@ -34,5 +34,6 @@ run chezmoi apply
 run_script "$DOTFILES_SCRIPTS/05-fedora-repos.sh"
 run_script "$DOTFILES_SCRIPTS/10-dnf-apps.sh"
 run_script "$DOTFILES_SCRIPTS/20-flatpak-apps.sh"
+run_script "$DOTFILES_SCRIPTS/30-mise-tools.sh"
 
 success "Install complete"
