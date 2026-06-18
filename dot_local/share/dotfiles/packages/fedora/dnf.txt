@@ -13,6 +13,10 @@ jq
 tmux
 yq
 
+# Clipboard
+wl-clipboard
+cliphist
+
 # Containers
 podman
 podman-compose
