@@ -8,6 +8,10 @@ end
 
 if command -q mise
     mise activate fish | source
+
+    if command -q usage
+        mise completion fish | source
+    end
 end
 
 if command -q vek
