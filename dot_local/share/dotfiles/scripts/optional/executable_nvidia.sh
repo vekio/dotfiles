@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Install the NVIDIA driver from RPM Fusion on Fedora.
+# Install the NVIDIA driver from RPM Fusion and enable NVIDIA CDI for Podman.
 # This script is intentionally optional and aborts on risky conditions.
 
 set -Eeuo pipefail
@@ -52,10 +52,25 @@ fi
 detail "Installing NVIDIA packages"
 run sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda nvidia-settings
 
+detail "Configuring NVIDIA Container Toolkit repository"
+if [ ! -f /etc/yum.repos.d/nvidia-container-toolkit.repo ]; then
+  run bash -c 'curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo >/dev/null'
+else
+  detail "NVIDIA Container Toolkit repository already configured"
+fi
+
+detail "Installing NVIDIA Container Toolkit"
+run sudo dnf install -y nvidia-container-toolkit
+
 detail "Building akmods"
 run sudo akmods --force
 
 detail "Regenerating initramfs"
 run sudo dracut --force
 
+detail "Enabling NVIDIA CDI refresh"
+run sudo systemctl enable --now nvidia-cdi-refresh.path
+run sudo systemctl enable --now nvidia-cdi-refresh.service
+
 success "NVIDIA driver installed. Reboot, then verify with: nvidia-smi"
+info "Podman GPU test: podman run --rm --device nvidia.com/gpu=all --security-opt=label=disable ubuntu nvidia-smi -L"

@@ -18,6 +18,8 @@ The script:
 * checks for an NVIDIA GPU with `lspci`
 * aborts if Secure Boot appears enabled
 * installs the RPM Fusion NVIDIA packages
+* installs NVIDIA Container Toolkit
+* enables NVIDIA CDI refresh units for Podman GPU access
 * runs `akmods --force`
 * regenerates initramfs
 
@@ -33,14 +35,28 @@ Make sure RPM Fusion nonfree is configured, then:
 
 ----
 sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda nvidia-settings
+curl -s -L https://nvidia.github.io/libnvidia-container/stable/rpm/nvidia-container-toolkit.repo | sudo tee /etc/yum.repos.d/nvidia-container-toolkit.repo
+sudo dnf install -y nvidia-container-toolkit
 sudo akmods --force
 sudo dracut --force
+sudo systemctl enable --now nvidia-cdi-refresh.path
+sudo systemctl enable --now nvidia-cdi-refresh.service
 ----
 
 Reboot, then verify:
 
 ----
 nvidia-smi
+----
+
+For Podman GPU access, use CDI:
+
+----
+nvidia-ctk cdi list
+podman run --rm \
+  --device nvidia.com/gpu=all \
+  --security-opt=label=disable \
+  ubuntu nvidia-smi -L
 ----
 
 == Secure Boot
