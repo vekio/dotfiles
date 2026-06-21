@@ -54,8 +54,24 @@ enable_brave() {
     --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
 }
 
+enable_starship() {
+  local repo_file="/etc/yum.repos.d/_copr:copr.fedorainfracloud.org:atim:starship.repo"
+
+  if [ -f "$repo_file" ]; then
+    detail "Starship COPR already configured"
+    return
+  fi
+
+  detail "Installing dnf copr support"
+  run sudo dnf install -y dnf-plugins-core
+
+  detail "Configuring Starship COPR"
+  run sudo dnf copr enable -y atim/starship
+}
+
 enable_rpmfusion
 enable_terra
 enable_brave
+enable_starship
 
 success "Fedora repositories configured"

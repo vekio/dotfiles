@@ -10,6 +10,7 @@ direnv
 fish
 fzf
 jq
+starship
 tmux
 yq
 
