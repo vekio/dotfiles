@@ -18,6 +18,10 @@ if command -q vek
     vek completion fish | source
 end
 
+if command -q pkm
+    pkm completion fish | source
+end
+
 if command -q starship
     starship init fish | source
 end
