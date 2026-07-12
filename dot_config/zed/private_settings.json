@@ -9,7 +9,7 @@
 {
   "git_panel": {
     "tree_view": true,
-    "group_by": "status"
+    "group_by": "none"
   },
   "minimap": {
     "show": "always"
