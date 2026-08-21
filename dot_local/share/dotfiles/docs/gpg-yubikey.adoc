@@ -11,7 +11,8 @@ The relevant dotfiles are:
 ~/.gnupg/gpg-agent.conf
 ~/.gnupg/scdaemon.conf
 ~/.gnupg/sshcontrol
-~/.config/fish/conf.d/10-gpg.fish
+~/.config/fish/conf.d/environment.fish
+~/.config/fish/conf.d/tools.fish
 ----
 
 `scdaemon.conf` uses:
@@ -22,21 +23,36 @@ disable-ccid
 
 That makes GnuPG use `pcscd` for smartcard access instead of trying to talk to
 the YubiKey through its own CCID driver. This avoids common reader ownership
-conflicts with `pcscd` and FIDO tooling.
+conflicts with `pcscd` and FIDO tooling. Do not add `pcsc-shared` or a short
+`card-timeout`: they can release the card between operations, reset its
+verified-PIN state and make Git request the signing PIN on every commit.
 
-== Safe check script
+== OpenSC conflict
+
+OpenSC clients can probe other applications on the YubiKey through `pcscd`'s
+CCID access. That changes card state underneath `scdaemon` and can make the
+OpenPGP card unavailable until `pcscd` is restarted. This machine does not use
+OpenSC, so `dotfiles-install` removes the package declared in:
+
+----
+~/.local/share/dotfiles/packages/fedora/dnf-remove.txt
+----
+
+Removing OpenSC avoids the conflict without a custom systemd service, udev
+rule or automatic `pcscd` restart.
+
+== Recovery check script
 
 Run:
 
 ----
-~/.local/share/dotfiles/scripts/optional/gpg-card-check.sh
+dotfiles-gpg-card-check
 ----
 
 It does only safe operational work:
 
-* enables and starts `pcscd.socket`
-* restarts the user GnuPG agents
-* prints `pcscd` status
+* verifies that `pcscd.socket` is active
+* restarts the user GnuPG agents, clearing their current cached state
 * runs `gpg --card-status`
 
 It does not modify keys, card data, trust, LUKS, or boot configuration.
@@ -57,6 +73,6 @@ If the card disappears after suspend/resume, start with:
 ----
 gpgconf --kill scdaemon
 gpgconf --kill gpg-agent
-sudo systemctl restart pcscd.socket
+sudo systemctl restart pcscd.service
 gpg --card-status
 ----

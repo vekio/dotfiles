@@ -1,17 +1,48 @@
 [user]
-  name = Alberto Castañeiras
-  email = alberto@vekio.dev
-  signingkey = 9E80B7B79DF8DFDF
+    name = Alberto Castañeiras Folgueral
+    email = alberto@vekio.dev
+    signingkey = 9E80B7B79DF8DFDF
 
 [commit]
-  gpgsign = true
+    gpgsign = true
 
 [init]
-  defaultBranch = main
+    defaultBranch = main
 
 [fetch]
-  prune = true
-  pruneTags = true
+    prune = true
 
 [push]
-  autoSetupRemote = true
+    autoSetupRemote = true
+    followTags = true
+
+[pull]
+    ff = only
+
+[tag]
+    sort = version:refname
+    gpgSign = true
+
+[branch]
+    sort = -committerdate
+
+[merge]
+    conflictStyle = zdiff3
+
+[diff]
+    algorithm = histogram
+    colorMoved = default
+
+[column]
+    ui = auto
+
+[alias]
+    last = log -1 --stat
+    lg = log --graph --decorate --oneline --all
+    ll = log --graph --decorate --pretty=format:'%C(auto)%h%d %s %C(black)%C(bold)%cr %C(blue)%an%Creset'
+    unstage = restore --staged
+    discard = restore
+    amend = commit --amend
+    undo = reset --soft HEAD~1
+    staged = diff --staged
+    contributors = shortlog --summary --numbered --email

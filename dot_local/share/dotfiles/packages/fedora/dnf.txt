@@ -2,14 +2,16 @@
 ca-certificates
 curl
 git
-# wget
 unzip
 
 # Shell
+bat
 direnv
 fish
 fzf
 jq
+just
+ripgrep
 starship
 tmux
 yq
@@ -21,8 +23,6 @@ cliphist
 # Containers
 podman
 podman-compose
-# buildah
-# skopeo
 
 # Security keys
 fido2-tools
@@ -33,7 +33,6 @@ yubikey-manager
 
 # Browsers
 brave-origin
-# brave-browser
 
 # Terminal
 alacritty

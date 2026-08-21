@@ -1,0 +1,5 @@
+# Smartcard conflicts
+# OpenSC clients probe YubiKey applications through pcscd. That can change the
+# active CCID application underneath scdaemon, invalidate its cached OpenPGP
+# state and make GPG fail until pcscd is restarted.
+opensc

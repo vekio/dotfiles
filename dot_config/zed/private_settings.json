@@ -30,5 +30,28 @@
     "mode": "system",
     "light": "One Light",
     "dark": "One Dark"
+  },
+  "file_types": {
+    "OpenTofu": ["tf"],
+    "OpenTofu Vars": ["tfvars"],
+    "ini": [
+      "*.container",
+      "*.container.j2",
+      "*.network",
+      "*.network.j2",
+      "*.volume",
+      "*.volume.j2",
+      "*.pod",
+      "*.pod.j2"
+    ]
+  },
+  "format_on_save": "on",
+  "languages": {
+    "OpenTofu": {
+      "formatter": "language_server"
+    },
+    "OpenTofu Vars": {
+      "formatter": "language_server"
+    }
   }
 }

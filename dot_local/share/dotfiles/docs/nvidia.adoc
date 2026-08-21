@@ -8,13 +8,13 @@ dotfiles install flow.
 Run:
 
 ----
-~/.local/share/dotfiles/scripts/optional/nvidia.sh
+dotfiles-nvidia
 ----
 
 The script:
 
 * requires Fedora
-* requires RPM Fusion nonfree
+* configures RPM Fusion free and nonfree when missing
 * checks for an NVIDIA GPU with `lspci`
 * aborts if Secure Boot appears enabled
 * installs the RPM Fusion NVIDIA packages
@@ -26,12 +26,13 @@ The script:
 Use `--force` only when you understand why the checks failed:
 
 ----
-~/.local/share/dotfiles/scripts/optional/nvidia.sh --force
+dotfiles-nvidia --force
 ----
 
 == Manual equivalent
 
-Make sure RPM Fusion nonfree is configured, then:
+The script configures RPM Fusion automatically. For a manual installation,
+configure RPM Fusion first, then:
 
 ----
 sudo dnf install -y akmod-nvidia xorg-x11-drv-nvidia-cuda nvidia-settings

@@ -3,13 +3,12 @@ com.obsproject.Studio
 org.videolan.VLC
 com.spotify.Client
 
-# Utilities
+# Games
+org.prismlauncher.PrismLauncher
+io.github.Faugus.faugus-launcher
 
 # Communication
 # com.discordapp.Discord
-
-# Notes
-# md.obsidian.Obsidian
 
 # Development
 com.usebruno.Bruno
