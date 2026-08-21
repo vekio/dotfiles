@@ -1,41 +1,25 @@
-# Core
-ca-certificates
-curl
-git
-unzip
-
-# Shell
+alacritty
 bat
+brave-origin
+ca-certificates
+cliphist
+curl
 direnv
+fido2-tools
 fish
 fzf
+git
+gnupg2-scdaemon
 jq
 just
-ripgrep
-starship
-tmux
-yq
-
-# Clipboard
-wl-clipboard
-cliphist
-
-# Containers
-podman
-podman-compose
-
-# Security keys
-fido2-tools
-gnupg2-scdaemon
 pcsc-lite
 pcsc-lite-ccid
+podman
+podman-compose
+starship
+tmux
+unzip
+wl-clipboard
+yq
 yubikey-manager
-
-# Browsers
-brave-origin
-
-# Terminal
-alacritty
-
-# Editors
 zed

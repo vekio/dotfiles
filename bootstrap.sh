@@ -1,36 +1,41 @@
 #!/usr/bin/env bash
 
-# Prepare a Fedora workstation, apply the dotfiles, and hand off provisioning
-# to ~/.local/bin/dotfiles-install. Keep this file self-contained because it can
-# run before the repository exists.
-
 set -Eeuo pipefail
 
-repo="https://git.casta.me/alberto/dotfiles_new.git"
-branch="main"
+readonly REPOSITORY="https://git.casta.me/alberto/dotfiles.git"
+readonly BRANCH="main"
 
-fail() {
-  printf '\033[1;31mERROR\033[0m  %s\n' "$*" >&2
+info() {
+  printf '\033[1;34m==>\033[0m %s\n' "$*"
+}
+
+die() {
+  printf '\033[1;31mERROR\033[0m %s\n' "$*" >&2
   exit 1
 }
 
-command -v sudo >/dev/null 2>&1 || fail "sudo is not installed"
-command -v dnf >/dev/null 2>&1 || fail "dnf is not installed"
+[[ -r /etc/os-release ]] || die "Missing /etc/os-release"
+# shellcheck disable=SC1091
+. /etc/os-release
+[[ "${ID:-}" == "fedora" ]] || die "Unsupported OS: ${ID:-unknown}"
 
-printf 'Installing bootstrap dependencies\n'
+command -v dnf >/dev/null || die "dnf is not installed"
+command -v sudo >/dev/null || die "sudo is not installed"
+
+info "Installing bootstrap packages"
 sudo dnf install -y ca-certificates curl git chezmoi
 
 source_dir="$(chezmoi source-path)"
-if [ -d "$source_dir/.git" ]; then
-  printf 'Applying existing chezmoi source state\n'
+if [[ -d "$source_dir/.git" ]]; then
+  info "Applying existing dotfiles"
   chezmoi apply
 else
-  printf 'Initializing dotfiles from %s\n' "$repo"
-  chezmoi init --apply --branch "$branch" "$repo"
+  info "Initializing dotfiles"
+  chezmoi init --apply --branch "$BRANCH" "$REPOSITORY"
 fi
 
 installer="$HOME/.local/bin/dotfiles-install"
-[ -x "$installer" ] || fail "Installer was not created by chezmoi: $installer"
-"$installer"
+[[ -x "$installer" ]] || die "Installer not found: $installer"
 
-printf '\033[1;32mOK\033[0m  Bootstrap complete\n'
+"$installer"
+printf '\033[1;32mOK\033[0m Bootstrap complete\n'

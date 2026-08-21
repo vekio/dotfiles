@@ -2,8 +2,7 @@
 
 set -Eeuo pipefail
 
-readonly PACKAGE_DIR="$HOME/.local/share/dotfiles/packages/fedora"
-readonly MISE_PATH="$HOME/.local/bin/mise"
+readonly PACKAGES_DIR="$HOME/.local/share/dotfiles/packages/fedora"
 
 info() {
   printf '\033[1;34m==>\033[0m %s\n' "$*"
@@ -14,7 +13,7 @@ die() {
   exit 1
 }
 
-load_packages() {
+read_package_file() {
   local file="$1"
 
   [[ -f "$file" ]] || die "Missing package file: $file"
@@ -28,8 +27,9 @@ load_packages() {
 }
 
 require_fedora() {
-  [[ -f /etc/os-release ]] || die "Missing /etc/os-release"
+  [[ -r /etc/os-release ]] || die "Missing /etc/os-release"
 
+  # shellcheck disable=SC1091
   . /etc/os-release
   [[ "${ID:-}" == "fedora" ]] || die "Unsupported OS: ${ID:-unknown}"
 }
@@ -46,6 +46,7 @@ configure_repositories() {
   info "Configuring repositories"
 
   if ! rpm -q terra-release >/dev/null 2>&1; then
+    # terra-release installs the key used to verify every later Terra package.
     sudo dnf install -y \
       --nogpgcheck \
       --repofrompath 'terra,https://repos.fyralabs.com/terra$releasever' \
@@ -59,13 +60,13 @@ configure_repositories() {
   fi
 }
 
-remove_packages() {
+remove_dnf_packages() {
   local packages=()
 
   mapfile -t packages < <(
     while read -r package; do
       rpm -q "$package" >/dev/null 2>&1 && printf '%s\n' "$package"
-    done < <(load_packages "$PACKAGE_DIR/dnf-remove.txt")
+    done < <(read_package_file "$PACKAGES_DIR/dnf-remove.txt")
   )
 
   (( ${#packages[@]} == 0 )) && return
@@ -74,17 +75,17 @@ remove_packages() {
   sudo dnf remove -y "${packages[@]}"
 }
 
-install_packages() {
+install_dnf_packages() {
   local packages=()
 
-  mapfile -t packages < <(load_packages "$PACKAGE_DIR/dnf.txt")
+  mapfile -t packages < <(read_package_file "$PACKAGES_DIR/dnf.txt")
   (( ${#packages[@]} > 0 )) || die "No DNF packages configured"
 
   info "Installing packages"
   sudo dnf install -y "${packages[@]}"
 }
 
-install_flatpaks() {
+install_flatpak_apps() {
   local apps=()
 
   command -v flatpak >/dev/null || sudo dnf install -y flatpak
@@ -94,7 +95,7 @@ install_flatpaks() {
     flathub \
     https://dl.flathub.org/repo/flathub.flatpakrepo
 
-  mapfile -t apps < <(load_packages "$PACKAGE_DIR/flatpak.txt")
+  mapfile -t apps < <(read_package_file "$PACKAGES_DIR/flatpak.txt")
   (( ${#apps[@]} == 0 )) && return
 
   info "Installing Flatpak applications"
@@ -102,18 +103,21 @@ install_flatpaks() {
 }
 
 install_mise() {
-  if [[ ! -x "$MISE_PATH" ]]; then
+  local installer
+  local mise_path="$HOME/.local/bin/mise"
+
+  if [[ ! -x "$mise_path" ]]; then
     info "Installing mise"
-    curl -fsSL https://mise.run |
-      env MISE_INSTALL_PATH="$MISE_PATH" sh
+    installer="$(mktemp)"
+    curl -fsSL https://mise.run -o "$installer"
+    env MISE_INSTALL_PATH="$mise_path" sh "$installer"
+    rm -f "$installer"
   fi
 
-  export PATH="${MISE_PATH%/*}:$PATH"
-
-  command -v mise >/dev/null || die "mise is not available"
+  [[ -x "$mise_path" ]] || die "mise is not available"
 
   info "Installing mise tools"
-  mise install
+  "$mise_path" install
 }
 
 main() {
@@ -123,13 +127,13 @@ main() {
   sudo -v
 
   configure_repositories
-  remove_packages
-  install_packages
+  remove_dnf_packages
+  install_dnf_packages
 
   info "Enabling smart card support"
   sudo systemctl enable --now pcscd.socket
 
-  install_flatpaks
+  install_flatpak_apps
   install_mise
 
   printf '\033[1;32mOK\033[0m Workstation installed\n'

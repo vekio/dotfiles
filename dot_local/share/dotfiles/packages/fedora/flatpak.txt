@@ -1,14 +1,6 @@
-# Media
 com.obsproject.Studio
-org.videolan.VLC
 com.spotify.Client
-
-# Games
-org.prismlauncher.PrismLauncher
-io.github.Faugus.faugus-launcher
-
-# Communication
-# com.discordapp.Discord
-
-# Development
 com.usebruno.Bruno
+io.github.Faugus.faugus-launcher
+org.prismlauncher.PrismLauncher
+org.videolan.VLC

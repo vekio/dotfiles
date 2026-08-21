@@ -45,4 +45,5 @@
     amend = commit --amend
     undo = reset --soft HEAD~1
     staged = diff --staged
+    new = switch -c
     contributors = shortlog --summary --numbered --email

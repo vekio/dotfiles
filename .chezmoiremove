@@ -1,0 +1,3 @@
+.config/fish/conf.d/pkg.fish
+.config/fish/conf.d/update.fish
+.config/fish/conf.d/environment.fish

@@ -20,3 +20,4 @@ abbr --command git sh show
 abbr -a j 'just'
 abbr -a v 'vek'
 abbr -a ov 'overmind'
+abbr -a ws 'workstation'
