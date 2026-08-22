@@ -1,57 +1,78 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "git_panel": {
-    "tree_view": true,
-    "group_by": "none"
-  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+
+  "cli_default_open_behavior": "existing_window",
+
+  "soft_wrap": "editor_width",
+  "format_on_save": "on",
+
+  "relative_line_numbers": "enabled",
+  "remove_trailing_whitespace_on_save": true,
+
   "minimap": {
     "show": "always"
   },
-  "cli_default_open_behavior": "existing_window",
-  "soft_wrap": "editor_width",
+
+  "theme": {
+    "mode": "system",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Hard"
+  },
+
+  "icon_theme": {
+    "mode": "system",
+    "light": "VSCode Icons for Zed (Light)",
+    "dark": "VSCode Icons for Zed (Dark)"
+  },
+
+  "resize_all_panels_in_dock": ["right"],
+
+  "project_panel": {
+    "dock": "right",
+    "default_width": 340,
+    "git_status": true,
+    "git_status_indicator": true
+  },
+
+  "git_panel": {
+    "dock": "right",
+    "default_width": 340,
+    "tree_view": true,
+    "group_by": "none"
+  },
+
+  "agent": {
+    "dock": "left",
+    "default_width": 600,
+    "flexible": false,
+    "commit_message_instructions": "Use Conventional Commits format: <type>(<scope>): <description>. Keep the subject concise."
+  },
+
   "agent_servers": {
     "codex-acp": {
       "default_config_options": {
+        "reasoning_effort": "medium",
         "mode": "auto"
       },
       "type": "registry"
     }
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
-  "file_types": {
-    "OpenTofu": ["tf"],
-    "OpenTofu Vars": ["tfvars"],
-    "ini": [
-      "*.container",
-      "*.container.j2",
-      "*.network",
-      "*.network.j2",
-      "*.volume",
-      "*.volume.j2",
-      "*.pod",
-      "*.pod.j2"
-    ]
-  },
-  "format_on_save": "on",
-  "languages": {
-    "OpenTofu": {
-      "formatter": "language_server"
-    },
-    "OpenTofu Vars": {
-      "formatter": "language_server"
-    }
+
+  "auto_install_extensions": {
+    "html": true,
+    "git-firefly": true,
+    "toml": true,
+    "sql": true,
+    "vue": true,
+    "vscode-icons": true,
+    "catppuccin": true,
+    "csharp": false,
+    "astro": true,
+    "ini": true,
+    "fish": true,
+    "just": true,
+    "asciidoc": true,
+    "opentofu": true
   }
 }
