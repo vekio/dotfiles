@@ -3,6 +3,7 @@ node = "lts"
 pnpm = "latest"
 usage = "latest"
 go = "latest"
+"go:github.com/danielmiessler/fabric/cmd/fabric" = "latest"
 "npm:@openai/codex" = "latest"
 
 [settings.npm]
