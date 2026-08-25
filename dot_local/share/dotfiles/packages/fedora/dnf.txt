@@ -5,17 +5,20 @@ ca-certificates
 cliphist
 curl
 direnv
+fd-find
 fido2-tools
 fish
 fzf
 git
 gnupg2-scdaemon
+gum
 jq
 just
 pcsc-lite
 pcsc-lite-ccid
 podman
 podman-compose
+ripgrep
 starship
 tmux
 unzip
@@ -23,3 +26,4 @@ wl-clipboard
 yq
 yubikey-manager
 zed
+zoxide
