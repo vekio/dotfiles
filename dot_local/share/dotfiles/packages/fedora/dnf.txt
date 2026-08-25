@@ -18,6 +18,7 @@ pcsc-lite
 pcsc-lite-ccid
 podman
 podman-compose
+ramalama
 ripgrep
 starship
 tmux
