@@ -22,8 +22,8 @@
 
   "icon_theme": {
     "mode": "system",
-    "light": "VSCode Icons for Zed (Light)",
-    "dark": "VSCode Icons for Zed (Dark)"
+    "light": "Catppuccin Mocha",
+    "dark": "Catppuccin Mocha"
   },
 
   "resize_all_panels_in_dock": ["right"],
@@ -65,7 +65,7 @@
     "toml": true,
     "sql": true,
     "vue": true,
-    "vscode-icons": true,
+    "catppuccin-icons": true,
     "catppuccin": true,
     "csharp": false,
     "astro": true,
