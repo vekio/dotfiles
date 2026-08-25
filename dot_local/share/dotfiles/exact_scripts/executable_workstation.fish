@@ -41,7 +41,8 @@ function os_id
 end
 
 function package_file --argument-names source
-    printf '%s/packages/%s/%s.txt\n' "$HOME/.local/share/dotfiles" (os_id) "$source"
+    set -l target "$HOME/.local/share/dotfiles/packages/"(os_id)"/$source.txt"
+    chezmoi source-path "$target"; or die "Package source not found: $target"
 end
 
 function require_package_file --argument-names source
@@ -71,7 +72,6 @@ function save_packages --argument-names file
     end
 
     sort -u -o "$file" "$file"
-    chezmoi add "$file"; or return 1
     info "Updated $file"
 end
 
@@ -110,6 +110,7 @@ end
 function pkg_mise
     require_commands awk chezmoi fzf mise sort
 
+    set -l config (chezmoi source-path "$HOME/.config/mise/config.toml"); or return 1
     set -l selected (
         mise registry |
         awk '{ print $1 }' |
@@ -120,10 +121,10 @@ function pkg_mise
     test -n "$selected"; or return
 
     for tool in $selected
-        mise use --global "$tool@latest"; or return 1
+        mise use --path "$config" "$tool@latest"; or return 1
     end
 
-    chezmoi add "$HOME/.config/mise/config.toml"
+    info "Updated $config"
 end
 
 function workstation_apply
