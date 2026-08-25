@@ -1,0 +1,24 @@
+# >>> vek-ssh-alias atlas >>>
+Host atlas
+	HostName atlas.home.arpa
+	User alberto
+	Port 22
+# <<< vek-ssh-alias atlas <<<
+# >>> vek-ssh-alias janus >>>
+Host janus
+	HostName janus.home.arpa
+	User alberto
+	Port 22
+# <<< vek-ssh-alias janus <<<
+# >>> vek-ssh-alias hyperion >>>
+Host hyperion
+	HostName hyperion.home.arpa
+	User alberto
+	Port 22
+# <<< vek-ssh-alias hyperion <<<
+# >>> vek-ssh-alias dione >>>
+Host dione
+	HostName dione.home.arpa
+	User alberto
+	Port 22
+# <<< vek-ssh-alias dione <<<
