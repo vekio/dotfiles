@@ -41,6 +41,7 @@
     lg = log --graph --decorate --oneline --all
     ll = log --graph --decorate --pretty=format:'%C(auto)%h%d %s %C(black)%C(bold)%cr %C(blue)%an%Creset'
     unstage = restore --staged
+    untrack = rm --cached --
     discard = restore
     amend = commit --amend
     undo = reset --soft HEAD~1
