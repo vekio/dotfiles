@@ -47,4 +47,5 @@
     undo = reset --soft HEAD~1
     staged = diff --staged
     new = switch -c
+    rename = branch -m
     contributors = shortlog --summary --numbered --email
