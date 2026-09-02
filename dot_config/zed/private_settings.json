@@ -10,6 +10,26 @@
   "relative_line_numbers": "enabled",
   "remove_trailing_whitespace_on_save": true,
 
+  "languages": {
+    "HTML": {
+      "tab_size": 2,
+      "hard_tabs": false
+    },
+    "CSS": {
+      "tab_size": 2,
+      "hard_tabs": false,
+      "language_servers": [
+        "tailwindcss-intellisense-css",
+        "!vscode-css-language-server",
+        "..."
+      ]
+    },
+    "JavaScript": {
+      "tab_size": 2,
+      "hard_tabs": false
+    }
+  },
+
   "minimap": {
     "show": "always"
   },
