@@ -29,10 +29,6 @@ if command -q overmind
     overmind completion fish | source
 end
 
-if command -q pkm
-    pkm completion fish | source
-end
-
 # Prompt
 if command -q starship
     starship init fish | source
