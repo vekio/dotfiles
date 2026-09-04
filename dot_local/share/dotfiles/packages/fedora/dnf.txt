@@ -1,6 +1,7 @@
 bat
 brave-origin
 ca-certificates
+cascadia-code-nf-fonts
 cliphist
 curl
 direnv
