@@ -1,6 +1,7 @@
 com.obsproject.Studio
 com.spotify.Client
 com.usebruno.Bruno
+io.dbeaver.DBeaverCommunity
 io.github.Faugus.faugus-launcher
 org.prismlauncher.PrismLauncher
 org.videolan.VLC
