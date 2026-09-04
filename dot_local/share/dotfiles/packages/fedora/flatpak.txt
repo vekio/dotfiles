@@ -3,5 +3,6 @@ com.spotify.Client
 com.usebruno.Bruno
 io.dbeaver.DBeaverCommunity
 io.github.Faugus.faugus-launcher
+io.github.getnf.embellish
 org.prismlauncher.PrismLauncher
 org.videolan.VLC
