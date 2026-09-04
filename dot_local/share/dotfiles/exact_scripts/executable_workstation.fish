@@ -80,6 +80,10 @@ function pkg_dnf
     require_commands chezmoi dnf fzf grep sort
 
     set -l file (require_package_file dnf)
+
+    info 'Checking DNF repositories'
+    dnf makecache; or return 1
+
     set -l selected (
         dnf --cacheonly --quiet repoquery \
             --available \
