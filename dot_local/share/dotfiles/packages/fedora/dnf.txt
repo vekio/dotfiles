@@ -1,4 +1,3 @@
-alacritty
 bat
 brave-origin
 ca-certificates
@@ -9,6 +8,7 @@ fd-find
 fido2-tools
 fish
 fzf
+ghostty
 git
 gnupg2-scdaemon
 gum
