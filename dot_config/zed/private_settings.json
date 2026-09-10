@@ -5,6 +5,21 @@
     "dark": "Gruvbox Dark Hard"
   },
 
+  "theme_overrides": {
+    "Gruvbox Light Hard": {
+      "syntax": {
+        "comment": { "font_style": "italic" },
+        "comment.doc": { "font_style": "italic" }
+      }
+    },
+    "Gruvbox Dark Hard": {
+      "syntax": {
+        "comment": { "font_style": "italic" },
+        "comment.doc": { "font_style": "italic" }
+      }
+    }
+  },
+
   "icon_theme": {
     "mode": "system",
     "light": "Catppuccin Latte",
@@ -12,7 +27,7 @@
   },
 
   "ui_font_family": ".ZedSans",
-  "ui_font_size": 15,
+  "ui_font_size": 16,
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 14,
 
