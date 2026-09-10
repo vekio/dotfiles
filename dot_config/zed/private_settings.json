@@ -1,5 +1,7 @@
 {
+  "ui_font_family": ".SystemUIFont",
   "ui_font_size": 16,
+  "buffer_font_family": "Cascadia Code NF",
   "buffer_font_size": 15,
 
   "cli_default_open_behavior": "existing_window",
@@ -9,6 +11,12 @@
 
   "relative_line_numbers": "enabled",
   "remove_trailing_whitespace_on_save": true,
+
+  "terminal": {
+    "font_family": "Cascadia Code NF",
+    "font_size": 14,
+    "line_height": "standard"
+  },
 
   "languages": {
     "HTML": {
