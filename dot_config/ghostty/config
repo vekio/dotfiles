@@ -1,5 +1,7 @@
-font-family = Cascadia Code NF
-font-size = 14
+theme = light:Gruvbox Light Hard,dark:Gruvbox Dark Hard
+
+font-family = JetBrainsMono Nerd Font Mono
+font-size = 13
 
 window-padding-x = 10
 window-padding-y = 10
