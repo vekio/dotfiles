@@ -93,6 +93,7 @@
     "dockerfile": true,
     "sql": true,
     "vue": true,
+    "catppuccin-icons": true,
     "csharp": false,
     "astro": true,
     "ini": true,
