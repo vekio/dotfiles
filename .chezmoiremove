@@ -4,3 +4,4 @@
 .config/fabric/custom-patterns/quick_answer
 .config/fabric/custom-patterns/web_answer
 .config/fabric/custom-patterns/searxng_planner
+.config/alacritty/alacritty.toml
