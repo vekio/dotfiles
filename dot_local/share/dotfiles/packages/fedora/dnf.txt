@@ -13,6 +13,7 @@ ghostty
 git
 gnupg2-scdaemon
 gum
+jetbrains-mono-fonts
 jq
 just
 pcsc-lite
