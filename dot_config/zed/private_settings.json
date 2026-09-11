@@ -35,9 +35,6 @@
     "dark": "Catppuccin Mocha"
   },
 
-  "ui_font_family": ".ZedSans",
-  "ui_font_size": 16,
-
   "buffer_font_family": "JetBrains Mono",
   "buffer_font_size": 15,
 
@@ -60,7 +57,7 @@
   "relative_line_numbers": "enabled",
 
   "terminal": {
-    "font_family": "JetBrainsMono Nerd Font Mono",
+    "font_family": "JetBrains Mono",
     "font_size": 15,
     "line_height": "standard"
   },
@@ -105,7 +102,11 @@
 
   "indent_guides": {
     "enabled": true,
-    "coloring": "indent_aware"
+    "coloring": "fixed"
+  },
+
+  "file_finder": {
+    "modal_max_width": "large"
   },
 
   "resize_all_panels_in_dock": ["right"],
@@ -121,8 +122,7 @@
     "git_status_indicator": true,
     "sticky_scroll": true,
     "scrollbar": {
-      "show": "auto",
-      "horizontal_scroll": false
+      "show": "never"
     },
     "indent_guides": {
       "show": "always"
@@ -147,7 +147,7 @@
 
   "agent": {
     "dock": "left",
-    "default_width": 600,
+    "default_width": 540,
     "flexible": false
   },
 
