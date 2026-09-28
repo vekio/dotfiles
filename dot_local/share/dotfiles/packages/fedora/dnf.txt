@@ -16,6 +16,7 @@ gum
 jetbrains-mono-fonts
 jq
 just
+neovim
 pcsc-lite
 pcsc-lite-ccid
 podman
