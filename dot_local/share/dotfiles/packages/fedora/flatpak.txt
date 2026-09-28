@@ -1,3 +1,4 @@
+com.github.finefindus.eyedropper
 com.obsproject.Studio
 com.spotify.Client
 com.usebruno.Bruno
