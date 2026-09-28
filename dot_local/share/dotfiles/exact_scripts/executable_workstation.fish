@@ -160,6 +160,9 @@ function workstation_update
     end
 
     if command -q mise
+        info 'Updating mise'
+        mise self-update --yes; or return 1
+
         info 'Updating mise tools'
         mise upgrade; or return 1
     end
