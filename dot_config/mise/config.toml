@@ -3,6 +3,7 @@ node = "lts"
 pnpm = "latest"
 usage = "latest"
 go = "latest"
+opentofu = "latest"
 "go:github.com/danielmiessler/fabric/cmd/fabric" = "latest"
 "go:github.com/vekio/vek/cmd/vek" = { version = "latest", minimum_release_age = "0s" }
 "npm:@openai/codex" = "latest"
