@@ -23,6 +23,7 @@ end
 # Completions
 if command -q vek
     vek completion fish | source
+    vek bonsai init fish | source
 end
 
 if command -q overmind
