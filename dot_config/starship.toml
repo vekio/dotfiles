@@ -2,14 +2,37 @@
 # when they carry useful signal.
 
 add_newline = false
+# Keep Starship's default modules, with the repository name before a worktree.
+format = "$username$hostname$localip$shlvl$singularity$kubernetes$nats${custom.worktree}$directory$all"
 
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[>](bold red)"
 
 [directory]
-truncation_length = 3
+# Preserve repo/worktree and the relative path when descending into a worktree.
+truncation_length = 0
 truncate_to_repo = true
+
+[custom.worktree]
+description = "Repository name for linked Git worktrees"
+require_repo = true
+when = true
+shell = ["sh"]
+format = "([$output/]($style))"
+style = "bold cyan"
+command = '''
+root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+[ -f "$root/.git" ] || exit 0
+common=$(git rev-parse --path-format=absolute --git-common-dir 2>/dev/null) || exit 0
+git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
+[ "$git_dir" != "$common" ] || exit 0
+case "${common##*/}" in
+    .git|.bare) repo=${common%/*} ;;
+    *) repo=$common ;;
+esac
+printf '%s' "${repo##*/}"
+'''
 
 [git_branch]
 format = "[$symbol$branch]($style) "
