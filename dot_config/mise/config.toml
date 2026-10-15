@@ -3,7 +3,12 @@ node = "lts"
 pnpm = "latest"
 usage = "latest"
 go = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
+"go:github.com/go-delve/delve/cmd/dlv" = "latest"
 opentofu = "latest"
+sops = "latest"
+uv = "latest"
+ansible = "latest"
 "go:github.com/danielmiessler/fabric/cmd/fabric" = "latest"
 "go:github.com/vekio/vek/cmd/vek" = { version = "latest", minimum_release_age = "0s" }
 "go:github.com/vekio/overmind/cmd/overmind" = { version = "latest", minimum_release_age = "0s" }
